@@ -26,7 +26,11 @@ interface Etape {
   numero: number;
   titre: string;
   description: string;
-  astuce: string;
+}
+
+interface ConseilSuivi {
+  titre: string;
+  description: string;
 }
 
 interface Results {
@@ -50,6 +54,7 @@ interface Results {
       dureeTest: string;
     };
     format: string;
+    conseilsSuivi: ConseilSuivi[];
     conseilsSecteur: string[];
   };
   section3: {
@@ -283,7 +288,7 @@ export default function ResultsPage() {
           {/* Étapes détaillées */}
           <div className="mb-8">
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
-              Tutoriel pas à pas
+              Étapes pour lancer votre campagne
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {results.section2.etapes.map((etape) => (
@@ -302,16 +307,35 @@ export default function ResultsPage() {
                       <p className="text-slate-300 text-xs leading-relaxed whitespace-pre-line">
                         {etape.description}
                       </p>
-                      {etape.astuce && (
-                        <div className="mt-2 flex items-start gap-2 bg-amber-500/10 border border-amber-500/20 rounded-lg px-2.5 py-1.5">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-                          </svg>
-                          <p className="text-amber-300/90 text-[11px]">
-                            {etape.astuce}
-                          </p>
-                        </div>
-                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Conseils de suivi */}
+          <div className="mb-8">
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
+              Suivi et optimisation de votre campagne
+            </h3>
+            <div className="space-y-3">
+              {results.section2.conseilsSuivi.map((conseil, i) => (
+                <div
+                  key={i}
+                  className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                    <div className="flex-1">
+                      <h4 className="text-white font-semibold text-sm mb-1">
+                        {conseil.titre}
+                      </h4>
+                      <p className="text-slate-300 text-xs leading-relaxed whitespace-pre-line">
+                        {conseil.description}
+                      </p>
                     </div>
                   </div>
                 </div>

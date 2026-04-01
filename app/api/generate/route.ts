@@ -97,12 +97,48 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
     "etapes": [
       {
         "numero": 1,
-        "titre": "Titre court de l'étape",
-        "ou": "Menu ou bouton exact où aller (ex: Meta Business Suite → Gestionnaire de publicités → bouton Créer)",
-        "action": "Ce qu'il faut faire en 1-2 phrases courtes maximum",
-        "valeur": "La valeur exacte à saisir ou sélectionner si applicable (sinon omettre ce champ)"
+        "titre": "Accéder au Gestionnaire de publicités",
+        "contenu": "Instructions courtes et directes pour cette étape. Chaque ligne = une action. Mentionne les boutons exacts."
+      },
+      {
+        "numero": 2,
+        "titre": "Choisir l'objectif (Niveau Campagne)",
+        "contenu": "Instructions pour le choix d'objectif, nommage de la campagne, etc."
+      },
+      {
+        "numero": 3,
+        "titre": "Configurer l'ensemble de publicités",
+        "contenu": "Phrase d'intro courte sur ce que contient cet écran.",
+        "sousEtapes": [
+          { "id": "3a", "titre": "Objectif de conversion", "contenu": "Choix du type de contact (formulaire, appels, messenger)." },
+          { "id": "3b", "titre": "Budget et calendrier", "contenu": "Budget quotidien recommandé, règle du 5x, dates." },
+          { "id": "3c", "titre": "Audience", "contenu": "Localisation, rayon, âge, ciblage détaillé, taille audience." },
+          { "id": "3d", "titre": "Emplacements", "contenu": "Advantage+ Placements ou sélection manuelle." }
+        ]
+      },
+      {
+        "numero": 4,
+        "titre": "Créer la publicité (Niveau Pub)",
+        "contenu": "Phrase d'intro courte.",
+        "sousEtapes": [
+          { "id": "4a", "titre": "Identité", "contenu": "Sélection page Facebook et compte Instagram." },
+          { "id": "4b", "titre": "Format et visuel", "contenu": "Image unique recommandée, specs, conseils photo." },
+          { "id": "4c", "titre": "Texte de l'annonce", "contenu": "Texte principal, titre, description." },
+          { "id": "4d", "titre": "Destination / Bouton d'action", "contenu": "Formulaire instantané, champs, message de remerciement." }
+        ]
+      },
+      {
+        "numero": 5,
+        "titre": "Vérifier et publier",
+        "contenu": "Vérification aperçu, points de contrôle, publication, délai d'examen."
+      },
+      {
+        "numero": 6,
+        "titre": "Suivre les résultats (à partir de J+3)",
+        "contenu": "KPIs à surveiller (coût par lead, CTR, fréquence), phase d'apprentissage, première analyse."
       }
     ],
+    "noteInterface": "L'interface Meta suit toujours cette structure en 3 niveaux :\n1. CAMPAGNE → objectif global\n2. ENSEMBLE DE PUBLICITÉS → audience + budget + emplacements\n3. PUBLICITÉ → contenu visuel + texte + CTA\nTout est configurable dans cet ordre, de haut en bas sur un seul écran scrollable (interface guided creation de Meta 2025).",
     "ciblage": {
       "age": "tranche d'âge recommandée",
       "zone": "zone géographique et rayon exact à configurer",
@@ -158,8 +194,15 @@ INSTRUCTIONS IMPORTANTES :
 - Chaque semaine doit contenir 3 posts.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - Les accroches courtes doivent faire max 40 caractères.
-- La section2.etapes doit contenir EXACTEMENT 11 étapes qui couvrent uniquement le lancement de la campagne (du début jusqu'à la publication) : création du compte Business, accès au Gestionnaire de publicités, choix de l'objectif, configuration de l'audience, paramétrage du budget, choix du placement, création du visuel, rédaction du texte, configuration du formulaire de contact, vérification et publication. NE PAS inclure le suivi après publication dans les étapes. Pas d'astuces dans les étapes.
-- IMPORTANT pour les étapes : le champ "ou" doit indiquer le chemin de navigation exact (menus, boutons). Le champ "action" doit être une instruction courte et directe (1-2 phrases max). Le champ "valeur" ne doit être présent que si l'utilisateur doit saisir ou sélectionner une valeur précise. Sois concis mais précis.
+- La section2.etapes doit contenir EXACTEMENT 6 étapes dans cet ordre qui reflète l'interface Meta Ads 2025/2026 :
+  1. Accéder au Gestionnaire de publicités (business.facebook.com → bouton + Créer)
+  2. Choisir l'objectif — Niveau Campagne (sélectionner Prospects, nommer la campagne, décocher ACB)
+  3. Configurer l'ensemble de publicités — avec 4 sousEtapes : 3a Objectif de conversion (formulaire/appels/messenger), 3b Budget et calendrier (budget quotidien, règle du 5x le coût par lead), 3c Audience (localisation + rayon 30-50km, âge, ciblage détaillé ou Advantage Audience), 3d Emplacements (Advantage+ Placements recommandé)
+  4. Créer la publicité — avec 4 sousEtapes : 4a Identité (page Facebook + Instagram), 4b Format et visuel (image unique 1080x1080 ou 1080x1350, conseils photo adaptés au secteur), 4c Texte de l'annonce (texte principal + titre + description personnalisés), 4d Destination / Bouton d'action (formulaire instantané avec champs adaptés au secteur)
+  5. Vérifier et publier (aperçu mobile/desktop, points de contrôle, publication, délai examen)
+  6. Suivre les résultats à partir de J+3 (coût par lead, CTR > 1.5%, fréquence < 3, ne pas toucher pendant 7 jours, analyse après 14 jours)
+- Le champ "contenu" de chaque étape doit être concis : des instructions directes, une action par ligne. Personnalise TOUS les exemples pour l'activité de l'utilisateur (nom, zone, type de service, visuels suggérés).
+- Ajoute le champ "noteInterface" avec l'explication des 3 niveaux (Campagne → Ensemble de pubs → Pub).
 - La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication : comment consulter les résultats, quels KPIs surveiller, quand et comment faire des ajustements, comment récupérer et traiter les prospects.
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
 

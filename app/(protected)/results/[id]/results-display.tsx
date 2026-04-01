@@ -182,48 +182,93 @@ export default function ResultsDisplay({
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
             Étapes pour lancer votre campagne
           </h3>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="space-y-4">
             {results.section2.etapes.map((etape) => (
               <div
                 key={etape.numero}
-                className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-4"
+                className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-5"
               >
-                <div className="flex items-start gap-3">
-                  <span className="w-7 h-7 flex-shrink-0 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white text-xs flex items-center justify-center font-bold shadow-lg shadow-violet-500/20">
+                <div className="flex items-start gap-3 mb-3">
+                  <span className="w-8 h-8 flex-shrink-0 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white text-sm flex items-center justify-center font-bold shadow-lg shadow-violet-500/20">
                     {etape.numero}
                   </span>
-                  <div className="flex-1 min-w-0 space-y-1.5">
-                    <h4 className="text-white font-semibold text-sm">
-                      {etape.titre}
-                    </h4>
-                    {etape.ou ? (
-                      <>
-                        <p className="text-xs">
-                          <span className="text-slate-500 font-medium">Où : </span>
-                          <span className="text-violet-300">{etape.ou}</span>
-                        </p>
-                        <p className="text-xs">
-                          <span className="text-slate-500 font-medium">Action : </span>
-                          <span className="text-slate-300">{etape.action}</span>
-                        </p>
-                        {etape.valeur && (
-                          <p className="text-xs">
-                            <span className="text-slate-500 font-medium">Valeur : </span>
-                            <span className="text-emerald-300">{etape.valeur}</span>
-                          </p>
-                        )}
-                      </>
-                    ) : (
-                      <p className="text-slate-300 text-xs leading-relaxed whitespace-pre-line">
-                        {etape.description}
-                      </p>
-                    )}
-                  </div>
+                  <h4 className="text-white font-semibold text-base pt-1">
+                    {etape.titre}
+                  </h4>
                 </div>
+
+                {/* Contenu principal (nouveau format) */}
+                {etape.contenu && (
+                  <div className="ml-11 text-slate-300 text-sm leading-relaxed whitespace-pre-line mb-3">
+                    {etape.contenu.split("\n").map((line, i) => {
+                      if (line.startsWith("IMPORTANT") || line.startsWith("RÈGLE") || line.startsWith("CONSEIL")) {
+                        return <p key={i} className="text-amber-300 font-medium mt-1">{line}</p>;
+                      }
+                      if (line.startsWith("•")) {
+                        return <p key={i} className="pl-2 text-slate-300">{line}</p>;
+                      }
+                      return <p key={i}>{line}</p>;
+                    })}
+                  </div>
+                )}
+
+                {/* Sous-étapes */}
+                {etape.sousEtapes && etape.sousEtapes.length > 0 && (
+                  <div className="ml-11 space-y-3">
+                    {etape.sousEtapes.map((sub) => (
+                      <div
+                        key={sub.id}
+                        className="bg-slate-800/60 border border-slate-700/20 rounded-lg p-4"
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="px-2 py-0.5 text-xs font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30 rounded-md">
+                            {sub.id}
+                          </span>
+                          <h5 className="text-white font-semibold text-sm">{sub.titre}</h5>
+                        </div>
+                        <div className="text-slate-300 text-xs leading-relaxed">
+                          {sub.contenu.split("\n").map((line, i) => {
+                            if (line.startsWith("IMPORTANT") || line.startsWith("RÈGLE") || line.startsWith("CONSEIL")) {
+                              return <p key={i} className="text-amber-300 font-medium mt-1">{line}</p>;
+                            }
+                            if (line.startsWith("•")) {
+                              return <p key={i} className="pl-2 text-slate-300">{line}</p>;
+                            }
+                            return <p key={i}>{line}</p>;
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Ancien format (backward compat) */}
+                {!etape.contenu && etape.description && (
+                  <p className="ml-11 text-slate-300 text-xs leading-relaxed whitespace-pre-line">
+                    {etape.description}
+                  </p>
+                )}
               </div>
             ))}
           </div>
         </div>
+
+        {/* Note sur l'interface Meta */}
+        {results.section2.noteInterface && (
+          <div className="mb-8 bg-violet-500/10 border border-violet-500/20 rounded-xl p-5">
+            <div className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-violet-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+              </svg>
+              <div>
+                <h4 className="text-violet-300 font-semibold text-sm mb-2">Structure de l&apos;interface Meta</h4>
+                <div className="text-slate-300 text-xs leading-relaxed whitespace-pre-line">
+                  {results.section2.noteInterface}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Conseils de suivi */}
         <div className="mb-8">

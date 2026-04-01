@@ -17,13 +17,22 @@ export interface Semaine {
   posts: Post[];
 }
 
+export interface SousEtape {
+  id: string;
+  titre: string;
+  contenu: string;
+}
+
 export interface Etape {
   numero: number;
   titre: string;
+  contenu: string;
+  sousEtapes?: SousEtape[];
+  // backward compat
+  description?: string;
   ou?: string;
   action?: string;
   valeur?: string;
-  description?: string;
 }
 
 export interface ConseilSuivi {
@@ -39,6 +48,7 @@ export interface Results {
   };
   section2: {
     etapes: Etape[];
+    noteInterface?: string;
     ciblage: {
       age: string;
       zone: string;

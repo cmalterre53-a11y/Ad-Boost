@@ -1,109 +1,129 @@
 {
-  "nomActivite": "Test Clean",
+  "nomActivite": "All-Clean",
   "typeActivite": "Nettoyage automobile à domicile",
-  "zone": "Paris et alentours",
-  "cible": "Particuliers 25-50 ans avec voiture",
+  "zone": "Perpignan et alentours, 20km",
+  "cible": "Particuliers avec voiture, 25-55 ans",
   "budget": "100€/mois",
   "objectif": "Attirer des appels/messages",
   "results": {
     "section1": {
       "accroches": [
-        "Voiture propre en 24h à Paris 🚗✨",
+        "Voiture propre en 24h à domicile",
         "Nettoyage auto sans bouger de chez vous",
         "Votre voiture comme neuve à domicile"
       ],
       "textesPub": [
         {
           "accroche": "Votre voiture mérite le meilleur nettoyage",
-          "description": "Test Clean vient à vous ! Nettoyage intérieur et extérieur complet de votre véhicule à domicile ou au bureau. Résultat professionnel garanti. Intervention rapide sur Paris et alentours.",
+          "description": "All-Clean vient à vous ! Nettoyage intérieur et extérieur complet de votre véhicule à domicile ou au bureau. Résultat professionnel garanti. Intervention rapide sur Perpignan et alentours.",
           "cta": "Appelez maintenant pour un devis gratuit !"
         },
         {
           "accroche": "Gagnez du temps avec notre service à domicile",
-          "description": "Fini les files d'attente au lavage auto ! Test Clean s'occupe de votre voiture pendant que vous travaillez ou vous détendez. Service professionnel, produits écologiques, tarifs transparents.",
+          "description": "Fini les files d'attente au lavage auto ! All-Clean s'occupe de votre voiture pendant que vous travaillez ou vous détendez. Service professionnel, produits écologiques, tarifs transparents.",
           "cta": "Réservez votre créneau par message"
         },
         {
           "accroche": "Offre spéciale : -20% sur votre 1er nettoyage",
-          "description": "Découvrez Test Clean, le spécialiste du nettoyage automobile à domicile. Intérieur aspiré et nettoyé, extérieur lavé et lustré. Nous venons chez vous avec tout le matériel.",
+          "description": "Découvrez All-Clean, le spécialiste du nettoyage automobile à domicile. Intérieur aspiré et nettoyé, extérieur lavé et lustré. Nous venons chez vous avec tout le matériel.",
           "cta": "Contactez-nous pour profiter de l'offre"
         }
       ],
       "legendes": [
-        "🚗 Avant/Après spectaculaire ! Votre voiture retrouve son éclat d'origine avec Test Clean. Service à domicile sur Paris. #NettoyageAuto #Paris #TestClean",
-        "⏰ Vous manquez de temps pour laver votre voiture ? On vient à vous ! Réservation facile, résultat garanti. DM pour réserver. #ServiceADomicile #VoiturePropre",
-        "✨ Intérieur impeccable = trajet agréable ! Notre équipe transforme votre habitacle en 1h. Dispo ce week-end sur Paris. Appelez-nous ! #DetailingAuto #CleanCar",
-        "🌿 Nettoyage auto écologique et professionnel. Produits respectueux de l'environnement, résultat premium. Test Clean, votre expert à Paris. #EcoFriendly #CarWash",
-        "💼 Voiture de fonction ou personnelle ? On s'en occupe pendant votre journée de travail. Service express ou complet selon vos besoins. #Professionnel #Paris"
+        "Avant/Après spectaculaire ! Votre voiture retrouve son éclat d'origine avec All-Clean. Service à domicile sur Perpignan. #NettoyageAuto #Perpignan #AllClean",
+        "Vous manquez de temps pour laver votre voiture ? On vient à vous ! Réservation facile, résultat garanti. DM pour réserver. #ServiceADomicile #VoiturePropre",
+        "Intérieur impeccable = trajet agréable ! Notre équipe transforme votre habitacle en 1h. Dispo ce week-end sur Perpignan. Appelez-nous ! #DetailingAuto #CleanCar",
+        "Nettoyage auto écologique et professionnel. Produits respectueux de l'environnement, résultat premium. All-Clean, votre expert à Perpignan. #EcoFriendly #CarWash",
+        "Voiture de fonction ou personnelle ? On s'en occupe pendant votre journée de travail. Service express ou complet selon vos besoins. #Professionnel #Perpignan"
       ]
     },
     "section2": {
       "etapes": [
         {
           "numero": 1,
-          "titre": "Créer votre compte Meta Business Suite",
-          "description": "Rendez-vous sur business.facebook.com et cliquez sur 'Créer un compte'. Entrez votre nom d'entreprise, votre nom complet, et votre adresse email professionnelle. Sélectionnez la catégorie de votre activité. Validez votre compte via l'email de confirmation reçu."
+          "titre": "Accéder au Gestionnaire de publicités",
+          "contenu": "Va sur business.facebook.com. Connecte-toi avec ton compte Facebook.\nDans le menu de gauche, clique sur \"Gestionnaire de publicités\" (ou va directement sur adsmanager.facebook.com).\nTu arrives sur le tableau de bord principal.\nClique sur le bouton vert \"+ Créer\" pour démarrer une nouvelle campagne."
         },
         {
           "numero": 2,
-          "titre": "Accéder au Gestionnaire de publicités",
-          "description": "Dans Meta Business Suite, cliquez sur le menu hamburger (3 lignes) en haut à gauche. Sélectionnez 'Gestionnaire de publicités' dans la liste. Acceptez les conditions générales si c'est votre première fois. Cliquez sur le bouton vert '+ Créer' pour démarrer."
+          "titre": "Choisir l'objectif (Niveau Campagne)",
+          "contenu": "C'est la PREMIÈRE chose que Meta te demande.\nSélectionne \"Prospects\" pour obtenir des contacts qualifiés (appels, messages, formulaires).\nDonne un nom clair à ta campagne : \"All-Clean – Prospects – [Mois Année]\"\nIMPORTANT : Laisse \"Advantage+ campaign budget (ACB)\" DÉCOCHÉ pour garder le contrôle du budget toi-même au début.\nClique sur \"Suivant\"."
         },
         {
           "numero": 3,
-          "titre": "Choisir l'objectif de campagne",
-          "description": "Sélectionnez l'objectif 'Prospects' pour collecter directement les coordonnées des clients intéressés. Nommez votre campagne de manière claire avec la date. Laissez les options 'Tests A/B' et 'Advantage campaign budget' décochées. Cliquez sur 'Continuer'."
+          "titre": "Configurer l'ensemble de publicités (Niveau Ensemble de pubs)",
+          "contenu": "C'est ici que tu paramètres : audience, budget, emplacements.\nTout se passe sur le même écran, de haut en bas dans cet ordre :",
+          "sousEtapes": [
+            {
+              "id": "3a",
+              "titre": "Objectif de conversion",
+              "contenu": "Choisis comment tu veux recevoir les contacts :\n• \"Formulaire instantané\" (recommandé pour débuter, formulaire directement dans Facebook/Instagram)\n• OU \"Appels\" si tu préfères recevoir des appels directs\n• OU \"Messenger / WhatsApp\""
+            },
+            {
+              "id": "3b",
+              "titre": "Budget et calendrier",
+              "contenu": "Sélectionne \"Budget quotidien\".\nMontant minimum recommandé : 10€/jour pour débuter.\nIdéal pour résultats stables : 15€/jour (~450€/mois).\nRÈGLE CLÉ : ton budget quotidien doit être au moins 5x ton coût par lead cible.\nEx : si tu veux des leads à 5€, mets 25€/jour minimum.\nDate de début : aujourd'hui ou demain.\nPas de date de fin (tu arrêtes manuellement si besoin)."
+            },
+            {
+              "id": "3c",
+              "titre": "Audience",
+              "contenu": "Localisation : tape \"Perpignan\" + ajuste le rayon à 30-50 km.\nÂge : 25-55 ans. Genre : Tous.\nCiblage détaillé (optionnel) : \"Entretien automobile\", \"Services à domicile\", \"Propriétaires de voiture\".\nTaille d'audience cible : entre 50 000 et 200 000 personnes.\nCONSEIL : tu peux aussi laisser l'audience large sans ciblage détaillé et laisser Meta optimiser lui-même (Advantage Audience) — souvent plus efficace pour un débutant."
+            },
+            {
+              "id": "3d",
+              "titre": "Emplacements",
+              "contenu": "Laisse \"Advantage+ Placements\" activé (option par défaut recommandée).\nMeta optimise automatiquement entre Facebook, Instagram, Messenger selon ce qui performe le mieux.\nLa sélection manuelle n'est utile que si tu as déjà des données de performance."
+            }
+          ]
         },
         {
           "numero": 4,
-          "titre": "Configurer le formulaire de contact",
-          "description": "Dans 'Conversion', sélectionnez 'Formulaire instantané' puis 'Créer un formulaire'. Donnez-lui un nom clair. Choisissez le modèle 'Plus de volume'. Ajoutez les questions : Nom, Téléphone, Email (obligatoires), et une question personnalisée adaptée à votre secteur. Ajoutez un message de remerciement. Enregistrez."
+          "titre": "Créer la publicité (Niveau Pub)",
+          "contenu": "C'est ici que tu crées le contenu visuel de ton annonce.",
+          "sousEtapes": [
+            {
+              "id": "4a",
+              "titre": "Identité",
+              "contenu": "Sélectionne ta page Facebook \"All-Clean\".\nAjoute ton compte Instagram si tu en as un."
+            },
+            {
+              "id": "4b",
+              "titre": "Format et visuel",
+              "contenu": "Choisis \"Image unique\" pour commencer simplement.\nClique sur \"Ajouter un média\" et uploade une photo :\n• Avant/après d'un véhicule nettoyé\n• Toi en action avec ton matériel\n• Format recommandé : 1080x1080px (carré) ou 1080x1350px (vertical)\n• Peu ou pas de texte sur l'image (Meta pénalise les images trop chargées en texte)"
+            },
+            {
+              "id": "4c",
+              "titre": "Texte de l'annonce",
+              "contenu": "Texte principal : colle le texte préparé dans la section 1 (accroche + bénéfices + CTA).\nTitre : \"Nettoyage pro à domicile – Devis gratuit\"\nDescription (optionnelle) : \"Intervention rapide sur Perpignan et alentours\""
+            },
+            {
+              "id": "4d",
+              "titre": "Destination / Bouton d'action",
+              "contenu": "Si tu as choisi Formulaire instantané à l'étape 3a :\nClique sur \"Créer un formulaire\".\nNom du formulaire : \"Contact All-Clean\"\nAjoute les champs : Prénom, Téléphone, et une question \"Type de service souhaité\" avec les options : Nettoyage extérieur, Nettoyage intérieur, Nettoyage complet, Canapé, Vitres.\nMessage de remerciement : \"Merci ! Nous vous contactons sous 2h pour votre devis gratuit.\""
+            }
+          ]
         },
         {
           "numero": 5,
-          "titre": "Définir l'audience cible",
-          "description": "Créez une nouvelle audience. Pour la localisation, cherchez votre ville et ajustez le rayon pour couvrir votre zone de service. Définissez la tranche d'âge correspondant à votre cible. Dans 'Ciblage détaillé', ajoutez les centres d'intérêt pertinents pour votre secteur. Visez 50 000 à 200 000 personnes."
+          "titre": "Vérifier et publier",
+          "contenu": "Vérifie l'aperçu à droite (mobile et desktop).\nContrôle les points clés : budget quotidien, zone géographique, objectif, visuel, texte.\nClique sur \"Publier\".\nMeta examine la publicité (15 min à 24h en général).\nTu reçois une notification quand elle est approuvée et diffusée."
         },
         {
           "numero": 6,
-          "titre": "Paramétrer le budget et calendrier",
-          "description": "Sélectionnez 'Budget quotidien' et calculez environ 3-3,5€ par jour pour un budget mensuel de 100€. Choisissez une date de début et laissez sans date de fin pour une diffusion continue. L'optimisation sera automatiquement réglée sur 'Prospects'."
-        },
-        {
-          "numero": 7,
-          "titre": "Choisir les emplacements",
-          "description": "Sélectionnez 'Emplacements manuels'. Cochez uniquement Facebook Fil d'actualité, Facebook Marketplace, Instagram Fil d'actualité et Instagram Stories. Décochez les autres emplacements moins performants. Cela concentrera votre budget efficacement."
-        },
-        {
-          "numero": 8,
-          "titre": "Créer votre publicité",
-          "description": "Donnez un nom à votre publicité. Sélectionnez votre page Facebook. Choisissez le format 'Image unique' pour commencer. Cliquez sur 'Ajouter un contenu multimédia' puis téléchargez une image de qualité au format carré (1080x1080px recommandé)."
-        },
-        {
-          "numero": 9,
-          "titre": "Rédiger le texte de la publicité",
-          "description": "Dans 'Texte principal', rédigez un message accrocheur avec votre proposition de valeur, les bénéfices clés et votre offre. Utilisez des émojis pertinents. Dans 'Titre', soyez concis et direct. Dans 'Description', ajoutez un élément d'urgence ou de valeur supplémentaire."
-        },
-        {
-          "numero": 10,
-          "titre": "Configurer le bouton d'appel à l'action",
-          "description": "Dans le menu 'Bouton d'appel à l'action', sélectionnez 'Obtenir un devis' ou 'En savoir plus'. Vérifiez que votre formulaire instantané est bien sélectionné. Ajoutez votre URL de site web si vous en avez un. Activez le pixel Meta si configuré."
-        },
-        {
-          "numero": 11,
-          "titre": "Vérifier et publier la campagne",
-          "description": "Cliquez sur 'Prévisualiser' pour voir le rendu sur Facebook et Instagram. Vérifiez l'orthographe et que l'image s'affiche correctement. Testez le formulaire dans la prévisualisation. Si tout est bon, cliquez sur 'Publier'. Votre pub sera vérifiée sous 24h puis diffusée automatiquement."
+          "titre": "Suivre les résultats (à partir de J+3)",
+          "contenu": "Dans le Gestionnaire de publicités, surveille ces indicateurs :\n• Coût par résultat (lead) : objectif < 10€ pour un service local\n• CTR (taux de clic) : bon si > 1,5%\n• Fréquence : si > 3, renouvelle le visuel\nNe touche PAS à la campagne pendant les 7 premiers jours (phase d'apprentissage de l'algorithme).\nPremière analyse sérieuse : après 14 jours minimum."
         }
       ],
+      "noteInterface": "L'interface Meta suit toujours cette structure en 3 niveaux :\n1. CAMPAGNE → objectif global\n2. ENSEMBLE DE PUBLICITÉS → audience + budget + emplacements\n3. PUBLICITÉ → contenu visuel + texte + CTA\nTout est configurable dans cet ordre, de haut en bas sur un seul écran scrollable (interface \"guided creation\" de Meta 2025).",
       "ciblage": {
-        "age": "25-50 ans (propriétaires de véhicules actifs)",
-        "zone": "Zone de service avec rayon de 15 km",
+        "age": "25-55 ans (propriétaires de véhicules actifs)",
+        "zone": "Perpignan + rayon de 30-50 km",
         "interets": [
           "Automobile et véhicules",
           "Entretien automobile",
-          "Voitures de luxe",
-          "Mode de vie automobile",
-          "Services à domicile"
+          "Services à domicile",
+          "Propriétaires de voiture",
+          "Mode de vie automobile"
         ],
         "exclusions": "Exclure les personnes intéressées par les transports en commun ou le vélo, moins susceptibles de posséder une voiture."
       },
@@ -117,19 +137,19 @@
       "conseilsSuivi": [
         {
           "titre": "Analyser les performances quotidiennes",
-          "description": "Connectez-vous chaque matin au Gestionnaire de publicités. Consultez : Portée (personnes touchées), Impressions, Résultats (nombre de prospects), Coût par résultat. Pour un budget de 100€/mois, visez un coût par prospect inférieur à 5€. Si après 3 jours le coût dépasse 8€, mettez en pause et testez un nouveau visuel ou texte. Si inférieur à 3€, augmentez légèrement le budget quotidien."
+          "description": "Connectez-vous chaque matin au Gestionnaire de publicités. Consultez : Portée, Impressions, Résultats (nombre de prospects), Coût par résultat. Visez un coût par prospect inférieur à 5€. Si après 3 jours le coût dépasse 8€, mettez en pause et testez un nouveau visuel ou texte."
         },
         {
           "titre": "Optimiser selon les résultats",
-          "description": "Après 7 jours, identifiez quel emplacement performe le mieux (Instagram vs Facebook). Cliquez sur 'Colonnes' puis 'Personnaliser les colonnes' et ajoutez les métriques par emplacement. Désactivez les emplacements avec un coût par prospect supérieur à 7€. Testez également différents visuels : gardez le texte identique mais changez l'image pour identifier ce qui résonne le mieux avec votre audience."
+          "description": "Après 7 jours, identifiez quel emplacement performe le mieux (Instagram vs Facebook). Désactivez les emplacements avec un coût par prospect supérieur à 7€. Testez différents visuels : gardez le texte identique mais changez l'image."
         },
         {
           "titre": "Gérer les prospects efficacement",
-          "description": "Téléchargez l'application Meta Business Suite sur votre téléphone pour recevoir les notifications de nouveaux prospects en temps réel. Dans le Gestionnaire de publicités, allez dans 'Formulaires' > votre formulaire > 'Télécharger' pour exporter en CSV. Contactez CHAQUE prospect dans les 2 heures maximum - c'est crucial pour la conversion. Les prospects contactés dans l'heure ont 7x plus de chances de convertir. Créez un tableau de suivi avec colonnes : Nom, Contact, Date, Statut (À rappeler/Devis envoyé/Réservé/Non intéressé)."
+          "description": "Téléchargez l'app Meta Business Suite pour recevoir les notifications en temps réel. Contactez CHAQUE prospect dans les 2 heures maximum — les prospects contactés dans l'heure ont 7x plus de chances de convertir."
         },
         {
           "titre": "Ajuster le budget selon les conversions",
-          "description": "Calculez votre ROI après 15 jours. Si vous dépensez 50€ de pub et générez 10 clients à 50€ de panier moyen = 500€ de CA pour 50€ d'investissement = ROI de 10x. Si le ROI est positif et que vous avez la capacité de servir plus de clients, augmentez progressivement le budget quotidien (+ 1-2€ tous les 3 jours). Si le ROI est négatif, analysez : est-ce le coût d'acquisition trop élevé ou le taux de conversion prospect → client trop faible ? Optimisez en conséquence avant d'augmenter le budget."
+          "description": "Calculez votre ROI après 15 jours. Si le ROI est positif et que vous avez la capacité de servir plus de clients, augmentez progressivement le budget quotidien (+1-2€ tous les 3 jours)."
         }
       ],
       "conseilsSecteur": [
@@ -202,7 +222,7 @@
               "heure": "17h30",
               "theme": "Focus produit écologique",
               "typeContenu": "Photo de vos produits",
-              "conseilVisuel": "Mise en scène de produits éco-responsables avec feuilles vertes et fond naturel. Texte : 'Efficace ET respectueux de l'environnement 🌿'. Montrez les labels bio."
+              "conseilVisuel": "Mise en scène de produits éco-responsables avec feuilles vertes et fond naturel. Texte : 'Efficace ET respectueux de l'environnement'. Montrez les labels bio."
             },
             {
               "jour": "Jeudi",
@@ -216,7 +236,7 @@
               "heure": "11h00",
               "theme": "Résultats de la semaine",
               "typeContenu": "Compilation photo",
-              "conseilVisuel": "Mosaïque de 4-6 voitures nettoyées cette semaine. Variété de modèles. Texte : 'Ils nous ont fait confiance cette semaine ⭐'. Ajoutez le nombre de clients."
+              "conseilVisuel": "Mosaïque de 4-6 voitures nettoyées cette semaine. Variété de modèles. Texte : 'Ils nous ont fait confiance cette semaine'. Ajoutez le nombre de clients."
             }
           ]
         },
@@ -235,7 +255,7 @@
               "heure": "19h00",
               "theme": "Cas extrême transformé",
               "typeContenu": "Photo dramatique avant/après",
-              "conseilVisuel": "Votre cas le plus impressionnant : voiture très sale transformée. Split-screen vertical. Ajoutez des émojis choc (😱➡️🤩). Racontez l'histoire."
+              "conseilVisuel": "Votre cas le plus impressionnant : voiture très sale transformée. Split-screen vertical. Racontez l'histoire."
             },
             {
               "jour": "Vendredi",

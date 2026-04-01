@@ -1,0 +1,217 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const objectifs = [
+  "Attirer des appels/messages",
+  "Gagner en visibilité",
+  "Vendre un service",
+];
+
+export default function GeneratePage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    nomActivite: "",
+    typeActivite: "",
+    zone: "",
+    cible: "",
+    budget: "",
+    objectif: objectifs[0],
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Erreur lors de la génération");
+
+      const data = await res.json();
+      router.push(`/results/${data.id}`);
+    } catch {
+      alert("Une erreur est survenue. Vérifiez votre clé API et réessayez.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <main className="max-w-4xl mx-auto px-6 py-12">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 text-balance">
+          Votre stratégie pub Meta Ads
+          <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+            générée par l&apos;IA
+          </span>
+        </h2>
+        <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          Remplissez le formulaire ci-dessous et recevez en quelques secondes
+          vos textes de pub, un guide Meta Ads personnalisé et votre
+          calendrier de publication.
+        </p>
+      </div>
+
+      {/* Form */}
+      <form
+        onSubmit={handleSubmit}
+        className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-sm"
+      >
+        <div className="grid sm:grid-cols-2 gap-6">
+          {/* Nom activité */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Nom de l&apos;activité
+            </label>
+            <input
+              type="text"
+              name="nomActivite"
+              placeholder="Ex : All-Clean - nettoyage de véhicules"
+              value={formData.nomActivite}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+            />
+          </div>
+
+          {/* Type activité */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Type d&apos;activité
+            </label>
+            <input
+              type="text"
+              name="typeActivite"
+              placeholder="Ex : nettoyage automobile à domicile"
+              value={formData.typeActivite}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+            />
+          </div>
+
+          {/* Zone */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Zone géographique
+            </label>
+            <input
+              type="text"
+              name="zone"
+              placeholder="Ex : Perpignan et alentours, 20km"
+              value={formData.zone}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+            />
+          </div>
+
+          {/* Cible */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Cible client
+            </label>
+            <input
+              type="text"
+              name="cible"
+              placeholder="Ex : particuliers avec voiture, 25-55 ans"
+              value={formData.cible}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+            />
+          </div>
+
+          {/* Budget */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Budget pub mensuel
+            </label>
+            <input
+              type="text"
+              name="budget"
+              placeholder="Ex : 100€/mois"
+              value={formData.budget}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+            />
+          </div>
+
+          {/* Objectif */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Objectif principal
+            </label>
+            <select
+              name="objectif"
+              value={formData.objectif}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition appearance-none"
+            >
+              {objectifs.map((obj) => (
+                <option key={obj} value={obj} className="bg-slate-900">
+                  {obj}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-violet-500/25"
+        >
+          {loading ? (
+            <>
+              <svg
+                className="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              Génération en cours...
+            </>
+          ) : (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
+              Générer ma stratégie publicitaire
+            </>
+          )}
+        </button>
+      </form>
+    </main>
+  );
+}

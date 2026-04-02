@@ -60,8 +60,28 @@ export default function ResultsDisplay({
   results: Results;
   formData: FormData;
 }) {
+  const [activeTab, setActiveTab] = useState<"textes" | "guide" | "calendrier">("textes");
+
+  const tabs = [
+    { id: "textes" as const, label: "Textes de pub", icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+      </svg>
+    )},
+    { id: "guide" as const, label: "Guide Meta Ads", icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+      </svg>
+    )},
+    { id: "calendrier" as const, label: "Calendrier", icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+      </svg>
+    )},
+  ];
+
   return (
-    <main className="max-w-5xl mx-auto px-6 py-10 space-y-10">
+    <main className="max-w-5xl mx-auto px-6 py-10 space-y-6">
       {/* Recap */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
         <h2 className="text-lg font-semibold text-white mb-3">
@@ -84,7 +104,27 @@ export default function ResultsDisplay({
         </div>
       </div>
 
+      {/* Tabs */}
+      <div className="flex gap-2 bg-slate-800/50 border border-slate-700/50 rounded-xl p-1.5">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+              activeTab === tab.id
+                ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-500/25"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            {tab.icon}
+            <span className="hidden sm:inline">{tab.label}</span>
+          </button>
+        ))}
+      </div>
+
       {/* Section 1 — Textes de pub */}
+      {activeTab === "textes" && (
       <section className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
         <SectionHeader
           icon={
@@ -164,8 +204,10 @@ export default function ResultsDisplay({
           </div>
         </div>
       </section>
+      )}
 
       {/* Section 2 — Guide Meta Ads */}
+      {activeTab === "guide" && (
       <section className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
         <SectionHeader
           icon={
@@ -390,8 +432,10 @@ export default function ResultsDisplay({
           </div>
         </div>
       </section>
+      )}
 
       {/* Section 3 — Calendrier */}
+      {activeTab === "calendrier" && (
       <section className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
         <SectionHeader
           icon={
@@ -442,6 +486,7 @@ export default function ResultsDisplay({
           ))}
         </div>
       </section>
+      )}
     </main>
   );
 }

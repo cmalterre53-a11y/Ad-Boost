@@ -97,48 +97,58 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
     "etapes": [
       {
         "numero": 1,
-        "titre": "Accéder au Gestionnaire de publicités",
-        "contenu": "Instructions courtes et directes pour cette étape. Chaque ligne = une action. Mentionne les boutons exacts."
+        "titre": "Créer la campagne (Page 1)",
+        "contenu": "Instructions pour la première page : type d'achat (Enchère ou Réservation → choisir Enchère), objectif de campagne (sélectionner Prospects). Cliquer Suivant. Sur la page suivante : nommer la campagne, catégories publicitaires spéciales, test A/B."
       },
       {
         "numero": 2,
-        "titre": "Choisir l'objectif (Niveau Campagne)",
-        "contenu": "Instructions pour le choix d'objectif, nommage de la campagne, etc."
+        "titre": "Budget et stratégie d'enchère (Page 2)",
+        "contenu": "Configuration du budget : Advantage+ campaign budget activé ou non, budget quotidien ou global, stratégie d'enchère (Volume le plus élevé).",
+        "sousEtapes": [
+          { "id": "2a", "titre": "Mode budget", "contenu": "Choisir entre Budget de la campagne (Advantage+) ou Budget de l'ensemble de publicités. Recommandation personnalisée." },
+          { "id": "2b", "titre": "Montant et stratégie", "contenu": "Budget quotidien recommandé selon le budget mensuel de l'utilisateur, stratégie d'enchère Volume le plus élevé." },
+          { "id": "2c", "titre": "Catégories spéciales", "contenu": "Vérifier si l'activité nécessite une catégorie spéciale (services financiers, emploi, logement, politique). Sinon ne rien cocher." }
+        ]
       },
       {
         "numero": 3,
-        "titre": "Configurer l'ensemble de publicités",
-        "contenu": "Phrase d'intro courte sur ce que contient cet écran.",
+        "titre": "Conversion et objectif de performance (Page 3 - haut)",
+        "contenu": "Configuration du lieu de conversion et de l'objectif de performance.",
         "sousEtapes": [
-          { "id": "3a", "titre": "Objectif de conversion", "contenu": "Choix du type de contact (formulaire, appels, messenger)." },
-          { "id": "3b", "titre": "Budget et calendrier", "contenu": "Budget quotidien recommandé, règle du 5x, dates." },
-          { "id": "3c", "titre": "Audience", "contenu": "Localisation, rayon, âge, ciblage détaillé, taille audience." },
-          { "id": "3d", "titre": "Emplacements", "contenu": "Advantage+ Placements ou sélection manuelle." }
+          { "id": "3a", "titre": "Lieu de conversion", "contenu": "Choisir entre Multiples (Site Web et formulaires, Site Web et appels, Formulaires et Messenger) ou Unique (Site Web, Formulaires instantanés, Messenger, Instagram, WhatsApp, Appels, Application). Recommandation personnalisée selon l'activité." },
+          { "id": "3b", "titre": "Objectif de performance", "contenu": "Choisir entre Maximiser le nombre de prospects ou Maximiser le nombre de prospects de conversions. Recommandation personnalisée." },
+          { "id": "3c", "titre": "Contenu publicitaire dynamique", "contenu": "Laisser désactivé pour commencer, ou activer si pertinent." }
         ]
       },
       {
         "numero": 4,
-        "titre": "Créer la publicité (Niveau Pub)",
-        "contenu": "Phrase d'intro courte.",
+        "titre": "Audience et placements (Page 3 - milieu)",
+        "contenu": "Configuration de l'audience cible et des placements.",
         "sousEtapes": [
-          { "id": "4a", "titre": "Identité", "contenu": "Sélection page Facebook et compte Instagram." },
-          { "id": "4b", "titre": "Format et visuel", "contenu": "Image unique recommandée, specs, conseils photo." },
-          { "id": "4c", "titre": "Texte de l'annonce", "contenu": "Texte principal, titre, description." },
-          { "id": "4d", "titre": "Destination / Bouton d'action", "contenu": "Formulaire instantané, champs, message de remerciement." }
+          { "id": "4a", "titre": "Budget et calendrier", "contenu": "Si budget au niveau ensemble de publicités : définir le budget quotidien. Choisir la date de début. Conseil sur la date de fin." },
+          { "id": "4b", "titre": "Audience", "contenu": "Advantage+ audience activé ou contrôles manuels. Lieux (zone géographique + rayon). Suggestions d'audiences personnalisées. Recommandations adaptées à l'activité." },
+          { "id": "4c", "titre": "Informations annonceur UE", "contenu": "Remplir le nom de l'annonceur (obligatoire pour diffuser dans l'UE). Indiquer si le payeur est différent." },
+          { "id": "4d", "titre": "Placements", "contenu": "Advantage+ placements recommandé (Meta diffuse automatiquement là où ça performe). Ou contrôles manuels avec exclusions si besoin." }
         ]
       },
       {
         "numero": 5,
-        "titre": "Vérifier et publier",
-        "contenu": "Vérification aperçu, points de contrôle, publication, délai d'examen."
+        "titre": "Créer la publicité (Page 3 - bas)",
+        "contenu": "Configuration du contenu publicitaire.",
+        "sousEtapes": [
+          { "id": "5a", "titre": "Identité", "contenu": "Sélectionner la Page Facebook et le profil Instagram liés à l'activité." },
+          { "id": "5b", "titre": "Format", "contenu": "Choisir Image/Vidéo unique ou Carrousel. Recommandation personnalisée avec conseils visuels adaptés au secteur." },
+          { "id": "5c", "titre": "Contenu publicitaire", "contenu": "Configurer le texte principal, le titre, la description et le CTA. Utiliser les textes générés dans la Section 1." },
+          { "id": "5d", "titre": "Destination", "contenu": "Formulaire instantané : créer le formulaire avec les champs adaptés (nom, téléphone, email, message). Ou autre destination selon le lieu de conversion choisi à l'étape 3." }
+        ]
       },
       {
         "numero": 6,
-        "titre": "Suivre les résultats (à partir de J+3)",
-        "contenu": "KPIs à surveiller (coût par lead, CTR, fréquence), phase d'apprentissage, première analyse."
+        "titre": "Vérifier, publier et suivre",
+        "contenu": "Vérifier l'aperçu mobile/desktop. Vérifier le suivi (évènements CRM, site Web, paramètres URL). Cliquer Publier. Délai d'examen Meta : 24h. Ne pas toucher pendant 7 jours (phase d'apprentissage). Premiers KPIs à surveiller à J+3."
       }
     ],
-    "noteInterface": "L'interface Meta suit toujours cette structure en 3 niveaux :\n1. CAMPAGNE → objectif global\n2. ENSEMBLE DE PUBLICITÉS → audience + budget + emplacements\n3. PUBLICITÉ → contenu visuel + texte + CTA\nTout est configurable dans cet ordre, de haut en bas sur un seul écran scrollable (interface guided creation de Meta 2025).",
+    "noteInterface": "L'interface Meta Ads suit un parcours en 3 pages :\nPage 1 → Type d'achat + Objectif de campagne\nPage 2 → Nom de campagne + Budget + Catégories spéciales\nPage 3 → Tout le reste sur un seul écran scrollable : Conversion, Budget/Calendrier, Audience, Placements, Identité, Format, Contenu pub, Destination, Suivi",
     "ciblage": {
       "age": "tranche d'âge recommandée",
       "zone": "zone géographique et rayon exact à configurer",
@@ -194,16 +204,15 @@ INSTRUCTIONS IMPORTANTES :
 - Chaque semaine doit contenir 3 posts.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - Les accroches courtes doivent faire max 40 caractères.
-- La section2.etapes doit contenir EXACTEMENT 6 étapes dans cet ordre qui reflète l'interface Meta Ads 2025/2026 :
-  1. Accéder au Gestionnaire de publicités (business.facebook.com → bouton + Créer)
-  2. Choisir l'objectif — Niveau Campagne (sélectionner Prospects, nommer la campagne, décocher ACB)
-  3. Configurer l'ensemble de publicités — avec 4 sousEtapes : 3a Objectif de conversion (formulaire/appels/messenger), 3b Budget et calendrier (budget quotidien, règle du 5x le coût par lead), 3c Audience (localisation + rayon 30-50km, âge, ciblage détaillé ou Advantage Audience), 3d Emplacements (Advantage+ Placements recommandé)
-  4. Créer la publicité — avec 4 sousEtapes : 4a Identité (page Facebook + Instagram), 4b Format et visuel (image unique 1080x1080 ou 1080x1350, conseils photo adaptés au secteur), 4c Texte de l'annonce (texte principal + titre + description personnalisés), 4d Destination / Bouton d'action (formulaire instantané avec champs adaptés au secteur)
-  5. Vérifier et publier (aperçu mobile/desktop, points de contrôle, publication, délai examen)
-  6. Suivre les résultats à partir de J+3 (coût par lead, CTR > 1.5%, fréquence < 3, ne pas toucher pendant 7 jours, analyse après 14 jours)
-- Le champ "contenu" de chaque étape doit être concis : des instructions directes, une action par ligne. Personnalise TOUS les exemples pour l'activité de l'utilisateur (nom, zone, type de service, visuels suggérés).
-- Ajoute le champ "noteInterface" avec l'explication des 3 niveaux (Campagne → Ensemble de pubs → Pub).
-- La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication : comment consulter les résultats, quels KPIs surveiller, quand et comment faire des ajustements, comment récupérer et traiter les prospects.
+- La section2.etapes doit contenir EXACTEMENT 6 étapes qui reflètent le vrai parcours de création Meta Ads 2025/2026 :
+  1. Créer la campagne (Page 1) : type d'achat → Enchère, objectif → Prospects. Cliquer Suivant.
+  2. Budget et stratégie d'enchère (Page 2) : nom de campagne, Advantage+ budget (activé ou non), budget quotidien calculé depuis le budget mensuel, stratégie d'enchère Volume le plus élevé, catégories spéciales si applicable. Cliquer Suivant.
+  3. Conversion et objectif de performance (Page 3 - haut) : lieu de conversion (Formulaires instantanés recommandé, ou Appels, Messenger, WhatsApp selon le secteur), objectif de performance (Maximiser prospects).
+  4. Audience et placements (Page 3 - milieu) : budget/calendrier si pas au niveau campagne, audience Advantage+ avec contrôles (lieux = zone de l'utilisateur, rayon adapté), informations annonceur UE obligatoires, placements Advantage+ recommandé.
+  5. Créer la publicité (Page 3 - bas) : identité (Page Facebook + Instagram), format (Image/Vidéo unique ou Carrousel), contenu publicitaire (texte + titre + description + CTA tirés de la section1), destination (formulaire instantané avec champs adaptés au secteur).
+  6. Vérifier, publier et suivre : aperçu, suivi/tracking, publier, délai examen 24h, phase d'apprentissage 7 jours, KPIs à J+3.
+- Le champ "contenu" de chaque étape doit être concis : des instructions directes, une action par ligne. Indique les noms exacts des boutons et options tels qu'ils apparaissent dans Meta Ads. Personnalise TOUS les exemples pour l'activité de l'utilisateur.
+- La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication.
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
 
       const message = await anthropic.messages.create({

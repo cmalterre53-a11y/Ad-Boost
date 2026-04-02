@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import DeleteButton from "./delete-button";
 
 export default async function DashboardPage() {
   const supabase = createClient();
@@ -81,9 +82,12 @@ export default async function DashboardPage() {
                     })}
                   </p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-slate-600 group-hover:text-violet-400 transition-colors flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
+                <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+                  <DeleteButton id={strategy.id} />
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-slate-600 group-hover:text-violet-400 transition-colors" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </div>
               </div>
             </Link>
           ))}

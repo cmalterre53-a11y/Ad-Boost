@@ -96,6 +96,16 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
   "section2": {
     "etapes": [
       {
+        "numero": 0,
+        "titre": "Accéder au Gestionnaire de publicités",
+        "contenu": "Comment accéder à Meta Ads pour créer sa première pub.",
+        "sousEtapes": [
+          { "id": "0a", "titre": "Si vous n'avez pas encore de compte", "contenu": "Créer une Page Facebook pour votre activité (obligatoire pour faire de la pub). Aller sur business.facebook.com et créer un compte Meta Business Suite. Associer votre Page Facebook à votre compte Business." },
+          { "id": "0b", "titre": "Si vous avez déjà un compte", "contenu": "Aller sur business.facebook.com ou adsmanager.facebook.com. Se connecter avec le compte Facebook lié à votre Page professionnelle." },
+          { "id": "0c", "titre": "Lancer la création", "contenu": "Dans le Gestionnaire de publicités, cliquer sur le bouton vert + Créer. Vous arrivez sur la première page de création de campagne." }
+        ]
+      },
+      {
         "numero": 1,
         "titre": "Créer la campagne (Page 1)",
         "contenu": "Instructions pour la première page : type d'achat (Enchère ou Réservation → choisir Enchère), objectif de campagne (sélectionner Prospects). Cliquer Suivant. Sur la page suivante : nommer la campagne, catégories publicitaires spéciales, test A/B."
@@ -204,7 +214,8 @@ INSTRUCTIONS IMPORTANTES :
 - Chaque semaine doit contenir 3 posts.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - Les accroches courtes doivent faire max 40 caractères.
-- La section2.etapes doit contenir EXACTEMENT 6 étapes qui reflètent le vrai parcours de création Meta Ads 2025/2026 :
+- La section2.etapes doit contenir EXACTEMENT 7 étapes (numérotées de 0 à 6) qui reflètent le vrai parcours de création Meta Ads 2025/2026 :
+  0. Accéder au Gestionnaire de publicités : avec 3 sous-étapes (0a pas de compte : créer Page Facebook + compte Meta Business Suite, 0b déjà un compte : aller sur business.facebook.com ou adsmanager.facebook.com, 0c lancer la création : cliquer + Créer).
   1. Créer la campagne (Page 1) : type d'achat → Enchère, objectif → Prospects. Cliquer Suivant.
   2. Budget et stratégie d'enchère (Page 2) : nom de campagne, Advantage+ budget (activé ou non), budget quotidien calculé depuis le budget mensuel, stratégie d'enchère Volume le plus élevé, catégories spéciales si applicable. Cliquer Suivant.
   3. Conversion et objectif de performance (Page 3 - haut) : lieu de conversion (Formulaires instantanés recommandé, ou Appels, Messenger, WhatsApp selon le secteur), objectif de performance (Maximiser prospects).

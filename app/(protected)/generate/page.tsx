@@ -38,12 +38,12 @@ export default function GeneratePage() {
         body: JSON.stringify(formData),
       });
 
-      if (!res.ok) throw new Error("Erreur lors de la génération");
-
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Erreur lors de la génération");
+
       router.push(`/results/${data.id}`);
-    } catch {
-      alert("Une erreur est survenue. Vérifiez votre clé API et réessayez.");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {
       setLoading(false);
     }

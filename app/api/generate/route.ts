@@ -276,8 +276,9 @@ INSTRUCTIONS IMPORTANTES :
     return NextResponse.json({ id: data.id, ...results });
   } catch (error) {
     console.error("Erreur API:", error);
+    const message = error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
-      { error: "Erreur lors de la génération du contenu" },
+      { error: `Erreur : ${message}` },
       { status: 500 }
     );
   }

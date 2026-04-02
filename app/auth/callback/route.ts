@@ -29,8 +29,13 @@ export async function GET(request: Request) {
       }
     );
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
+      // Si c'est un recovery (reset password), rediriger vers la page de reset
+      const type = searchParams.get("type");
+      if (type === "recovery") {
+        return NextResponse.redirect(`${origin}/auth/reset`);
+      }
       return NextResponse.redirect(`${origin}/dashboard`);
     }
   }

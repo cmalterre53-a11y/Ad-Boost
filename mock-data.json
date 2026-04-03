@@ -6,6 +6,7 @@
   "budget": "100€/mois",
   "objectif": "Attirer des appels/messages",
   "results": {
+    "icp": "Particuliers de 25 à 55 ans résidant à Perpignan et alentours, propriétaires de véhicules, actifs professionnellement avec peu de temps libre. Ils recherchent un service pratique et rapide pour entretenir leur voiture sans se déplacer.",
     "section1": {
       "accroches": [
         "Voiture propre en 24h à domicile",
@@ -27,6 +28,20 @@
           "accroche": "Offre spéciale : -20% sur votre 1er nettoyage",
           "description": "Découvrez All-Clean, le spécialiste du nettoyage automobile à domicile. Intérieur aspiré et nettoyé, extérieur lavé et lustré. Nous venons chez vous avec tout le matériel.",
           "cta": "Contactez-nous pour profiter de l'offre"
+        }
+      ],
+      "visuels": [
+        {
+          "titre": "Avant/Après nettoyage extérieur",
+          "promptImage": "Professional car detailing before and after photo, split screen comparison. Left side: dirty dusty grey sedan in a driveway, Right side: same car gleaming clean with water droplets. Bright natural daylight, suburban French home background, realistic photography style, 1080x1080px square format"
+        },
+        {
+          "titre": "Technicien en action à domicile",
+          "promptImage": "Professional car cleaning technician in branded uniform working on a car interior with steam cleaner, parked in front of a Mediterranean-style French house. Warm afternoon sunlight, professional equipment visible, clean and organized workspace. Realistic photography, vibrant colors, 1080x1080px"
+        },
+        {
+          "titre": "Intérieur impeccable gros plan",
+          "promptImage": "Close-up of a perfectly cleaned car interior, pristine leather seats with subtle shine, spotless dashboard, clean steering wheel. Soft natural light coming through the windshield, shallow depth of field, premium detailing result. Realistic photography style, warm tones, 1080x1080px"
         }
       ],
       "legendes": [

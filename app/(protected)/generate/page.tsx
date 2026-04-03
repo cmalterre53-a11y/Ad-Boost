@@ -16,7 +16,6 @@ export default function GeneratePage() {
     nomActivite: "",
     typeActivite: "",
     zone: "",
-    cible: "",
     budget: "",
     objectif: objectifs[0],
   });
@@ -114,22 +113,6 @@ export default function GeneratePage() {
               name="zone"
               placeholder="Ex : Perpignan et alentours, 20km"
               value={formData.zone}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
-            />
-          </div>
-
-          {/* Cible */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
-              Cible client
-            </label>
-            <input
-              type="text"
-              name="cible"
-              placeholder="Ex : particuliers avec voiture, 25-55 ans"
-              value={formData.cible}
               onChange={handleChange}
               required
               className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"

@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resetSent, setResetSent] = useState(false);
+  const [signupDone, setSignupDone] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,8 +44,9 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
+      router.push("/dashboard");
     } else {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
@@ -53,9 +55,15 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
+      // If email confirmation is required, show success message
+      if (data.user && !data.session) {
+        setSignupDone(true);
+        setLoading(false);
+        return;
+      }
+      // If auto-confirmed (no email confirmation required), redirect
+      router.push("/dashboard");
     }
-
-    router.push("/dashboard");
   };
 
   const handleResetPassword = async () => {
@@ -121,7 +129,29 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {resetSent ? (
+          {signupDone ? (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-emerald-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-lg font-semibold text-white mb-2">
+                Compte créé avec succès !
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Un email de confirmation a été envoyé à{" "}
+                <span className="text-white font-medium">{email}</span>.
+                <br />
+                Cliquez sur le lien dans l&apos;email pour activer votre compte.
+              </p>
+              <button
+                type="button"
+                onClick={() => { setSignupDone(false); setMode("login"); }}
+                className="mt-4 text-sm text-violet-400 hover:text-violet-300 transition"
+              >
+                Retour à la connexion
+              </button>
+            </div>
+          ) : resetSent ? (
             <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 text-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-emerald-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />

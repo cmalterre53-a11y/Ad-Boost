@@ -4,6 +4,11 @@ export interface TextePub {
   cta: string;
 }
 
+export interface VisuelPub {
+  titre: string;
+  promptImage: string;
+}
+
 export interface Post {
   jour: string;
   heure: string;
@@ -41,9 +46,11 @@ export interface ConseilSuivi {
 }
 
 export interface Results {
+  icp: string;
   section1: {
     accroches: string[];
     textesPub: TextePub[];
+    visuels: VisuelPub[];
     legendes: string[];
   };
   section2: {
@@ -74,7 +81,6 @@ export interface FormData {
   nomActivite: string;
   typeActivite: string;
   zone: string;
-  cible: string;
   budget: string;
   objectif: string;
 }
@@ -85,7 +91,7 @@ export interface Strategy {
   nom_activite: string;
   type_activite: string;
   zone: string;
-  cible: string;
+  cible?: string;
   budget: string;
   objectif: string;
   results: Results;

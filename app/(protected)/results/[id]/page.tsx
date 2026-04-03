@@ -23,7 +23,6 @@ export default async function ResultPage({
     nomActivite: strategy.nom_activite,
     typeActivite: strategy.type_activite,
     zone: strategy.zone,
-    cible: strategy.cible,
     budget: strategy.budget,
     objectif: strategy.objectif,
   };

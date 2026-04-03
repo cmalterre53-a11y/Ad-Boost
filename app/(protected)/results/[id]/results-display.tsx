@@ -88,7 +88,7 @@ export default function ResultsDisplay({
           Stratégie pour{" "}
           <span className="text-violet-400">{formData.nomActivite}</span>
         </h2>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 mb-4">
           <span className="px-3 py-1 text-xs bg-violet-500/15 text-violet-300 border border-violet-500/25 rounded-full">
             {formData.typeActivite}
           </span>
@@ -102,6 +102,19 @@ export default function ResultsDisplay({
             {formData.objectif}
           </span>
         </div>
+        {results.icp && (
+          <div className="bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+            <div className="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
+              <div>
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Client cible (ICP)</span>
+                <p className="text-slate-300 text-sm mt-1">{results.icp}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Tabs */}
@@ -157,27 +170,58 @@ export default function ResultsDisplay({
           </div>
         </div>
 
-        {/* Textes complets */}
+        {/* Visuels (prompts image) */}
+        {results.section1.visuels && results.section1.visuels.length > 0 && (
         <div className="mb-8">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Textes de pub complets
+            Visuels — Prompts de génération d&apos;image
           </h3>
-          <div className="space-y-4">
-            {results.section1.textesPub.map((pub, i) => (
+          <div className="space-y-2">
+            {results.section1.visuels.map((visuel, i) => (
               <div
                 key={i}
-                className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-5"
+                className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
               >
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <h4 className="text-lg font-semibold text-white">
-                    {pub.accroche}
-                  </h4>
-                  <CopyButton
-                    text={`${pub.accroche}\n\n${pub.description}\n\n${pub.cta}`}
-                  />
+                <span className="w-6 h-6 flex-shrink-0 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold mt-0.5">
+                  {i + 1}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white font-medium text-sm mb-1">{visuel.titre}</p>
+                  <p className="text-slate-400 text-xs">{visuel.promptImage}</p>
                 </div>
-                <p className="text-slate-300 mb-3 whitespace-pre-line">{pub.description}</p>
-                <p className="text-violet-400 font-medium">{pub.cta}</p>
+                <CopyButton text={visuel.promptImage} />
+              </div>
+            ))}
+          </div>
+        </div>
+        )}
+
+        {/* Textes de pub */}
+        <div className="mb-8">
+          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+            Textes de pub
+          </h3>
+          <div className="space-y-2">
+            {results.section1.textesPub.map((pub, i) => (
+              <div key={i} className="space-y-2">
+                {/* Accroche */}
+                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+                  <span className="w-6 h-6 flex-shrink-0 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <p className="text-white font-medium flex-1">{pub.accroche}</p>
+                  <CopyButton text={pub.accroche} />
+                </div>
+                {/* Description */}
+                <div className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
+                  <p className="text-slate-300 text-sm flex-1 whitespace-pre-line">{pub.description}</p>
+                  <CopyButton text={pub.description} />
+                </div>
+                {/* CTA */}
+                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4 mb-4">
+                  <p className="text-violet-400 font-medium text-sm flex-1">{pub.cta}</p>
+                  <CopyButton text={pub.cta} />
+                </div>
               </div>
             ))}
           </div>

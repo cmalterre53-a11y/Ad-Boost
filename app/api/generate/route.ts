@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
-    const { nomActivite, typeActivite, zone, cible, budget, objectif } =
+    const { nomActivite, typeActivite, zone, budget, objectif } =
       await req.json();
 
     let results;
@@ -65,13 +65,15 @@ Voici les informations sur l'activité :
 - Nom de l'activité : ${nomActivite}
 - Type d'activité : ${typeActivite}
 - Zone géographique : ${zone}
-- Cible client : ${cible}
 - Budget pub mensuel : ${budget}
 - Objectif principal : ${objectif}
+
+À partir de ces informations, tu dois d'abord DÉTERMINER le profil client idéal (ICP - Ideal Customer Profile) : qui sont les clients cibles de cette activité ? (type de personnes, leurs besoins, leur profil démographique, etc.). Tu dois déduire cela intelligemment à partir du type d'activité et de la zone géographique.
 
 Génère un plan complet en JSON avec exactement cette structure (pas de texte autour, uniquement du JSON valide) :
 
 {
+  "icp": "Description du profil client idéal déduit (2-3 phrases décrivant qui sont les clients cibles, leur profil, leurs besoins)",
   "section1": {
     "accroches": ["accroche1 (max 40 car)", "accroche2", "accroche3"],
     "textesPub": [
@@ -89,6 +91,20 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
         "accroche": "titre accrocheur",
         "description": "texte descriptif engageant",
         "cta": "call to action clair"
+      }
+    ],
+    "visuels": [
+      {
+        "titre": "description courte du visuel (ex: Photo avant/après nettoyage)",
+        "promptImage": "prompt détaillé pour générer l'image avec un outil IA (Midjourney, DALL-E, etc). Doit décrire précisément la scène, le style, les couleurs, l'ambiance."
+      },
+      {
+        "titre": "description courte du visuel 2",
+        "promptImage": "prompt détaillé pour générer l'image 2"
+      },
+      {
+        "titre": "description courte du visuel 3",
+        "promptImage": "prompt détaillé pour générer l'image 3"
       }
     ],
     "legendes": ["légende1", "légende2", "légende3", "légende4", "légende5"]
@@ -214,6 +230,7 @@ INSTRUCTIONS IMPORTANTES :
 - Chaque semaine doit contenir 3 posts.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - Les accroches courtes doivent faire max 40 caractères.
+- Les visuels doivent contenir 3 prompts de génération d'image détaillés et adaptés au secteur d'activité. Chaque prompt doit être suffisamment précis pour être copié-collé directement dans un outil de génération d'images IA (Midjourney, DALL-E, etc).
 - La section2.etapes doit contenir EXACTEMENT 7 étapes (numérotées de 0 à 6) qui reflètent le vrai parcours de création Meta Ads 2025/2026 :
   0. Accéder au Gestionnaire de publicités : avec 3 sous-étapes (0a pas de compte : créer Page Facebook + compte Meta Business Suite, 0b déjà un compte : aller sur business.facebook.com ou adsmanager.facebook.com, 0c lancer la création : cliquer + Créer).
   1. Créer la campagne (Page 1) : type d'achat → Enchère, objectif → Prospects. Cliquer Suivant.
@@ -257,7 +274,7 @@ INSTRUCTIONS IMPORTANTES :
         nom_activite: nomActivite,
         type_activite: typeActivite,
         zone,
-        cible,
+        cible: results.icp,
         budget,
         objectif,
         results,

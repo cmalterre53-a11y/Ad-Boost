@@ -15,7 +15,6 @@ import {
   MessageSquare,
   Clock,
   DollarSign,
-  Headphones,
   ChevronDown,
   ArrowRight,
   Menu,

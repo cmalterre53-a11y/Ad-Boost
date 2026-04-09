@@ -113,10 +113,10 @@ const plans = [
 ];
 
 const faqs = [
-  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil IA qui génère automatiquement tout le contenu marketing dont un petit entrepreneur local a besoin : textes de pub, posts réseaux sociaux, emails, scripts vidéo, et plus encore. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
+  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil IA qui génère automatiquement tout le contenu marketing dont un entrepreneur a besoin : textes de pub, posts réseaux sociaux, emails, scripts vidéo, et plus encore. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
   { q: "Est-ce que je dois être expert en marketing ?", a: "Pas du tout ! AdBoost est conçu pour les entrepreneurs qui n'ont ni le temps ni les compétences en marketing. L'IA s'occupe de tout, tu n'as qu'à copier-coller." },
   { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour que l'IA génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
-  { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité, ta zone géographique et tes objectifs. Rien n'est générique." },
+  { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité et tes objectifs. Rien n'est générique." },
   { q: "Je peux annuler à tout moment ?", a: "Bien sûr. Aucun engagement, tu peux annuler ton abonnement en un clic depuis ton tableau de bord." },
   { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels par notre équipe de designers, des supports print (flyers, cartes de visite) et un accompagnement personnalisé pour ta stratégie." },
 ];
@@ -241,16 +241,17 @@ export default function LandingPage() {
 
               {/* Title */}
               <motion.h1 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Toute ta communication locale,{" "}
+                Fini de chercher quoi dire.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                  générée en 2 minutes.
+                  AdBoost écrit pour toi.
                 </span>
               </motion.h1>
 
               {/* Subtitle */}
               <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
-                AdBoost analyse ton activité et génère automatiquement tes textes de pub,
-                tes posts réseaux sociaux, tes emails, tes scripts vidéo et bien plus encore.
+                Tes clients jugent ton sérieux en ligne avant de venir.
+                AdBoost génère tout ton contenu — textes, pubs, emails,
+                scripts vidéo — pour que ton image soit toujours au niveau.
               </motion.p>
 
               {/* Buttons */}
@@ -259,7 +260,7 @@ export default function LandingPage() {
                   href="/login"
                   className="inline-flex items-center gap-2 px-6 py-3 font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25"
                 >
-                  Générer mon pack gratuit
+                  Générer mon contenu gratuitement
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a
@@ -272,7 +273,7 @@ export default function LandingPage() {
 
               {/* Social proof */}
               <motion.p variants={fadeUp} custom={4} className="text-sm text-slate-500">
-                <span className="text-amber-400">&#9733;</span> Déjà utilisé par + de 500 entrepreneurs locaux
+                <span className="text-amber-400">&#9733;</span> Des centaines d&apos;entrepreneurs qui publient avec confiance
               </motion.p>
             </motion.div>
 
@@ -311,7 +312,7 @@ export default function LandingPage() {
                     className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
                   >
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Texte de pub</p>
-                    <p className="text-sm text-slate-300">Envie d&apos;une vraie pizza italienne sans bouger de chez vous ? Pizza Roma livre dans tout Perpignan...</p>
+                    <p className="text-sm text-slate-300">Envie d&apos;une vraie pizza italienne sans bouger de chez vous ? Pizza Roma vous livre en 30 min...</p>
                   </motion.div>
 
                   <motion.div
@@ -509,7 +510,7 @@ export default function LandingPage() {
                     <p className="text-slate-300 text-sm mb-3">
                       Chez Pizza Roma, on prépare chaque pizza avec des ingrédients frais importés d&apos;Italie.
                       Pâte pétrie à la main, mozzarella di bufala, tomates San Marzano.
-                      Livraison gratuite sur Perpignan en 30 min chrono.
+                      Livraison gratuite en 30 min chrono.
                     </p>
                     <p className="text-violet-400 text-sm font-medium">Commandez maintenant au 04 68 XX XX XX</p>
                   </div>
@@ -685,7 +686,7 @@ export default function LandingPage() {
                 variants={fadeUp}
                 className="text-3xl sm:text-4xl font-bold mb-4"
               >
-                Prêt à booster ta communication locale ?
+                Prêt à booster ta communication ?
               </motion.h2>
               <motion.p
                 initial="hidden"
@@ -728,7 +729,7 @@ export default function LandingPage() {
               Ad<span className="text-violet-400">Boost</span>
             </span>
             <span className="text-slate-600 text-sm ml-2">
-              Le marketing IA pour les entrepreneurs locaux
+              Le marketing IA pour les entrepreneurs
             </span>
           </div>
 
@@ -739,7 +740,7 @@ export default function LandingPage() {
           </div>
 
           <p className="text-sm text-slate-600">
-            Fait avec &hearts; pour les entrepreneurs locaux
+            Fait avec &hearts; pour les entrepreneurs
           </p>
         </div>
       </footer>

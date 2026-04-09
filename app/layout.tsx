@@ -9,7 +9,7 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "AdBoost — Stratégie publicitaire IA pour entrepreneurs locaux",
+  title: "AdBoost — Stratégie publicitaire IA pour entrepreneurs",
   description:
     "Créez votre stratégie publicitaire Facebook & Instagram grâce à l'IA. Textes de pub, guide Meta Ads et calendrier de publication personnalisés.",
 };

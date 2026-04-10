@@ -19,8 +19,8 @@ import {
   ArrowRight,
   Menu,
   X,
-  Sparkles,
   Check,
+  UserCircle,
 } from "lucide-react";
 
 /* ─────────────────── ANIMATIONS ─────────────────── */
@@ -213,6 +213,13 @@ export default function LandingPage() {
             >
               Essayer gratuitement
             </Link>
+            <Link
+              href="/login"
+              className="p-2 text-slate-400 hover:text-white transition"
+              title="Se connecter"
+            >
+              <UserCircle className="w-6 h-6" />
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -240,6 +247,10 @@ export default function LandingPage() {
                 <Link href="/login" className="block w-full text-center px-4 py-2 text-sm font-medium bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg">
                   Essayer gratuitement
                 </Link>
+                <Link href="/login" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 text-sm text-slate-400 hover:text-white">
+                  <UserCircle className="w-5 h-5" />
+                  Se connecter
+                </Link>
               </div>
             </motion.div>
           )}
@@ -258,12 +269,6 @@ export default function LandingPage() {
               animate="visible"
               variants={stagger}
             >
-              {/* Badge */}
-              <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-sm mb-6">
-                <Sparkles className="w-4 h-4" />
-                Propulsé par l&apos;IA Anthropic
-              </motion.div>
-
               {/* Title */}
               <motion.h1 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 Fini de chercher quoi dire.{" "}

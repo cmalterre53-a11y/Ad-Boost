@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -92,7 +93,7 @@ export default function LoginPage() {
       <main className="flex items-center justify-center px-6 pt-24 pb-12">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <div className="flex items-center justify-center gap-3 mb-10">
+          <Link href="/" className="flex items-center justify-center gap-3 mb-10">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-violet-500/20">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -101,7 +102,7 @@ export default function LoginPage() {
             <h1 className="text-3xl font-bold text-white">
               Ad<span className="text-violet-400">Boost</span>
             </h1>
-          </div>
+          </Link>
 
           {/* Tabs */}
           <div className="flex mb-8 bg-slate-800/50 border border-slate-700/50 rounded-xl p-1">

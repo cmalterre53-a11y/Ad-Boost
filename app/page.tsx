@@ -90,7 +90,14 @@ const plans = [
     name: "Starter",
     price: "Gratuit",
     period: "",
-    features: ["1 génération par mois", "Textes de pub + Calendrier", "3 modules au choix"],
+    features: [
+      "1 génération par mois",
+      "Textes de pub Meta Ads (3 accroches + 3 textes)",
+      "Calendrier éditorial 10 jours",
+      "1 script vidéo Reels",
+      "1 email de relance client",
+      "Brief visuel Canva",
+    ],
     cta: "Commencer gratuitement",
     popular: false,
   },
@@ -98,15 +105,33 @@ const plans = [
     name: "Pro",
     price: "29€",
     period: "/mois",
-    features: ["Générations illimitées", "Tous les modules", "Historique des générations", "Profil sauvegardé"],
+    features: [
+      "Générations illimitées",
+      "Tous les modules disponibles",
+      "Calendrier éditorial 30 jours",
+      "Scripts vidéo illimités",
+      "Tous les types d'emails",
+      "Réponses aux avis Google",
+      "Offres promotionnelles",
+      "Textes Google Business Profile",
+      "Historique des générations sauvegardé",
+      "Profil business sauvegardé",
+    ],
     cta: "Essayer 7 jours gratuits",
     popular: true,
   },
   {
     name: "Premium",
-    price: "79€",
-    period: "/mois",
-    features: ["Tout le Pro", "Visuels créés par notre équipe", "Flyers & supports print", "Accompagnement personnalisé"],
+    price: "Sur devis",
+    period: "",
+    features: [
+      "Tout le Pro inclus",
+      "Visuels et flyers créés par notre équipe",
+      "Calendrier géré et publié pour vous",
+      "Emails rédigés et envoyés pour vous",
+      "Accompagnement stratégique mensuel",
+      "Support prioritaire",
+    ],
     cta: "Nous contacter",
     popular: false,
   },
@@ -118,7 +143,7 @@ const faqs = [
   { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour que l'IA génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
   { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité et tes objectifs. Rien n'est générique." },
   { q: "Je peux annuler à tout moment ?", a: "Bien sûr. Aucun engagement, tu peux annuler ton abonnement en un clic depuis ton tableau de bord." },
-  { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels par notre équipe de designers, des supports print (flyers, cartes de visite) et un accompagnement personnalisé pour ta stratégie." },
+  { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels et flyers par notre équipe, la gestion et publication de ton calendrier, l'envoi de tes emails, un accompagnement stratégique mensuel et un support prioritaire. Le tarif est sur devis selon tes besoins." },
 ];
 
 /* ─────────────────── COMPONENTS ─────────────────── */
@@ -292,7 +317,7 @@ export default function LandingPage() {
                     <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
                       <Zap className="w-4 h-4 text-violet-400" />
                     </div>
-                    <span className="text-sm font-medium text-slate-300">Stratégie générée pour <span className="text-violet-400">Pizza Roma</span></span>
+                    <span className="text-sm font-medium text-slate-300">Stratégie générée pour <span className="text-violet-400">Institut Lumière</span></span>
                   </div>
 
                   <motion.div
@@ -302,7 +327,7 @@ export default function LandingPage() {
                     className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
                   >
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Accroche pub</p>
-                    <p className="text-sm text-white font-medium">Pizza artisanale livrée en 30 min</p>
+                    <p className="text-sm text-white font-medium">Offrez-vous une pause beauté bien méritée ✨</p>
                   </motion.div>
 
                   <motion.div
@@ -312,7 +337,7 @@ export default function LandingPage() {
                     className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
                   >
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Texte de pub</p>
-                    <p className="text-sm text-slate-300">Envie d&apos;une vraie pizza italienne sans bouger de chez vous ? Pizza Roma vous livre en 30 min...</p>
+                    <p className="text-sm text-slate-300">Chez Institut Lumière à Toulouse, on prend soin de vous de la tête aux pieds. Soin du visage, épilation, manucure...</p>
                   </motion.div>
 
                   <motion.div
@@ -322,7 +347,7 @@ export default function LandingPage() {
                     className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
                   >
                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Prompt visuel</p>
-                    <p className="text-sm text-slate-300">Close-up of a freshly baked margherita pizza...</p>
+                    <p className="text-sm text-slate-300">Soft-lit photo of a woman relaxing during a facial treatment in a cozy beauty salon...</p>
                   </motion.div>
 
                   <motion.div
@@ -489,7 +514,7 @@ export default function LandingPage() {
             <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold mb-4">
               Voilà ce que ça donne{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                pour un restaurant
+                pour un institut de beauté
               </span>
             </motion.h2>
           </motion.div>
@@ -504,15 +529,15 @@ export default function LandingPage() {
               <div className="grid sm:grid-cols-2 gap-6">
                 {/* Ad text example */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Texte de pub Facebook</h3>
+                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Texte de pub Facebook / Instagram</h3>
                   <div className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4">
-                    <p className="text-violet-400 font-semibold text-sm mb-2">Envie d&apos;une vraie pizza italienne ?</p>
+                    <p className="text-violet-400 font-semibold text-sm mb-2">Offrez-vous une pause beauté bien méritée ✨</p>
                     <p className="text-slate-300 text-sm mb-3">
-                      Chez Pizza Roma, on prépare chaque pizza avec des ingrédients frais importés d&apos;Italie.
-                      Pâte pétrie à la main, mozzarella di bufala, tomates San Marzano.
-                      Livraison gratuite en 30 min chrono.
+                      Chez Institut Lumière à Toulouse, on prend soin de vous
+                      de la tête aux pieds. Soin du visage, épilation, manucure...
+                      Réservez votre séance dès aujourd&apos;hui et repartez transformée.
                     </p>
-                    <p className="text-violet-400 text-sm font-medium">Commandez maintenant au 04 68 XX XX XX</p>
+                    <p className="text-violet-400 text-sm font-medium">Prendre rendez-vous →</p>
                   </div>
                 </div>
 
@@ -522,15 +547,15 @@ export default function LandingPage() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">1</span>
-                      <p className="text-slate-300 text-sm">Coulisses : préparation de la pâte en time-lapse</p>
+                      <p className="text-slate-300 text-sm">Avant/après soin du visage — montrez la différence en photo</p>
                     </div>
                     <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">2</span>
-                      <p className="text-slate-300 text-sm">Avant/après : four à bois allumé vs pizza dorée</p>
+                      <p className="text-slate-300 text-sm">Offre du mois : -20% sur la manucure complète jusqu&apos;au 30 avril</p>
                     </div>
                     <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">3</span>
-                      <p className="text-slate-300 text-sm">Offre Flash : -15% ce weekend pour les abonnés</p>
+                      <p className="text-slate-300 text-sm">Coulisses de l&apos;institut — une journée avec notre équipe</p>
                     </div>
                   </div>
                 </div>
@@ -539,18 +564,22 @@ export default function LandingPage() {
               {/* Mini calendar */}
               <div className="mt-6 pt-6 border-t border-slate-700/30">
                 <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Calendrier semaine 1</h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Lundi 18h</p>
-                    <p className="text-xs text-violet-400">Coulisses du chef</p>
+                    <p className="text-xs text-white font-medium">Lundi</p>
+                    <p className="text-xs text-violet-400">Post témoignage client</p>
                   </div>
                   <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Mercredi 12h</p>
-                    <p className="text-xs text-violet-400">Photo plat du jour</p>
+                    <p className="text-xs text-white font-medium">Mercredi</p>
+                    <p className="text-xs text-violet-400">Promo soin du visage</p>
                   </div>
                   <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Vendredi 19h</p>
-                    <p className="text-xs text-violet-400">Avis client + offre</p>
+                    <p className="text-xs text-white font-medium">Vendredi</p>
+                    <p className="text-xs text-violet-400">Reel coulisses de l&apos;institut</p>
+                  </div>
+                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
+                    <p className="text-xs text-white font-medium">Dimanche</p>
+                    <p className="text-xs text-violet-400">Rappel prise de rendez-vous</p>
                   </div>
                 </div>
               </div>

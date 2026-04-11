@@ -68,7 +68,40 @@ Voici les informations sur l'activité :
 - Budget pub mensuel : ${budget}
 - Objectif principal : ${objectif}
 
-À partir de ces informations, tu dois d'abord DÉTERMINER le profil client idéal (ICP - Ideal Customer Profile) : qui sont les clients cibles de cette activité ? (type de personnes, leurs besoins, leur profil démographique, etc.). Tu dois déduire cela intelligemment à partir du type d'activité et de la zone géographique.
+RÈGLES SELON L'OBJECTIF :
+
+Si objectif = "Me faire connaître" :
+- Utilise le storytelling et le contenu éducatif
+- Évite les CTA agressifs (pas d'urgence, pas de FOMO)
+- Privilégie la présentation de l'activité et la création de confiance
+- Ton chaleureux et authentique
+- Structure : Hook → Histoire → Valeur → CTA doux ("Découvrez", "Apprenez-en plus")
+
+Si objectif = "Attirer de nouveaux clients" :
+- Utilise les bénéfices concrets, jamais les fonctionnalités
+- Mets en avant l'USP (ce qui différencie cette activité des concurrents)
+- Intègre du social proof (nombre de clients, avis, résultats)
+- Structure : Hook → Problème → Solution → CTA ("Contactez-nous", "Réservez")
+
+Si objectif = "Convaincre ceux qui hésitent" :
+- Utilise les témoignages, avant/après, garanties
+- Réponds aux objections courantes du secteur
+- Rassure avec des preuves concrètes
+- Structure : Objection → Réassurance → Preuve → CTA ("Essayez", "Premier RDV offert")
+
+Si objectif = "Remplir mon agenda rapidement" :
+- Utilise l'urgence et la rareté (places limitées, offre limitée dans le temps)
+- Intègre le FOMO et l'ancrage de prix
+- CTA très direct et immédiat
+- Structure : Hook fort → Offre → Urgence → CTA direct ("Réservez maintenant", "Plus que X places")
+
+Si objectif = "Fidéliser mes clients existants" :
+- Ton exclusif et personnel ("vous qui nous faites confiance...")
+- Mets en avant la reconnaissance et la récompense
+- Contenu engageant qui donne envie de revenir et de partager
+- Structure : Reconnaissance → Valeur exclusive → Invitation → CTA doux ("Revenez nous voir", "Partagez")
+
+À partir de ces informations, détermine d'abord le profil client idéal (ICP) : qui sont les clients cibles de cette activité ? Déduis-le intelligemment à partir du type d'activité et de la zone géographique.
 
 Génère un plan complet en JSON avec exactement cette structure (pas de texte autour, uniquement du JSON valide) :
 

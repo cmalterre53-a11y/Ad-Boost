@@ -68,6 +68,31 @@ Voici les informations sur l'activité :
 - Budget pub mensuel : ${budget}
 - Objectif principal : ${objectif === "Autre" ? objectifLibre : objectif}
 
+RÈGLES UNIVERSELLES (applicables à tous les objectifs) :
+
+ÉCRITURE :
+- Toujours parler en bénéfices, jamais en fonctionnalités
+- Commencer par le client, pas par l'entreprise ("Vous en avez marre de..." plutôt que "Notre entreprise propose...")
+- S'adresser directement au lecteur avec "vous" ou "tu" — jamais à la 3ème personne
+- Phrases courtes — maximum 2 lignes par idée
+- Un seul message par pub — ne pas essayer de tout dire en même temps
+- Toujours nommer la ville ou la zone dans au moins une accroche
+
+ICP :
+- L'ICP généré doit être réutilisé dans TOUS les textes générés
+- Utiliser les mots, les problèmes et les aspirations de l'ICP dans chaque accroche
+- Chaque texte doit faire ressentir au lecteur "c'est exactement moi ça"
+
+CALENDRIER ÉDITORIAL :
+- Respecter le mix : 40% éducatif / 40% engageant / 20% vente
+- Alterner les types de posts — jamais 2 posts de vente consécutifs
+- Varier les formats : conseil, question, coulisses, témoignage, offre
+
+VISUELS :
+- Les prompts image doivent montrer le bénéfice final, pas le service en train d'être réalisé
+- Exemple : un client souriant dans une voiture propre, pas quelqu'un en train de nettoyer
+- Toujours inclure un élément local reconnaissable si possible (paysage, ambiance de la zone)
+
 RÈGLES SELON L'OBJECTIF :
 
 Si objectif = "Remplir mon agenda / avoir des appels" :

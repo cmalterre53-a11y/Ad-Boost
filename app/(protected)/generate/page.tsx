@@ -7,6 +7,7 @@ const objectifs = [
   "Attirer des appels/messages",
   "Gagner en visibilité",
   "Vendre un service",
+  "Autre",
 ];
 
 export default function GeneratePage() {
@@ -18,10 +19,11 @@ export default function GeneratePage() {
     zone: "",
     budget: "",
     objectif: objectifs[0],
+    objectifAutre: "",
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -34,7 +36,10 @@ export default function GeneratePage() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          objectif: formData.objectif === "Autre" ? formData.objectifAutre : formData.objectif,
+        }),
       });
 
       const data = await res.json();
@@ -154,6 +159,24 @@ export default function GeneratePage() {
               ))}
             </select>
           </div>
+
+          {/* Objectif personnalisé */}
+          {formData.objectif === "Autre" && (
+            <div className="space-y-2 sm:col-span-2">
+              <label className="text-sm font-medium text-slate-300">
+                Décrivez votre objectif
+              </label>
+              <textarea
+                name="objectifAutre"
+                placeholder="Ex : Générer des prises de rendez-vous en ligne"
+                value={formData.objectifAutre}
+                onChange={handleChange}
+                required
+                rows={3}
+                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+              />
+            </div>
+          )}
         </div>
 
         <button

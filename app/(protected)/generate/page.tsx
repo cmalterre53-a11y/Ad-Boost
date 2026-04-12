@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const objectifs = [
-  { value: "Remplir mon agenda", label: "⚡ Remplir mon agenda / avoir des appels", description: "Tu veux des réservations et des contacts directs cette semaine." },
-  { value: "Me faire connaître", label: "👁️ Me faire connaître dans ma zone", description: "Tu viens de te lancer ou tu veux toucher de nouveaux quartiers autour de toi." },
-  { value: "Vendre une offre", label: "💰 Vendre une offre ou un service", description: "Tu as une promotion ou un service précis à mettre en avant maintenant." },
+  { value: "Remplir mon agenda / avoir des appels", label: "⚡ Remplir mon agenda / avoir des appels", description: "Tu veux des réservations et des contacts directs cette semaine." },
+  { value: "Me faire connaître dans ma zone", label: "👁️ Me faire connaître dans ma zone", description: "Tu viens de te lancer ou tu veux toucher de nouveaux quartiers autour de toi." },
+  { value: "Vendre une offre ou un service", label: "💰 Vendre une offre ou un service", description: "Tu as une promotion ou un service précis à mettre en avant maintenant." },
   { value: "Convaincre ceux qui hésitent", label: "💬 Convaincre ceux qui hésitent", description: "Les gens te connaissent mais n'ont pas encore sauté le pas." },
-  { value: "Fidéliser mes clients", label: "❤️ Fidéliser mes clients existants", description: "Tu veux que tes anciens clients reviennent et parlent de toi." },
+  { value: "Fidéliser mes clients existants", label: "❤️ Fidéliser mes clients existants", description: "Tu veux que tes anciens clients reviennent et parlent de toi." },
   { value: "Autre", label: "✏️ Autre", description: "Tu as un objectif spécifique en tête." },
 ];
 

@@ -70,42 +70,62 @@ Voici les informations sur l'activité :
 
 RÈGLES SELON L'OBJECTIF :
 
-Si objectif = "Remplir mon agenda" :
-- Utilise l'urgence et la rareté (places limitées, offre limitée dans le temps)
-- Intègre le FOMO et l'ancrage de prix
-- CTA très direct et immédiat
-- Structure : Hook fort → Offre → Urgence → CTA direct ("Réservez maintenant", "Plus que X places")
+Si objectif = "Remplir mon agenda / avoir des appels" :
+- Structure principale : Hook fort → Offre claire → Urgence/Rareté → CTA direct
+- Utilise la rareté en priorité sur l'urgence (un planning local est réellement limité — plus crédible)
+- Intègre le FOMO : la personne doit sentir qu'elle va rater quelque chose si elle n'agit pas maintenant
+- Ancrage de prix : montre ce que ça coûte de ne pas agir (temps perdu, problème qui s'aggrave) avant de donner le prix
+- Parle toujours en bénéfices, jamais en fonctionnalités (pas "nettoyage vapeur" mais "voiture propre sans effort")
+- CTA très direct et immédiat : "Réservez maintenant", "Appelez aujourd'hui", "Plus que X places cette semaine"
+- Ton : direct, percutant, sans fioriture
 
-Si objectif = "Me faire connaître" :
-- Utilise le storytelling et le contenu éducatif
-- Évite les CTA agressifs (pas d'urgence, pas de FOMO)
-- Privilégie la présentation de l'activité et la création de confiance
-- Ton chaleureux et authentique
-- Structure : Hook → Histoire → Valeur → CTA doux ("Découvrez", "Apprenez-en plus")
+Si objectif = "Me faire connaître dans ma zone" :
+- Structure principale : Hook curiosité → Storytelling → Valeur/Expertise → CTA doux
+- Utilise le storytelling : l'histoire du fondateur, pourquoi il a lancé ce business, un moment marquant
+- Contenu éducatif : partage des conseils utiles liés au secteur qui prouvent l'expertise
+- Évite absolument les CTA agressifs, l'urgence et le FOMO — trop tôt dans la relation
+- Intègre la dimension locale : nomme la ville, le quartier, les références locales connues
+- Construis la confiance avant de vendre : le client ne te connaît pas encore
+- CTA doux : "Découvrez notre histoire", "Apprenez-en plus", "Suivez-nous"
+- Ton : chaleureux, authentique, humain
 
-Si objectif = "Vendre une offre" :
-- Utilise les bénéfices concrets, jamais les fonctionnalités
-- Mets en avant l'USP (ce qui différencie cette activité des concurrents)
-- Intègre du social proof (nombre de clients, avis, résultats)
-- Ancrage de prix : montre la valeur avant le prix
-- Structure : Hook → Problème → Solution → Offre → CTA ("Profitez-en", "Commandez maintenant")
+Si objectif = "Vendre une offre ou un service" :
+- Structure principale : Hook → Problème reconnaissable → Solution → Offre → CTA
+- Mets en avant l'USP dès le début : ce que cette activité fait que personne d'autre ne fait exactement pareil
+- Parle uniquement en bénéfices : ce que le client gagne, ressent, économise — jamais les caractéristiques techniques
+- Intègre le social proof : nombre de clients, avis, résultats concrets chiffrés si possible
+- Ancrage de prix : compare avec une alternative plus chère ou montre la valeur avant d'annoncer le prix
+- Utilise la structure AIDA pour les textes longs : Attention → Intérêt → Désir → Action
+- CTA orienté conversion : "Profitez-en", "Commandez maintenant", "Réservez votre place"
+- Ton : persuasif, concret, orienté résultat
 
 Si objectif = "Convaincre ceux qui hésitent" :
-- Utilise les témoignages, avant/après, garanties
-- Réponds aux objections courantes du secteur
-- Rassure avec des preuves concrètes
-- Structure : Objection → Réassurance → Preuve → CTA ("Essayez", "Premier RDV offert")
+- Structure principale : Objection courante du secteur → Réassurance → Preuve concrète → CTA rassurant
+- Identifie et répond aux 2-3 objections les plus fréquentes dans ce secteur (trop cher, pas le temps, pas sûr de la qualité)
+- Utilise le social proof fort : témoignages clients avec prénom et ville, notes Google, résultats avant/après
+- Mets en avant les garanties et engagements : satisfaction, remboursement, premier RDV sans engagement
+- Évite l'urgence et le FOMO — la personne hésite déjà, la presser va la faire fuir
+- Raconte une histoire d'un client qui hésitait et qui est satisfait aujourd'hui (storytelling de réassurance)
+- CTA doux et sans risque : "Essayez sans engagement", "Premier RDV offert", "Posez vos questions"
+- Ton : rassurant, empathique, honnête
 
-Si objectif = "Fidéliser mes clients" :
-- Ton exclusif et personnel ("vous qui nous faites confiance...")
-- Mets en avant la reconnaissance et la récompense
-- Contenu engageant qui donne envie de revenir et de partager
-- Structure : Reconnaissance → Valeur exclusive → Invitation → CTA doux ("Revenez nous voir", "Partagez")
+Si objectif = "Fidéliser mes clients existants" :
+- Structure principale : Reconnaissance → Valeur exclusive réservée aux clients fidèles → Invitation → CTA doux
+- Parle directement aux clients existants : "vous qui nous faites confiance depuis...", "nos clients fidèles savent que..."
+- Crée un sentiment d'exclusivité : offre réservée aux habitués, avant-première, avantage VIP
+- Utilise le storytelling communautaire : montre que tes clients font partie de quelque chose
+- Encourage le bouche-à-oreille : invite-les à partager, à parrainer un ami, à laisser un avis
+- Mix de contenu : 60% engageant (coulisses, remerciements, sondages) / 40% offre exclusive
+- CTA communautaire : "Revenez nous voir", "Partagez avec un ami", "Rejoignez notre programme fidélité"
+- Ton : reconnaissant, chaleureux, exclusif
 
 Si objectif = "Autre" (objectif libre : ${objectifLibre}) :
-- Adapte le ton, le style et la structure au besoin spécifique décrit par l'utilisateur
-- Déduis la meilleure approche marketing en fonction de l'objectif personnalisé
-- Choisis les CTA les plus pertinents pour cet objectif
+- Analyse l'objectif décrit par l'utilisateur et détermine à quelle étape du funnel il correspond (notoriété, considération ou conversion)
+- Si notoriété : applique les règles de "Me faire connaître" (storytelling, éducatif, CTA doux)
+- Si considération : applique les règles de "Convaincre ceux qui hésitent" (social proof, réassurance)
+- Si conversion : applique les règles de "Remplir mon agenda" (urgence, rareté, CTA direct)
+- Dans tous les cas : parle en bénéfices, intègre l'USP, adapte le ton à l'objectif spécifique décrit
+- CTA : choisis le plus pertinent selon l'objectif libre détecté
 
 À partir de ces informations, détermine d'abord le profil client idéal (ICP) : qui sont les clients cibles de cette activité ? Déduis-le intelligemment à partir du type d'activité et de la zone géographique.
 

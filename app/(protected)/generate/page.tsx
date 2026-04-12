@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const objectifs = [
-  "Attirer des appels/messages",
-  "Gagner en visibilité",
-  "Vendre un service",
-  "Autre",
+  { value: "Remplir mon agenda", label: "⚡ Remplir mon agenda / avoir des appels", description: "Tu veux des réservations et des contacts directs cette semaine." },
+  { value: "Me faire connaître", label: "👁️ Me faire connaître dans ma zone", description: "Tu viens de te lancer ou tu veux toucher de nouveaux quartiers autour de toi." },
+  { value: "Vendre une offre", label: "💰 Vendre une offre ou un service", description: "Tu as une promotion ou un service précis à mettre en avant maintenant." },
+  { value: "Convaincre ceux qui hésitent", label: "💬 Convaincre ceux qui hésitent", description: "Les gens te connaissent mais n'ont pas encore sauté le pas." },
+  { value: "Fidéliser mes clients", label: "❤️ Fidéliser mes clients existants", description: "Tu veux que tes anciens clients reviennent et parlent de toi." },
+  { value: "Autre", label: "✏️ Autre", description: "Tu as un objectif spécifique en tête." },
 ];
 
 export default function GeneratePage() {
@@ -18,8 +20,8 @@ export default function GeneratePage() {
     typeActivite: "",
     zone: "",
     budget: "",
-    objectif: objectifs[0],
-    objectifAutre: "",
+    objectif: objectifs[0].value,
+    objectifLibre: "",
   });
 
   const handleChange = (
@@ -36,10 +38,7 @@ export default function GeneratePage() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          objectif: formData.objectif === "Autre" ? formData.objectifAutre : formData.objectif,
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
@@ -141,35 +140,39 @@ export default function GeneratePage() {
           </div>
 
           {/* Objectif */}
-          <div className="space-y-2">
+          <div className="space-y-3 sm:col-span-2">
             <label className="text-sm font-medium text-slate-300">
               Objectif principal
             </label>
-            <select
-              name="objectif"
-              value={formData.objectif}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition appearance-none"
-            >
+            <div className="grid sm:grid-cols-2 gap-3">
               {objectifs.map((obj) => (
-                <option key={obj} value={obj} className="bg-slate-900">
-                  {obj}
-                </option>
+                <button
+                  key={obj.value}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, objectif: obj.value })}
+                  className={`text-left px-4 py-3 rounded-xl border transition ${
+                    formData.objectif === obj.value
+                      ? "border-violet-500 bg-violet-500/10 ring-2 ring-violet-500/50"
+                      : "border-slate-600/50 bg-slate-900/50 hover:border-slate-500/50"
+                  }`}
+                >
+                  <span className="block text-sm font-medium text-white">{obj.label}</span>
+                  <span className="block text-xs text-slate-400 mt-1">{obj.description}</span>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
 
-          {/* Objectif personnalisé */}
+          {/* Objectif libre */}
           {formData.objectif === "Autre" && (
             <div className="space-y-2 sm:col-span-2">
               <label className="text-sm font-medium text-slate-300">
-                Décrivez votre objectif
+                Décris ton objectif
               </label>
               <textarea
-                name="objectifAutre"
-                placeholder="Ex : Générer des prises de rendez-vous en ligne"
-                value={formData.objectifAutre}
+                name="objectifLibre"
+                placeholder="Tu as un objectif spécifique ? Décris-le en quelques mots."
+                value={formData.objectifLibre}
                 onChange={handleChange}
                 required
                 rows={3}

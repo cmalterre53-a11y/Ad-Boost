@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
-    const { nomActivite, typeActivite, zone, budget, objectif } =
+    const { nomActivite, typeActivite, zone, budget, objectif, objectifLibre } =
       await req.json();
 
     let results;
@@ -66,9 +66,15 @@ Voici les informations sur l'activité :
 - Type d'activité : ${typeActivite}
 - Zone géographique : ${zone}
 - Budget pub mensuel : ${budget}
-- Objectif principal : ${objectif}
+- Objectif principal : ${objectif === "Autre" ? objectifLibre : objectif}
 
 RÈGLES SELON L'OBJECTIF :
+
+Si objectif = "Remplir mon agenda" :
+- Utilise l'urgence et la rareté (places limitées, offre limitée dans le temps)
+- Intègre le FOMO et l'ancrage de prix
+- CTA très direct et immédiat
+- Structure : Hook fort → Offre → Urgence → CTA direct ("Réservez maintenant", "Plus que X places")
 
 Si objectif = "Me faire connaître" :
 - Utilise le storytelling et le contenu éducatif
@@ -77,11 +83,12 @@ Si objectif = "Me faire connaître" :
 - Ton chaleureux et authentique
 - Structure : Hook → Histoire → Valeur → CTA doux ("Découvrez", "Apprenez-en plus")
 
-Si objectif = "Attirer de nouveaux clients" :
+Si objectif = "Vendre une offre" :
 - Utilise les bénéfices concrets, jamais les fonctionnalités
 - Mets en avant l'USP (ce qui différencie cette activité des concurrents)
 - Intègre du social proof (nombre de clients, avis, résultats)
-- Structure : Hook → Problème → Solution → CTA ("Contactez-nous", "Réservez")
+- Ancrage de prix : montre la valeur avant le prix
+- Structure : Hook → Problème → Solution → Offre → CTA ("Profitez-en", "Commandez maintenant")
 
 Si objectif = "Convaincre ceux qui hésitent" :
 - Utilise les témoignages, avant/après, garanties
@@ -89,17 +96,16 @@ Si objectif = "Convaincre ceux qui hésitent" :
 - Rassure avec des preuves concrètes
 - Structure : Objection → Réassurance → Preuve → CTA ("Essayez", "Premier RDV offert")
 
-Si objectif = "Remplir mon agenda rapidement" :
-- Utilise l'urgence et la rareté (places limitées, offre limitée dans le temps)
-- Intègre le FOMO et l'ancrage de prix
-- CTA très direct et immédiat
-- Structure : Hook fort → Offre → Urgence → CTA direct ("Réservez maintenant", "Plus que X places")
-
-Si objectif = "Fidéliser mes clients existants" :
+Si objectif = "Fidéliser mes clients" :
 - Ton exclusif et personnel ("vous qui nous faites confiance...")
 - Mets en avant la reconnaissance et la récompense
 - Contenu engageant qui donne envie de revenir et de partager
 - Structure : Reconnaissance → Valeur exclusive → Invitation → CTA doux ("Revenez nous voir", "Partagez")
+
+Si objectif = "Autre" (objectif libre : ${objectifLibre}) :
+- Adapte le ton, le style et la structure au besoin spécifique décrit par l'utilisateur
+- Déduis la meilleure approche marketing en fonction de l'objectif personnalisé
+- Choisis les CTA les plus pertinents pour cet objectif
 
 À partir de ces informations, détermine d'abord le profil client idéal (ICP) : qui sont les clients cibles de cette activité ? Déduis-le intelligemment à partir du type d'activité et de la zone géographique.
 

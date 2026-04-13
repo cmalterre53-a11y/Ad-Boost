@@ -41,7 +41,13 @@ export default function GeneratePage() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error("Le serveur a renvoyé une réponse invalide. Réessayez dans quelques instants.");
+      }
       if (!res.ok) throw new Error(data.error || "Erreur lors de la génération");
 
       router.push(`/results/${data.id}`);

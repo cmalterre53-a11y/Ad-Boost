@@ -9,6 +9,8 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+export const maxDuration = 60;
+
 export async function POST(req: NextRequest) {
   try {
     // Auth check
@@ -45,7 +47,9 @@ export async function POST(req: NextRequest) {
     const { nomActivite, typeActivite, zone, budget, objectif, objectifLibre } =
       await req.json();
 
-    const moisActuel = new Date().toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+    const moisFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+    const now = new Date();
+    const moisActuel = `${moisFR[now.getMonth()]} ${now.getFullYear()}`;
 
     let results;
 

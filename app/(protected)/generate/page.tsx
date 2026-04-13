@@ -41,16 +41,31 @@ export default function GeneratePage() {
         body: JSON.stringify(formData),
       });
 
-      const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch {
+      if (!res.ok || !res.body) {
         throw new Error("Le serveur a renvoyé une réponse invalide. Réessayez dans quelques instants.");
       }
-      if (!res.ok) throw new Error(data.error || "Erreur lors de la génération");
 
-      router.push(`/results/${data.id}`);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let resultId = "";
+      let errorMsg = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const text = decoder.decode(value);
+        const lines = text.split("\n").filter((l) => l.startsWith("data: "));
+        for (const line of lines) {
+          const msg = JSON.parse(line.slice(6));
+          if (msg.type === "done") resultId = msg.id;
+          if (msg.type === "error") errorMsg = msg.error;
+        }
+      }
+
+      if (errorMsg) throw new Error(errorMsg);
+      if (!resultId) throw new Error("Aucun résultat reçu");
+
+      router.push(`/results/${resultId}`);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {

@@ -2,8 +2,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import fs from "fs";
-import path from "path";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -12,60 +10,45 @@ const anthropic = new Anthropic({
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
-  try {
-    // Auth check
-    const cookieStore = cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
-              );
-            } catch {
-              // ignore
-            }
-          },
+  // Auth check
+  const cookieStore = cookies();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
         },
-      }
-    );
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // ignore
+          }
+        },
+      },
     }
+  );
 
-    const { nomActivite, typeActivite, zone, budget, objectif, objectifLibre } =
-      await req.json();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-    const moisFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-    const now = new Date();
-    const moisActuel = `${moisFR[now.getMonth()]} ${now.getFullYear()}`;
+  if (!user) {
+    return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+  }
 
-    let results;
+  const { nomActivite, typeActivite, zone, budget, objectif, objectifLibre } =
+    await req.json();
 
-    // Mode développement : retourne les données mockées
-    if (process.env.USE_MOCK_DATA === "true") {
-      const mockDataPath = path.join(process.cwd(), "mock-data.json");
-      const mockData = JSON.parse(fs.readFileSync(mockDataPath, "utf-8"));
+  const moisFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  const now = new Date();
+  const moisActuel = `${moisFR[now.getMonth()]} ${now.getFullYear()}`;
 
-      console.log("🚀 Mode DEV : Utilisation des données mockées (instantané)");
-
-      // Petit délai pour simuler un appel API (optionnel)
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      results = mockData.results;
-    } else {
-      const prompt = `Tu es un expert en marketing digital et publicité Meta Ads (Facebook & Instagram) pour les petits entrepreneurs locaux en France.
+  const prompt = `Tu es un expert en marketing digital et publicité Meta Ads (Facebook & Instagram) pour les petits entrepreneurs locaux en France.
 
 Voici les informations sur l'activité :
 - Nom de l'activité : ${nomActivite}
@@ -297,7 +280,7 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
         "contenu": "Vérifier l'aperçu mobile/desktop. Vérifier le suivi (évènements CRM, site Web, paramètres URL). Cliquer Publier. Délai d'examen Meta : 24h. Ne pas toucher pendant 7 jours (phase d'apprentissage). Premiers KPIs à surveiller à J+3."
       }
     ],
-    "noteInterface": "L'interface Meta Ads suit un parcours en 3 pages :\nPage 1 → Type d'achat + Objectif de campagne\nPage 2 → Nom de campagne + Budget + Catégories spéciales\nPage 3 → Tout le reste sur un seul écran scrollable : Conversion, Budget/Calendrier, Audience, Placements, Identité, Format, Contenu pub, Destination, Suivi",
+    "noteInterface": "L'interface Meta Ads suit un parcours en 3 pages :\\nPage 1 → Type d'achat + Objectif de campagne\\nPage 2 → Nom de campagne + Budget + Catégories spéciales\\nPage 3 → Tout le reste sur un seul écran scrollable : Conversion, Budget/Calendrier, Audience, Placements, Identité, Format, Contenu pub, Destination, Suivi",
     "ciblage": {
       "age": "tranche d'âge recommandée",
       "zone": "zone géographique et rayon exact à configurer",
@@ -366,67 +349,87 @@ INSTRUCTIONS IMPORTANTES :
 - La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication.
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
 
-      const message = await anthropic.messages.create({
+  const encoder = new TextEncoder();
+  const stream = new TransformStream();
+  const writer = stream.writable.getWriter();
+
+  // Process in background while streaming
+  (async () => {
+    try {
+      const anthropicStream = anthropic.messages.stream({
         model: "claude-sonnet-4-5-20250929",
         max_tokens: 16384,
         messages: [{ role: "user", content: prompt }],
       });
 
-      const content = message.content[0];
-      if (content.type !== "text") {
-        return NextResponse.json(
-          { error: "Réponse inattendue de l'IA" },
-          { status: 500 }
-        );
+      let fullText = "";
+
+      for await (const event of anthropicStream) {
+        if (
+          event.type === "content_block_delta" &&
+          event.delta.type === "text_delta"
+        ) {
+          fullText += event.delta.text;
+          // Send chunk to keep connection alive
+          await writer.write(
+            encoder.encode(`data: ${JSON.stringify({ type: "chunk" })}\n\n`)
+          );
+        }
       }
 
-      // Extract valid JSON from response
-      let jsonText = content.text.trim();
-      // Remove markdown code blocks
+      // Extract JSON
+      let jsonText = fullText.trim();
       if (jsonText.startsWith("```")) {
         jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
       }
-      // Extract JSON object even if there's text before/after
       const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         throw new Error("Aucun JSON valide trouvé dans la réponse");
       }
-      jsonText = jsonMatch[0];
+      const results = JSON.parse(jsonMatch[0]);
 
-      results = JSON.parse(jsonText);
-    }
+      // Save to Supabase
+      const { data, error } = await supabase
+        .from("strategies")
+        .insert({
+          user_id: user!.id,
+          nom_activite: nomActivite,
+          type_activite: typeActivite,
+          zone,
+          cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
+          budget,
+          objectif,
+          results,
+        })
+        .select("id")
+        .single();
 
-    // Save to Supabase
-    const { data, error } = await supabase
-      .from("strategies")
-      .insert({
-        user_id: user.id,
-        nom_activite: nomActivite,
-        type_activite: typeActivite,
-        zone,
-        cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
-        budget,
-        objectif,
-        results,
-      })
-      .select("id")
-      .single();
-
-    if (error) {
-      console.error("Erreur sauvegarde Supabase:", error);
-      return NextResponse.json(
-        { error: "Erreur lors de la sauvegarde" },
-        { status: 500 }
+      if (error) {
+        console.error("Erreur sauvegarde Supabase:", error);
+        await writer.write(
+          encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Erreur lors de la sauvegarde" })}\n\n`)
+        );
+      } else {
+        await writer.write(
+          encoder.encode(`data: ${JSON.stringify({ type: "done", id: data.id })}\n\n`)
+        );
+      }
+    } catch (err) {
+      console.error("Erreur API:", err);
+      const message = err instanceof Error ? err.message : "Erreur inconnue";
+      await writer.write(
+        encoder.encode(`data: ${JSON.stringify({ type: "error", error: message })}\n\n`)
       );
+    } finally {
+      await writer.close();
     }
+  })();
 
-    return NextResponse.json({ id: data.id, ...results });
-  } catch (error) {
-    console.error("Erreur API:", error);
-    const message = error instanceof Error ? error.message : "Erreur inconnue";
-    return NextResponse.json(
-      { error: `Erreur : ${message}` },
-      { status: 500 }
-    );
-  }
+  return new Response(stream.readable, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
 }

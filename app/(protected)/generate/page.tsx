@@ -55,22 +55,26 @@ export default function GeneratePage() {
         fullResponse += decoder.decode(value, { stream: true });
       }
 
-      const marker = fullResponse.lastIndexOf("__RESULT__");
-      if (marker === -1) throw new Error("La génération a pris trop de temps. Réessayez.");
-
-      const jsonStr = fullResponse.slice(marker + 10).trim();
-      if (!jsonStr) throw new Error("Réponse vide du serveur. Réessayez.");
-
-      let data;
-      try {
-        data = JSON.parse(jsonStr);
-      } catch {
-        throw new Error("Réponse invalide du serveur. Réessayez.");
+      // Find the last "data: {...}" line which contains the result
+      const lines = fullResponse.split("\n");
+      let resultData = null;
+      for (let i = lines.length - 1; i >= 0; i--) {
+        const line = lines[i].trim();
+        if (line.startsWith("data: ")) {
+          try {
+            resultData = JSON.parse(line.slice(6));
+            break;
+          } catch {
+            continue;
+          }
+        }
       }
-      if (data.error) throw new Error(data.error);
-      if (!data.id) throw new Error("Aucun résultat reçu");
 
-      router.push(`/results/${data.id}`);
+      if (!resultData) throw new Error("La génération a pris trop de temps. Réessayez.");
+      if (resultData.error) throw new Error(resultData.error);
+      if (!resultData.id) throw new Error("Aucun résultat reçu.");
+
+      router.push(`/results/${resultData.id}`);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {

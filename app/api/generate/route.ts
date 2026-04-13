@@ -350,86 +350,89 @@ INSTRUCTIONS IMPORTANTES :
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
 
   const encoder = new TextEncoder();
+  const { readable, writable } = new TransformStream();
+  const writer = writable.getWriter();
 
-  const readable = new ReadableStream({
-    async start(controller) {
-      // Heartbeat every 2 seconds to keep connection alive
-      const heartbeat = setInterval(() => {
-        try { controller.enqueue(encoder.encode(" ")); } catch {}
-      }, 2000);
+  // Process in background - response is returned immediately
+  (async () => {
+    // Heartbeat every 2 seconds
+    const heartbeat = setInterval(async () => {
+      try { await writer.write(encoder.encode(": heartbeat\n\n")); } catch {}
+    }, 2000);
 
-      // Send first byte immediately
-      controller.enqueue(encoder.encode(" "));
+    // First byte immediately
+    await writer.write(encoder.encode(": connected\n\n"));
 
-      try {
-        const anthropicStream = anthropic.messages.stream({
-          model: "claude-sonnet-4-5-20250929",
-          max_tokens: 8192,
-          messages: [{ role: "user", content: prompt }],
-        });
+    try {
+      const anthropicStream = anthropic.messages.stream({
+        model: "claude-sonnet-4-5-20250929",
+        max_tokens: 8192,
+        messages: [{ role: "user", content: prompt }],
+      });
 
-        let fullText = "";
+      let fullText = "";
 
-        for await (const event of anthropicStream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
-            fullText += event.delta.text;
-          }
+      for await (const event of anthropicStream) {
+        if (
+          event.type === "content_block_delta" &&
+          event.delta.type === "text_delta"
+        ) {
+          fullText += event.delta.text;
         }
-
-        clearInterval(heartbeat);
-
-        // Extract JSON
-        let jsonText = fullText.trim();
-        if (jsonText.startsWith("```")) {
-          jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
-        }
-        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) {
-          throw new Error("Aucun JSON valide trouvé dans la réponse");
-        }
-        const results = JSON.parse(jsonMatch[0]);
-
-        // Save to Supabase
-        const { data, error } = await supabase
-          .from("strategies")
-          .insert({
-            user_id: user!.id,
-            nom_activite: nomActivite,
-            type_activite: typeActivite,
-            zone,
-            cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
-            budget,
-            objectif,
-            results,
-          })
-          .select("id")
-          .single();
-
-        if (error) {
-          console.error("Erreur sauvegarde Supabase:", error);
-          controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ error: "Erreur lors de la sauvegarde" })));
-        } else {
-          controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ id: data.id })));
-        }
-      } catch (err) {
-        clearInterval(heartbeat);
-        console.error("Erreur API:", err);
-        const message = err instanceof Error ? err.message : "Erreur inconnue";
-        controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ error: message })));
-      } finally {
-        controller.close();
       }
-    },
-  });
 
+      clearInterval(heartbeat);
+
+      // Extract JSON
+      let jsonText = fullText.trim();
+      if (jsonText.startsWith("```")) {
+        jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+      }
+      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error("Aucun JSON valide trouvé dans la réponse");
+      }
+      const results = JSON.parse(jsonMatch[0]);
+
+      // Save to Supabase
+      const { data, error } = await supabase
+        .from("strategies")
+        .insert({
+          user_id: user!.id,
+          nom_activite: nomActivite,
+          type_activite: typeActivite,
+          zone,
+          cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
+          budget,
+          objectif,
+          results,
+        })
+        .select("id")
+        .single();
+
+      if (error) {
+        console.error("Erreur sauvegarde Supabase:", error);
+        await writer.write(encoder.encode(`data: ${JSON.stringify({ error: "Erreur lors de la sauvegarde" })}\n\n`));
+      } else {
+        await writer.write(encoder.encode(`data: ${JSON.stringify({ id: data.id })}\n\n`));
+      }
+    } catch (err) {
+      clearInterval(heartbeat);
+      console.error("Erreur API:", err);
+      const msg = err instanceof Error ? err.message : "Erreur inconnue";
+      await writer.write(encoder.encode(`data: ${JSON.stringify({ error: msg })}\n\n`));
+    } finally {
+      await writer.close();
+    }
+  })();
+
+  // Response returned IMMEDIATELY before async work starts
   return new Response(readable, {
     headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache",
-      "X-Content-Type-Options": "nosniff",
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
     },
   });
 }

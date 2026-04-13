@@ -309,15 +309,15 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
       },
       {
         "semaine": 2,
-        "posts": [...]
+        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
       },
       {
         "semaine": 3,
-        "posts": [...]
+        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
       },
       {
         "semaine": 4,
-        "posts": [...]
+        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
       }
     ]
   }
@@ -354,11 +354,18 @@ INSTRUCTIONS IMPORTANTES :
         );
       }
 
-      // Remove markdown code blocks if present
+      // Extract valid JSON from response
       let jsonText = content.text.trim();
+      // Remove markdown code blocks
       if (jsonText.startsWith("```")) {
         jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
       }
+      // Extract JSON object even if there's text before/after
+      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error("Aucun JSON valide trouvé dans la réponse");
+      }
+      jsonText = jsonMatch[0];
 
       results = JSON.parse(jsonText);
     }

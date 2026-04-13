@@ -70,7 +70,11 @@ export default function GeneratePage() {
       }
       const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
       if (!jsonMatch) throw new Error("Aucun résultat valide reçu. Réessayez.");
-      const results = JSON.parse(jsonMatch[0]);
+      // Clean common JSON issues from LLM output (trailing commas, etc.)
+      const cleanedJson = jsonMatch[0]
+        .replace(/,\s*([\]}])/g, "$1")
+        .replace(/[\x00-\x1f]/g, (ch) => (ch === "\n" || ch === "\r" || ch === "\t" ? ch : ""));
+      const results = JSON.parse(cleanedJson);
 
       // Save to Supabase via separate quick POST
       const saveRes = await fetch("/api/strategies", {

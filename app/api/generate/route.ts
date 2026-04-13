@@ -350,86 +350,77 @@ INSTRUCTIONS IMPORTANTES :
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
 
   const encoder = new TextEncoder();
-  const stream = new TransformStream();
-  const writer = stream.writable.getWriter();
 
-  // Process in background while streaming
-  (async () => {
-    try {
-      const anthropicStream = anthropic.messages.stream({
-        model: "claude-sonnet-4-5-20250929",
-        max_tokens: 16384,
-        messages: [{ role: "user", content: prompt }],
-      });
+  const readable = new ReadableStream({
+    async start(controller) {
+      try {
+        const anthropicStream = anthropic.messages.stream({
+          model: "claude-sonnet-4-5-20250929",
+          max_tokens: 16384,
+          messages: [{ role: "user", content: prompt }],
+        });
 
-      let fullText = "";
+        let fullText = "";
 
-      for await (const event of anthropicStream) {
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
-          fullText += event.delta.text;
-          // Send chunk to keep connection alive
-          await writer.write(
-            encoder.encode(`data: ${JSON.stringify({ type: "chunk" })}\n\n`)
-          );
+        for await (const event of anthropicStream) {
+          if (
+            event.type === "content_block_delta" &&
+            event.delta.type === "text_delta"
+          ) {
+            fullText += event.delta.text;
+            // Send a space to keep connection alive
+            controller.enqueue(encoder.encode(" "));
+          }
         }
-      }
 
-      // Extract JSON
-      let jsonText = fullText.trim();
-      if (jsonText.startsWith("```")) {
-        jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
-      }
-      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) {
-        throw new Error("Aucun JSON valide trouvé dans la réponse");
-      }
-      const results = JSON.parse(jsonMatch[0]);
+        // Extract JSON
+        let jsonText = fullText.trim();
+        if (jsonText.startsWith("```")) {
+          jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+        }
+        const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) {
+          throw new Error("Aucun JSON valide trouvé dans la réponse");
+        }
+        const results = JSON.parse(jsonMatch[0]);
 
-      // Save to Supabase
-      const { data, error } = await supabase
-        .from("strategies")
-        .insert({
-          user_id: user!.id,
-          nom_activite: nomActivite,
-          type_activite: typeActivite,
-          zone,
-          cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
-          budget,
-          objectif,
-          results,
-        })
-        .select("id")
-        .single();
+        // Save to Supabase
+        const { data, error } = await supabase
+          .from("strategies")
+          .insert({
+            user_id: user!.id,
+            nom_activite: nomActivite,
+            type_activite: typeActivite,
+            zone,
+            cible: typeof results.icp === "string" ? results.icp : results.icp.profil,
+            budget,
+            objectif,
+            results,
+          })
+          .select("id")
+          .single();
 
-      if (error) {
-        console.error("Erreur sauvegarde Supabase:", error);
-        await writer.write(
-          encoder.encode(`data: ${JSON.stringify({ type: "error", error: "Erreur lors de la sauvegarde" })}\n\n`)
-        );
-      } else {
-        await writer.write(
-          encoder.encode(`data: ${JSON.stringify({ type: "done", id: data.id })}\n\n`)
-        );
+        if (error) {
+          console.error("Erreur sauvegarde Supabase:", error);
+          controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ error: "Erreur lors de la sauvegarde" })));
+        } else {
+          controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ id: data.id })));
+        }
+      } catch (err) {
+        console.error("Erreur API:", err);
+        const message = err instanceof Error ? err.message : "Erreur inconnue";
+        controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ error: message })));
+      } finally {
+        controller.close();
       }
-    } catch (err) {
-      console.error("Erreur API:", err);
-      const message = err instanceof Error ? err.message : "Erreur inconnue";
-      await writer.write(
-        encoder.encode(`data: ${JSON.stringify({ type: "error", error: message })}\n\n`)
-      );
-    } finally {
-      await writer.close();
-    }
-  })();
+    },
+  });
 
-  return new Response(stream.readable, {
+  return new Response(readable, {
     headers: {
-      "Content-Type": "text/event-stream",
+      "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "no-cache",
-      Connection: "keep-alive",
+      "X-Content-Type-Options": "nosniff",
     },
   });
 }

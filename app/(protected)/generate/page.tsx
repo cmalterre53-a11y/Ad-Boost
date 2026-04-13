@@ -47,33 +47,22 @@ export default function GeneratePage() {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let resultId = "";
-      let errorMsg = "";
-      let buffer = "";
+      let fullResponse = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const parts = buffer.split("\n\n");
-        buffer = parts.pop() || "";
-        for (const part of parts) {
-          const line = part.trim();
-          if (!line.startsWith("data: ")) continue;
-          try {
-            const msg = JSON.parse(line.slice(6));
-            if (msg.type === "done") resultId = msg.id;
-            if (msg.type === "error") errorMsg = msg.error;
-          } catch {
-            // incomplete chunk, ignore
-          }
-        }
+        fullResponse += decoder.decode(value, { stream: true });
       }
 
-      if (errorMsg) throw new Error(errorMsg);
-      if (!resultId) throw new Error("Aucun résultat reçu");
+      const marker = fullResponse.lastIndexOf("__RESULT__");
+      if (marker === -1) throw new Error("Aucun résultat reçu. Réessayez.");
 
-      router.push(`/results/${resultId}`);
+      const data = JSON.parse(fullResponse.slice(marker + 10));
+      if (data.error) throw new Error(data.error);
+      if (!data.id) throw new Error("Aucun résultat reçu");
+
+      router.push(`/results/${data.id}`);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {

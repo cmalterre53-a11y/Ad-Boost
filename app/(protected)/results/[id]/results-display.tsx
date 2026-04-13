@@ -119,6 +119,8 @@ export default function ResultsDisplay({
                     <p className="text-slate-300"><span className="text-slate-400 font-medium">Aspiration :</span> {results.icp.aspiration}</p>
                     <p className="text-slate-300"><span className="text-slate-400 font-medium">Objections :</span> {results.icp.objections.join(" · ")}</p>
                     <p className="text-slate-300"><span className="text-slate-400 font-medium">Ses mots :</span> {results.icp.mots.map((m) => `"${m}"`).join(", ")}</p>
+                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Déclencheur :</span> {results.icp.declencheur}</p>
+                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Présence en ligne :</span> {results.icp.presence}</p>
                   </div>
                 )}
               </div>

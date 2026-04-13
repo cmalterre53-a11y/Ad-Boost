@@ -51,6 +51,8 @@ export interface ICP {
   aspiration: string;
   objections: string[];
   mots: string[];
+  declencheur: string;
+  presence: string;
 }
 
 export interface Results {

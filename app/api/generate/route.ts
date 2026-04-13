@@ -152,12 +152,14 @@ Si objectif = "Autre" (objectif libre : ${objectifLibre}) :
 - Dans tous les cas : parle en bénéfices, intègre l'USP, adapte le ton à l'objectif spécifique décrit
 - CTA : choisis le plus pertinent selon l'objectif libre détecté
 
-À partir du type d'activité et de la zone géographique, génère un ICP précis et structuré en 5 dimensions :
+À partir du type d'activité et de la zone géographique, génère un ICP précis et structuré en 7 dimensions :
 1. Profil : qui est cette personne (âge, situation, profession, niveau de vie)
 2. Problème : sa douleur principale — ce qui l'énerve, lui prend du temps ou lui coûte de l'argent
 3. Aspiration : ce qu'il veut vraiment obtenir comme résultat final
 4. Objections : les 2-3 raisons pour lesquelles il n'a pas encore acheté
 5. Ses mots : les expressions exactes qu'il utiliserait pour décrire son problème
+6. Déclencheur : l'événement ou la situation qui le pousse enfin à passer à l'action (mariage, rendez-vous pro important, visite de famille, honte devant collègues, voiture rendue sale...)
+7. Présence en ligne : où il passe son temps sur internet (Facebook groupes locaux, Instagram, entre les deux, autre)
 
 Cet ICP doit ensuite servir de base à TOUS les textes générés — chaque accroche, chaque post, chaque texte pub doit parler directement à cette personne avec ses mots, ses problèmes et ses aspirations.
 
@@ -169,7 +171,9 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
     "probleme": "sa douleur principale exprimée dans ses propres mots",
     "aspiration": "ce qu'il veut vraiment obtenir comme résultat",
     "objections": ["objection 1", "objection 2", "objection 3"],
-    "mots": ["expression 1", "expression 2", "expression 3"]
+    "mots": ["expression 1", "expression 2", "expression 3"],
+    "declencheur": "l'événement ou situation qui déclenche l'achat",
+    "presence": "où il passe son temps en ligne et comment il consomme le contenu"
   },
   "section1": {
     "accroches": ["accroche1 (max 40 car)", "accroche2", "accroche3"],

@@ -45,8 +45,16 @@ export interface ConseilSuivi {
   description: string;
 }
 
+export interface ICP {
+  profil: string;
+  probleme: string;
+  aspiration: string;
+  objections: string[];
+  mots: string[];
+}
+
 export interface Results {
-  icp: string;
+  icp: ICP | string;
   section1: {
     accroches: string[];
     textesPub: TextePub[];

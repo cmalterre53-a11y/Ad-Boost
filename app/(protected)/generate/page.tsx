@@ -56,9 +56,17 @@ export default function GeneratePage() {
       }
 
       const marker = fullResponse.lastIndexOf("__RESULT__");
-      if (marker === -1) throw new Error("Aucun résultat reçu. Réessayez.");
+      if (marker === -1) throw new Error("La génération a pris trop de temps. Réessayez.");
 
-      const data = JSON.parse(fullResponse.slice(marker + 10));
+      const jsonStr = fullResponse.slice(marker + 10).trim();
+      if (!jsonStr) throw new Error("Réponse vide du serveur. Réessayez.");
+
+      let data;
+      try {
+        data = JSON.parse(jsonStr);
+      } catch {
+        throw new Error("Réponse invalide du serveur. Réessayez.");
+      }
       if (data.error) throw new Error(data.error);
       if (!data.id) throw new Error("Aucun résultat reçu");
 

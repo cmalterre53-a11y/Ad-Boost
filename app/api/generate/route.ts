@@ -353,6 +353,14 @@ INSTRUCTIONS IMPORTANTES :
 
   const readable = new ReadableStream({
     async start(controller) {
+      // Heartbeat every 2 seconds to keep connection alive
+      const heartbeat = setInterval(() => {
+        try { controller.enqueue(encoder.encode(" ")); } catch {}
+      }, 2000);
+
+      // Send first byte immediately
+      controller.enqueue(encoder.encode(" "));
+
       try {
         const anthropicStream = anthropic.messages.stream({
           model: "claude-sonnet-4-5-20250929",
@@ -368,10 +376,10 @@ INSTRUCTIONS IMPORTANTES :
             event.delta.type === "text_delta"
           ) {
             fullText += event.delta.text;
-            // Send a space to keep connection alive
-            controller.enqueue(encoder.encode(" "));
           }
         }
+
+        clearInterval(heartbeat);
 
         // Extract JSON
         let jsonText = fullText.trim();
@@ -407,6 +415,7 @@ INSTRUCTIONS IMPORTANTES :
           controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ id: data.id })));
         }
       } catch (err) {
+        clearInterval(heartbeat);
         console.error("Erreur API:", err);
         const message = err instanceof Error ? err.message : "Erreur inconnue";
         controller.enqueue(encoder.encode("\n__RESULT__" + JSON.stringify({ error: message })));

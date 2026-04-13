@@ -49,16 +49,24 @@ export default function GeneratePage() {
       const decoder = new TextDecoder();
       let resultId = "";
       let errorMsg = "";
+      let buffer = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const text = decoder.decode(value);
-        const lines = text.split("\n").filter((l) => l.startsWith("data: "));
-        for (const line of lines) {
-          const msg = JSON.parse(line.slice(6));
-          if (msg.type === "done") resultId = msg.id;
-          if (msg.type === "error") errorMsg = msg.error;
+        buffer += decoder.decode(value, { stream: true });
+        const parts = buffer.split("\n\n");
+        buffer = parts.pop() || "";
+        for (const part of parts) {
+          const line = part.trim();
+          if (!line.startsWith("data: ")) continue;
+          try {
+            const msg = JSON.parse(line.slice(6));
+            if (msg.type === "done") resultId = msg.id;
+            if (msg.type === "error") errorMsg = msg.error;
+          } catch {
+            // incomplete chunk, ignore
+          }
         }
       }
 

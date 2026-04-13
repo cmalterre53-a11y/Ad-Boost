@@ -45,6 +45,8 @@ export async function POST(req: NextRequest) {
     const { nomActivite, typeActivite, zone, budget, objectif, objectifLibre } =
       await req.json();
 
+    const moisActuel = new Date().toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+
     let results;
 
     // Mode développement : retourne les données mockées
@@ -67,6 +69,7 @@ Voici les informations sur l'activité :
 - Zone géographique : ${zone}
 - Budget pub mensuel : ${budget}
 - Objectif principal : ${objectif === "Autre" ? objectifLibre : objectif}
+- Mois en cours : ${moisActuel}
 
 RÈGLES UNIVERSELLES (applicables à tous les objectifs) :
 
@@ -87,6 +90,21 @@ CALENDRIER ÉDITORIAL :
 - Respecter le mix : 40% éducatif / 40% engageant / 20% vente
 - Alterner les types de posts — jamais 2 posts de vente consécutifs
 - Varier les formats : conseil, question, coulisses, témoignage, offre
+- Le calendrier commence en ${moisActuel} — tous les posts doivent être contextualisés à cette période
+- Intégrer automatiquement les événements saisonniers et moments clés de l'année selon le secteur d'activité :
+  Exemples par secteur :
+  Nettoyage auto : janvier-février (sel et boue hivernale), avril (pollen), juin (départs en vacances), septembre (rentrée), novembre (premières pluies et feuilles mortes)
+  Coiffeur : janvier (nouvelles résolutions/nouveau look), février (Saint-Valentin), mai (fête des mères), juin (mariages et fêtes de fin d'année scolaire), décembre (fêtes de Noël)
+  Restaurant : février (Saint-Valentin), mars-avril (Pâques), juin (fête des pères), novembre (Beaujolais nouveau), décembre (repas de Noël et réveillon)
+  Fleuriste : février (Saint-Valentin), mars (fête des grands-mères), mai (fête du travail + fête des mères), novembre (Toussaint), décembre (Noël)
+  Comptable/Expert-comptable : janvier (clôture exercice), mars-avril (déclarations fiscales), mai (liasse fiscale), septembre (rentrée fiscale), décembre (optimisation fin d'année)
+  Diocèse/Religion : calendrier liturgique complet — Avent (novembre-décembre), Noël, Épiphanie (janvier), Carême (février-mars), Pâques, Pentecôte, Toussaint (novembre), fêtes des saints selon le secteur
+  Plombier/Chauffagiste : septembre-octobre (révision chaudière avant hiver), novembre-février (urgences gel et pannes), avril (révision climatisation), juin-août (piscines et arrosage)
+  Sport/Coach : janvier (résolutions nouvel an), mars (préparation été), juin (objectifs beach body), septembre (rentrée sportive), novembre (préparation fêtes)
+- Si le secteur ne correspond à aucun exemple ci-dessus, déduire intelligemment les moments clés de l'année les plus pertinents pour ce type d'activité
+- Utiliser les déclencheurs d'achat de l'ICP dans les posts du calendrier quand c'est pertinent
+- Intégrer des références locales à ${zone} dans au moins 2 posts par mois
+- Adapter le ton des posts à la saison : chaleureux et festif en décembre, dynamique et motivant en janvier, léger et estival en juillet
 
 VISUELS :
 - Les prompts image doivent montrer le bénéfice final, pas le service en train d'être réalisé

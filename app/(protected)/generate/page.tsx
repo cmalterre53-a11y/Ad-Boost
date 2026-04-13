@@ -3,6 +3,70 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+function repairJson(json: string): string {
+  // 1. Remove trailing commas before } or ]
+  json = json.replace(/,\s*([\]}])/g, "$1");
+
+  // 2. Fix unescaped double quotes inside string values
+  let fixed = "";
+  let inString = false;
+  let escaped = false;
+  for (let i = 0; i < json.length; i++) {
+    const ch = json[i];
+    if (escaped) {
+      fixed += ch;
+      escaped = false;
+      continue;
+    }
+    if (ch === "\\") {
+      fixed += ch;
+      escaped = true;
+      continue;
+    }
+    if (ch === '"') {
+      if (!inString) {
+        inString = true;
+        fixed += ch;
+      } else {
+        // Look ahead: if next non-whitespace is : , ] } — it's a real string end
+        const rest = json.slice(i + 1);
+        const nextChar = rest.match(/^\s*(.)/)?.[1];
+        if (!nextChar || ":,]}".includes(nextChar)) {
+          inString = false;
+          fixed += ch;
+        } else {
+          // Unescaped quote inside string — escape it
+          fixed += "'";
+        }
+      }
+    } else {
+      fixed += ch;
+    }
+  }
+
+  // 3. Fix truncated JSON — close any open brackets
+  let opens = 0;
+  let closeBraces = 0;
+  let openBrackets = 0;
+  let closeBrackets = 0;
+  let inStr = false;
+  let esc = false;
+  for (const c of fixed) {
+    if (esc) { esc = false; continue; }
+    if (c === "\\") { esc = true; continue; }
+    if (c === '"') { inStr = !inStr; continue; }
+    if (inStr) continue;
+    if (c === "{") opens++;
+    if (c === "}") closeBraces++;
+    if (c === "[") openBrackets++;
+    if (c === "]") closeBrackets++;
+  }
+  for (let i = 0; i < openBrackets - closeBrackets; i++) fixed += "]";
+  for (let i = 0; i < opens - closeBraces; i++) fixed += "}";
+
+  return fixed;
+}
+
 const objectifs = [
   { value: "Remplir mon agenda / avoir des appels", label: "⚡ Remplir mon agenda / avoir des appels", description: "Tu veux des réservations et des contacts directs cette semaine." },
   { value: "Me faire connaître dans ma zone", label: "👁️ Me faire connaître dans ma zone", description: "Tu viens de te lancer ou tu veux toucher de nouveaux quartiers autour de toi." },
@@ -70,11 +134,14 @@ export default function GeneratePage() {
       }
       const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
       if (!jsonMatch) throw new Error("Aucun résultat valide reçu. Réessayez.");
-      // Clean common JSON issues from LLM output (trailing commas, etc.)
-      const cleanedJson = jsonMatch[0]
-        .replace(/,\s*([\]}])/g, "$1")
-        .replace(/[\x00-\x1f]/g, (ch) => (ch === "\n" || ch === "\r" || ch === "\t" ? ch : ""));
-      const results = JSON.parse(cleanedJson);
+      // Repair common JSON issues from LLM output
+      let results;
+      try {
+        results = JSON.parse(jsonMatch[0]);
+      } catch {
+        const repaired = repairJson(jsonMatch[0]);
+        results = JSON.parse(repaired);
+      }
 
       // Save to Supabase via separate quick POST
       const saveRes = await fetch("/api/strategies", {

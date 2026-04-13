@@ -347,7 +347,9 @@ INSTRUCTIONS IMPORTANTES :
   6. Vérifier, publier et suivre : aperçu, suivi/tracking, publier, délai examen 24h, phase d'apprentissage 7 jours, KPIs à J+3.
 - Le champ "contenu" de chaque étape doit être concis : des instructions directes, une action par ligne. Indique les noms exacts des boutons et options tels qu'ils apparaissent dans Meta Ads. Personnalise TOUS les exemples pour l'activité de l'utilisateur.
 - La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication.
-- Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
+- Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.
+- IMPORTANT : dans toutes les valeurs texte du JSON, n'utilise JAMAIS de guillemets doubles ("). Utilise des apostrophes (') ou des guillemets français (« ») à la place. Cela garantit un JSON valide.
+- Échappe toujours les caractères spéciaux dans les chaînes JSON (retours à la ligne avec \\n, tabulations avec \\t).`;
 
   const encoder = new TextEncoder();
 
@@ -355,10 +357,15 @@ INSTRUCTIONS IMPORTANTES :
   const stream = new ReadableStream({
     async start(controller) {
       try {
+        // Prefill with "{" to force valid JSON output
+        controller.enqueue(encoder.encode("{"));
         const anthropicStream = anthropic.messages.stream({
           model: "claude-haiku-4-5-20251001",
           max_tokens: 8192,
-          messages: [{ role: "user", content: prompt }],
+          messages: [
+            { role: "user", content: prompt },
+            { role: "assistant", content: "{" },
+          ],
         });
 
         for await (const event of anthropicStream) {

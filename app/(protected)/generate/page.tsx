@@ -42,39 +42,55 @@ export default function GeneratePage() {
       });
 
       if (!res.ok || !res.body) {
-        throw new Error("Le serveur a renvoyé une réponse invalide. Réessayez dans quelques instants.");
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || "Le serveur a renvoyé une réponse invalide.");
       }
 
+      // Read streamed text tokens from Claude
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let fullResponse = "";
+      let fullText = "";
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        fullResponse += decoder.decode(value, { stream: true });
+        fullText += decoder.decode(value, { stream: true });
       }
 
-      // Find the last "data: {...}" line which contains the result
-      const lines = fullResponse.split("\n");
-      let resultData = null;
-      for (let i = lines.length - 1; i >= 0; i--) {
-        const line = lines[i].trim();
-        if (line.startsWith("data: ")) {
-          try {
-            resultData = JSON.parse(line.slice(6));
-            break;
-          } catch {
-            continue;
-          }
-        }
+      // Check for server-side error
+      if (fullText.includes("__ERROR__")) {
+        const errorMsg = fullText.split("__ERROR__").pop() || "Erreur inconnue";
+        throw new Error(errorMsg);
       }
 
-      if (!resultData) throw new Error("La génération a pris trop de temps. Réessayez.");
-      if (resultData.error) throw new Error(resultData.error);
-      if (!resultData.id) throw new Error("Aucun résultat reçu.");
+      // Extract and parse JSON from Claude's response
+      let jsonText = fullText.trim();
+      if (jsonText.startsWith("```")) {
+        jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
+      }
+      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error("Aucun résultat valide reçu. Réessayez.");
+      const results = JSON.parse(jsonMatch[0]);
 
-      router.push(`/results/${resultData.id}`);
+      // Save to Supabase via separate quick POST
+      const saveRes = await fetch("/api/strategies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nomActivite: formData.nomActivite,
+          typeActivite: formData.typeActivite,
+          zone: formData.zone,
+          budget: formData.budget,
+          objectif: formData.objectif,
+          results,
+        }),
+      });
+
+      const saveData = await saveRes.json();
+      if (saveData.error) throw new Error(saveData.error);
+      if (!saveData.id) throw new Error("Erreur lors de la sauvegarde.");
+
+      router.push(`/results/${saveData.id}`);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {

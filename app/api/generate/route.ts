@@ -48,6 +48,9 @@ export async function POST(req: NextRequest) {
   const now = new Date();
   const moisActuel = `${moisFR[now.getMonth()]} ${now.getFullYear()}`;
 
+  console.log("[Ad-Boost] moisActuel:", moisActuel);
+  console.log("[Ad-Boost] Generating for:", { nomActivite, typeActivite, zone, budget, objectif });
+
   const prompt = `Tu es un expert en marketing digital et publicité Meta Ads (Facebook & Instagram) pour les petits entrepreneurs locaux en France.
 
 Voici les informations sur l'activité :

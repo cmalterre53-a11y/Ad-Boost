@@ -141,6 +141,9 @@ export default function GeneratePage() {
       const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
       if (!jsonMatch) throw new Error("Aucun résultat valide reçu. Réessayez.");
       // Repair common JSON issues from LLM output
+      console.log("[Ad-Boost] Raw Claude response length:", fullText.length);
+      console.log("[Ad-Boost] Raw Claude response (first 500 chars):", fullText.slice(0, 500));
+      console.log("[Ad-Boost] Raw Claude response (last 500 chars):", fullText.slice(-500));
       let results;
       try {
         results = JSON.parse(jsonMatch[0]);
@@ -148,6 +151,8 @@ export default function GeneratePage() {
         const repaired = repairJson(jsonMatch[0]);
         results = JSON.parse(repaired);
       }
+      console.log("[Ad-Boost] Parsed section3:", JSON.stringify(results.section3, null, 2));
+      console.log("[Ad-Boost] Parsed results keys:", Object.keys(results));
 
       // Save to Supabase via separate quick POST
       const saveRes = await fetch("/api/strategies", {

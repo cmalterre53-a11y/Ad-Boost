@@ -2,6 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import ResultsDisplay from "./results-display";
 
+// Disable Next.js caching — always fetch fresh data from Supabase
+export const dynamic = "force-dynamic";
+
 export default async function ResultPage({
   params,
 }: {

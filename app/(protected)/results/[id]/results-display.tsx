@@ -114,13 +114,13 @@ export default function ResultsDisplay({
                   <p className="text-slate-300 text-sm mt-1">{results.icp}</p>
                 ) : (
                   <div className="mt-2 space-y-2 text-sm">
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Profil :</span> {results.icp.profil}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Problème :</span> {results.icp.probleme}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Aspiration :</span> {results.icp.aspiration}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Objections :</span> {results.icp.objections.join(" · ")}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Ses mots :</span> {results.icp.mots.map((m) => `"${m}"`).join(", ")}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Déclencheur :</span> {results.icp.declencheur}</p>
-                    <p className="text-slate-300"><span className="text-slate-400 font-medium">Présence en ligne :</span> {results.icp.presence}</p>
+                    {results.icp?.profil && <p className="text-slate-300"><span className="text-slate-400 font-medium">Profil :</span> {results.icp.profil}</p>}
+                    {results.icp?.probleme && <p className="text-slate-300"><span className="text-slate-400 font-medium">Problème :</span> {results.icp.probleme}</p>}
+                    {results.icp?.aspiration && <p className="text-slate-300"><span className="text-slate-400 font-medium">Aspiration :</span> {results.icp.aspiration}</p>}
+                    {Array.isArray(results.icp?.objections) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Objections :</span> {results.icp.objections.join(" · ")}</p>}
+                    {Array.isArray(results.icp?.mots) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Ses mots :</span> {results.icp.mots.map((m) => `"${m}"`).join(", ")}</p>}
+                    {results.icp?.declencheur && <p className="text-slate-300"><span className="text-slate-400 font-medium">Déclencheur :</span> {results.icp.declencheur}</p>}
+                    {results.icp?.presence && <p className="text-slate-300"><span className="text-slate-400 font-medium">Présence en ligne :</span> {results.icp.presence}</p>}
                   </div>
                 )}
               </div>
@@ -167,7 +167,7 @@ export default function ResultsDisplay({
             Accroches courtes (max 40 car.)
           </h3>
           <div className="space-y-2">
-            {results.section1.accroches.map((accroche, i) => (
+            {(results.section1?.accroches ?? []).map((accroche, i) => (
               <div
                 key={i}
                 className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
@@ -214,7 +214,7 @@ export default function ResultsDisplay({
             Textes de pub
           </h3>
           <div className="space-y-2">
-            {results.section1.textesPub.map((pub, i) => (
+            {(results.section1?.textesPub ?? []).map((pub, i) => (
               <div key={i} className="space-y-2">
                 {/* Accroche */}
                 <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
@@ -245,7 +245,7 @@ export default function ResultsDisplay({
             Idées de légendes pour posts organiques
           </h3>
           <div className="space-y-2">
-            {results.section1.legendes.map((legende, i) => (
+            {(results.section1?.legendes ?? []).map((legende, i) => (
               <div
                 key={i}
                 className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
@@ -281,7 +281,7 @@ export default function ResultsDisplay({
             Étapes pour lancer votre campagne
           </h3>
           <div className="space-y-4">
-            {results.section2.etapes.map((etape) => (
+            {(results.section2?.etapes ?? []).map((etape) => (
               <div
                 key={etape.numero}
                 className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-5"
@@ -374,7 +374,7 @@ export default function ResultsDisplay({
             Suivi et optimisation de votre campagne
           </h3>
           <div className="space-y-3">
-            {results.section2.conseilsSuivi.map((conseil, i) => (
+            {(results.section2?.conseilsSuivi ?? []).map((conseil, i) => (
               <div
                 key={i}
                 className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-4"
@@ -409,16 +409,16 @@ export default function ResultsDisplay({
             </div>
             <div className="space-y-1.5 text-sm">
               <p className="text-slate-300">
-                <span className="text-slate-500">Âge :</span> {results.section2.ciblage.age}
+                <span className="text-slate-500">Âge :</span> {results.section2?.ciblage?.age ?? "—"}
               </p>
               <p className="text-slate-300">
-                <span className="text-slate-500">Zone :</span> {results.section2.ciblage.zone}
+                <span className="text-slate-500">Zone :</span> {results.section2?.ciblage?.zone ?? "—"}
               </p>
               <p className="text-slate-300">
-                <span className="text-slate-500">Exclusions :</span> {results.section2.ciblage.exclusions}
+                <span className="text-slate-500">Exclusions :</span> {results.section2?.ciblage?.exclusions ?? "—"}
               </p>
               <div className="flex flex-wrap gap-1.5 mt-2">
-                {results.section2.ciblage.interets.map((interet, i) => (
+                {(results.section2?.ciblage?.interets ?? []).map((interet, i) => (
                   <span
                     key={i}
                     className="px-2 py-0.5 text-xs bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/25 rounded-full"
@@ -440,18 +440,18 @@ export default function ResultsDisplay({
             </div>
             <div className="space-y-1.5 text-sm">
               <p className="text-slate-300">
-                <span className="text-slate-500">Total :</span> {results.section2.budget.total}
+                <span className="text-slate-500">Total :</span> {results.section2?.budget?.total ?? "—"}
               </p>
               <p className="text-slate-300">
-                <span className="text-slate-500">Par jour :</span> {results.section2.budget.budgetJournalier}
+                <span className="text-slate-500">Par jour :</span> {results.section2?.budget?.budgetJournalier ?? "—"}
               </p>
               <p className="text-slate-300">
                 <span className="text-slate-500">Répartition :</span>{" "}
-                {results.section2.budget.repartition}
+                {results.section2?.budget?.repartition ?? "—"}
               </p>
               <p className="text-slate-300">
                 <span className="text-slate-500">Phase de test :</span>{" "}
-                {results.section2.budget.dureeTest}
+                {results.section2?.budget?.dureeTest ?? "—"}
               </p>
             </div>
           </div>
@@ -464,7 +464,7 @@ export default function ResultsDisplay({
               </svg>
               <h3 className="font-semibold text-white">Format recommandé</h3>
             </div>
-            <p className="text-slate-300 text-sm">{results.section2.format}</p>
+            <p className="text-slate-300 text-sm">{results.section2?.format ?? "—"}</p>
           </div>
         </div>
 
@@ -474,7 +474,7 @@ export default function ResultsDisplay({
             Conseils spécifiques à votre secteur
           </h3>
           <div className="space-y-2">
-            {results.section2.conseilsSecteur.map((conseil, i) => (
+            {(results.section2?.conseilsSecteur ?? []).map((conseil, i) => (
               <div
                 key={i}
                 className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
@@ -504,37 +504,37 @@ export default function ResultsDisplay({
         />
 
         <div className="space-y-6">
-          {results.section3.semaines.map((semaine) => (
-            <div key={semaine.semaine}>
+          {(results.section3?.semaines ?? []).map((semaine, idx) => (
+            <div key={semaine?.semaine ?? idx}>
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
                 <span className="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-400 text-sm flex items-center justify-center font-bold">
-                  S{semaine.semaine}
+                  S{semaine?.semaine ?? idx + 1}
                 </span>
-                Semaine {semaine.semaine}
+                Semaine {semaine?.semaine ?? idx + 1}
               </h3>
               <div className="grid sm:grid-cols-3 gap-3">
-                {semaine.posts.map((post, j) => (
+                {(Array.isArray(semaine?.posts) ? semaine.posts : []).map((post, j) => (
                   <div
                     key={j}
                     className="bg-slate-900/50 border border-slate-700/30 rounded-xl p-4 space-y-2"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-white">
-                        {post.jour}
+                        {post?.jour ?? "—"}
                       </span>
                       <span className="text-xs text-slate-500">
-                        {post.heure}
+                        {post?.heure ?? ""}
                       </span>
                     </div>
                     <p className="text-sm text-violet-400 font-medium">
-                      {post.theme}
+                      {post?.theme ?? ""}
                     </p>
                     <div className="flex items-center gap-1.5">
                       <span className="px-2 py-0.5 text-xs bg-cyan-500/15 text-cyan-300 border border-cyan-500/25 rounded-full">
-                        {post.typeContenu}
+                        {post?.typeContenu ?? ""}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500">{post.conseilVisuel}</p>
+                    <p className="text-xs text-slate-500">{post?.conseilVisuel ?? ""}</p>
                   </div>
                 ))}
               </div>

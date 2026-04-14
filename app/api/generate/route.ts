@@ -318,15 +318,27 @@ Génère un plan complet en JSON avec exactement cette structure (pas de texte a
       },
       {
         "semaine": 2,
-        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
+        "posts": [
+          { "jour": "Lundi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Mercredi", "heure": "12h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Vendredi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" }
+        ]
       },
       {
         "semaine": 3,
-        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
+        "posts": [
+          { "jour": "Lundi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Mercredi", "heure": "12h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Vendredi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" }
+        ]
       },
       {
         "semaine": 4,
-        "posts": [{ "jour": "...", "heure": "...", "theme": "...", "typeContenu": "...", "conseilVisuel": "..." }]
+        "posts": [
+          { "jour": "Lundi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Mercredi", "heure": "12h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" },
+          { "jour": "Vendredi", "heure": "18h00", "theme": "thème du post", "typeContenu": "photo/vidéo courte/story/carrousel", "conseilVisuel": "conseil visuel" }
+        ]
       }
     ]
   }
@@ -361,7 +373,7 @@ INSTRUCTIONS IMPORTANTES :
         controller.enqueue(encoder.encode("{"));
         const anthropicStream = anthropic.messages.stream({
           model: "claude-haiku-4-5-20251001",
-          max_tokens: 8192,
+          max_tokens: 16384,
           messages: [
             { role: "user", content: prompt },
             { role: "assistant", content: "{" },

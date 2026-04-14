@@ -133,26 +133,31 @@ export default function GeneratePage() {
         throw new Error(errorMsg);
       }
 
-      // Extract and parse JSON from Claude's response
+      // Parse JSON from Claude's response (prefilled with {, so text IS the JSON)
       let jsonText = fullText.trim();
       if (jsonText.startsWith("```")) {
         jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
       }
-      const jsonMatch = jsonText.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) throw new Error("Aucun résultat valide reçu. Réessayez.");
-      // Repair common JSON issues from LLM output
-      console.log("[Ad-Boost] Raw Claude response length:", fullText.length);
-      console.log("[Ad-Boost] Raw Claude response (first 500 chars):", fullText.slice(0, 500));
-      console.log("[Ad-Boost] Raw Claude response (last 500 chars):", fullText.slice(-500));
+      // Remove any trailing text after the JSON (Claude might add comments)
+      const lastBrace = jsonText.lastIndexOf("}");
+      if (lastBrace !== -1 && lastBrace < jsonText.length - 1) {
+        jsonText = jsonText.slice(0, lastBrace + 1);
+      }
+      if (!jsonText.startsWith("{")) throw new Error("Aucun résultat valide reçu. Réessayez.");
+
+      console.log("[Ad-Boost] Response length:", fullText.length);
+      console.log("[Ad-Boost] Last 300 chars:", fullText.slice(-300));
+
+      // Try parsing directly, then with repair
       let results;
       try {
-        results = JSON.parse(jsonMatch[0]);
+        results = JSON.parse(jsonText);
       } catch {
-        const repaired = repairJson(jsonMatch[0]);
+        const repaired = repairJson(jsonText);
         results = JSON.parse(repaired);
       }
-      console.log("[Ad-Boost] Parsed section3:", JSON.stringify(results.section3, null, 2));
-      console.log("[Ad-Boost] Parsed results keys:", Object.keys(results));
+      console.log("[Ad-Boost] Parsed keys:", Object.keys(results));
+      console.log("[Ad-Boost] section3:", results.section3 ? `${(results.section3.semaines ?? []).length} semaines` : "MISSING");
 
       // Save to Supabase via separate quick POST
       const saveRes = await fetch("/api/strategies", {

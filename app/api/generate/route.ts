@@ -375,7 +375,7 @@ INSTRUCTIONS IMPORTANTES :
         // Prefill with "{" to force valid JSON output
         controller.enqueue(encoder.encode("{"));
         const anthropicStream = anthropic.messages.stream({
-          model: "claude-haiku-4-5-20251001",
+          model: "claude-sonnet-4-5-20250929",
           max_tokens: 16384,
           messages: [
             { role: "user", content: prompt },

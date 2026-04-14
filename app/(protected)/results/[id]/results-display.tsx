@@ -503,13 +503,6 @@ export default function ResultsDisplay({
           subtitle="Planning sur 4 semaines pour vos réseaux sociaux"
         />
 
-        {/* DEBUG — temporary diagnostic */}
-        <div className="mb-4 p-3 bg-yellow-900/30 border border-yellow-600/30 rounded-lg text-xs text-yellow-300 font-mono break-all">
-          <p>section3 keys: {JSON.stringify(results.section3 ? Object.keys(results.section3) : "undefined")}</p>
-          <p>semaines type: {results.section3?.semaines ? (Array.isArray(results.section3.semaines) ? `array[${results.section3.semaines.length}]` : typeof results.section3.semaines) : "undefined"}</p>
-          <p>section3 preview: {JSON.stringify(results.section3)?.slice(0, 300)}</p>
-        </div>
-
         <div className="space-y-6">
           {(results.section3?.semaines ?? []).map((semaine, idx) => (
             <div key={semaine?.semaine ?? idx}>

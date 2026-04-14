@@ -7,7 +7,7 @@ function repairJson(json: string): string {
   // 1. Remove trailing commas before } or ]
   json = json.replace(/,\s*([\]}])/g, "$1");
 
-  // 2. Fix unescaped double quotes inside string values
+  // 2. Fix unescaped quotes, newlines, and control chars inside string values
   let fixed = "";
   let inString = false;
   let escaped = false;
@@ -23,6 +23,12 @@ function repairJson(json: string): string {
       escaped = true;
       continue;
     }
+    // Escape real newlines/tabs/control chars inside strings
+    if (inString) {
+      if (ch === "\n") { fixed += "\\n"; continue; }
+      if (ch === "\r") { fixed += "\\r"; continue; }
+      if (ch === "\t") { fixed += "\\t"; continue; }
+    }
     if (ch === '"') {
       if (!inString) {
         inString = true;
@@ -35,7 +41,7 @@ function repairJson(json: string): string {
           inString = false;
           fixed += ch;
         } else {
-          // Unescaped quote inside string — escape it
+          // Unescaped quote inside string — replace with apostrophe
           fixed += "'";
         }
       }

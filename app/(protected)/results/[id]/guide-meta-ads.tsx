@@ -7,7 +7,7 @@ const STEP_EMOJIS = ["🔑", "🎯", "💰", "🔄", "👥", "🎨", "🚀"];
 
 function splitIntoCheckableItems(text: string): string[] {
   return text
-    .split(/(?<=\.)\s+|\n/)
+    .split(/(?<=(?<!\d)\.)\s+|\n/)
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 }

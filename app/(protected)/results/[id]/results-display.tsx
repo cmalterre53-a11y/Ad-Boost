@@ -189,20 +189,23 @@ export default function ResultsDisplay({
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
             Visuels — Prompts de génération d&apos;image
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-4">
             {results.section1.visuels.map((visuel, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
-              >
-                <span className="w-6 h-6 flex-shrink-0 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold mt-0.5">
-                  {i + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-medium text-sm mb-1">{visuel.titre}</p>
-                  <p className="text-slate-400 text-xs">{visuel.promptImage}</p>
+              <div key={i} className="space-y-2">
+                {/* Titre / texte du visuel */}
+                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+                  <span className="w-6 h-6 flex-shrink-0 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  <p className="text-white font-medium text-sm flex-1">{visuel.titre}</p>
+                  <CopyButton text={visuel.titre} />
                 </div>
-                <CopyButton text={visuel.promptImage} />
+                {/* Prompt image */}
+                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
+                  <span className="text-xs font-semibold text-cyan-400/70 uppercase tracking-wider flex-shrink-0">Prompt</span>
+                  <p className="text-slate-400 text-xs flex-1">{visuel.promptImage}</p>
+                  <CopyButton text={visuel.promptImage} />
+                </div>
               </div>
             ))}
           </div>

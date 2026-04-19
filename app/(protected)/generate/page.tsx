@@ -194,11 +194,27 @@ export default function GeneratePage() {
     if (jsonText.startsWith("```")) {
       jsonText = jsonText.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
     }
-    const lastBrace = jsonText.lastIndexOf("}");
-    if (lastBrace !== -1 && lastBrace < jsonText.length - 1) {
-      jsonText = jsonText.slice(0, lastBrace + 1);
+    // Find the matching closing brace for the root object by tracking depth
+    const startIdx = jsonText.indexOf("{");
+    if (startIdx === -1) throw new Error(`Aucun résultat valide reçu pour ${step}. Réessayez.`);
+    let depth = 0;
+    let inStr = false;
+    let esc = false;
+    let endIdx = -1;
+    for (let i = startIdx; i < jsonText.length; i++) {
+      const c = jsonText[i];
+      if (esc) { esc = false; continue; }
+      if (c === "\\") { esc = true; continue; }
+      if (c === '"') { inStr = !inStr; continue; }
+      if (inStr) continue;
+      if (c === "{") depth++;
+      if (c === "}") { depth--; if (depth === 0) { endIdx = i; break; } }
     }
-    if (!jsonText.startsWith("{")) throw new Error(`Aucun résultat valide reçu pour ${step}. Réessayez.`);
+    if (endIdx !== -1) {
+      jsonText = jsonText.slice(startIdx, endIdx + 1);
+    } else {
+      jsonText = jsonText.slice(startIdx);
+    }
 
     let parsed;
     try {

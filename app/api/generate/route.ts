@@ -348,22 +348,31 @@ INSTRUCTIONS :
 
     case "section3": {
       const moisFR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+      const joursFR = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
       const now = new Date();
       const moisActuel = `${moisFR[now.getMonth()]} ${now.getFullYear()}`;
+      const dateComplete = `${joursFR[now.getDay()]} ${now.getDate()} ${moisFR[now.getMonth()]} ${now.getFullYear()}`;
       const icpRecap = buildIcpRecap(body.icp!);
 
       return `${role}
 
 ${biz}
+- Date du jour : ${dateComplete}
 - Mois en cours : ${moisActuel}
 
 ${icpRecap}
 
+PROGRESSION NARRATIVE SUR 4 SEMAINES :
+Le calendrier doit suivre une progression logique et stratégique :
+- Semaine 1 — NOTORIÉTÉ : se présenter, créer la confiance, contenu éducatif. Ton chaleureux et accessible.
+- Semaine 2 — PREUVE SOCIALE : témoignages, avant/après, résultats concrets, chiffres. Ton factuel et rassurant.
+- Semaine 3 — ENGAGEMENT : questions, sondages, coulisses, interaction directe avec la communauté. Ton conversationnel et humain.
+- Semaine 4 — CONVERSION : offre, urgence, CTA direct, remplir l'agenda. Ton percutant et orienté action.
+Chaque semaine garde 3 posts mais le ton et le type de contenu évoluent selon cette progression.
+
 RÈGLES DU CALENDRIER ÉDITORIAL :
-- Respecter le mix : 40% éducatif / 40% engageant / 20% vente
-- Alterner les types de posts — jamais 2 posts de vente consécutifs
+- Le calendrier commence la semaine suivant le ${dateComplete} — tous les posts doivent être contextualisés à cette période
 - Varier les formats : conseil, question, coulisses, témoignage, offre
-- Le calendrier commence en ${moisActuel} — tous les posts doivent être contextualisés à cette période
 - Intégrer automatiquement les événements saisonniers et moments clés de l'année selon le secteur d'activité :
   Exemples par secteur :
   Nettoyage auto : janvier-février (sel et boue hivernale), avril (pollen), juin (départs en vacances), septembre (rentrée), novembre (premières pluies et feuilles mortes)

@@ -30,5 +30,5 @@ export default async function ResultPage({
     objectif: strategy.objectif,
   };
 
-  return <ResultsDisplay results={strategy.results} formData={formData} />;
+  return <ResultsDisplay results={strategy.results} formData={formData} createdAt={strategy.created_at} />;
 }

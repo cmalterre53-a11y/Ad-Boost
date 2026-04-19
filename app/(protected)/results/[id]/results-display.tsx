@@ -54,12 +54,45 @@ function SectionHeader({
   );
 }
 
+const JOURS_MAP: Record<string, number> = {
+  "Lundi": 1, "Mardi": 2, "Mercredi": 3, "Jeudi": 4, "Vendredi": 5, "Samedi": 6, "Dimanche": 0,
+};
+
+const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+const SEMAINE_THEMES = [
+  "Notoriété",
+  "Preuve sociale",
+  "Engagement",
+  "Conversion",
+];
+
+function getPostDate(createdAt: string, weekIndex: number, jourName: string): string {
+  const base = new Date(createdAt);
+  // Find next Monday after creation date
+  const dayOfWeek = base.getDay();
+  const daysUntilMonday = dayOfWeek === 0 ? 1 : (8 - dayOfWeek);
+  const firstMonday = new Date(base);
+  firstMonday.setDate(base.getDate() + daysUntilMonday);
+  // Add weeks
+  const weekStart = new Date(firstMonday);
+  weekStart.setDate(firstMonday.getDate() + weekIndex * 7);
+  // Add day offset from Monday
+  const targetDay = JOURS_MAP[jourName] ?? 1;
+  const dayOffset = targetDay === 0 ? 6 : targetDay - 1; // Monday=0 offset
+  const postDate = new Date(weekStart);
+  postDate.setDate(weekStart.getDate() + dayOffset);
+  return `${jourName} ${postDate.getDate()} ${MOIS_FR[postDate.getMonth()]}`;
+}
+
 export default function ResultsDisplay({
   results,
   formData,
+  createdAt,
 }: {
   results: Results;
   formData: FormData;
+  createdAt: string;
 }) {
   const [activeTab, setActiveTab] = useState<"textes" | "guide" | "calendrier">("textes");
   const [showFullIcp, setShowFullIcp] = useState(false);
@@ -316,7 +349,12 @@ export default function ResultsDisplay({
                 <span className="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-400 text-sm flex items-center justify-center font-bold">
                   S{semaine?.semaine ?? idx + 1}
                 </span>
-                Semaine {semaine?.semaine ?? idx + 1}
+                <span>Semaine {semaine?.semaine ?? idx + 1}</span>
+                {SEMAINE_THEMES[idx] && (
+                  <span className="px-2 py-0.5 text-xs bg-violet-500/15 text-violet-300 border border-violet-500/25 rounded-full">
+                    {SEMAINE_THEMES[idx]}
+                  </span>
+                )}
               </h3>
               <div className="grid sm:grid-cols-3 gap-3">
                 {(Array.isArray(semaine?.posts) ? semaine.posts : []).map((post, j) => (
@@ -326,7 +364,7 @@ export default function ResultsDisplay({
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-white">
-                        {post?.jour ?? "—"}
+                        {createdAt ? getPostDate(createdAt, idx, post?.jour ?? "Lundi") : (post?.jour ?? "—")}
                       </span>
                       <span className="text-xs text-slate-500">
                         {post?.heure ?? ""}

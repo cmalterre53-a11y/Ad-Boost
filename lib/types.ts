@@ -53,6 +53,7 @@ export interface ICP {
   mots: string[];
   declencheur: string;
   presence: string;
+  icpResume?: string;
 }
 
 export interface Results {

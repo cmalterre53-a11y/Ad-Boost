@@ -150,7 +150,8 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
     "objections": ["objection 1", "objection 2", "objection 3"],
     "mots": ["expression 1", "expression 2", "expression 3"],
     "declencheur": "l'événement ou situation qui déclenche l'achat",
-    "presence": "où il passe son temps en ligne et comment il consomme le contenu"
+    "presence": "où il passe son temps en ligne et comment il consomme le contenu",
+    "icpResume": "Résumé en 3-4 lignes de l'ICP. Format : Ton client idéal : [profil en une ligne]. Son problème principal : [problème en une ligne]. Ce qui le déclenche : [déclencheur en une ligne]. Où le toucher : [présence en ligne en une ligne]."
   }
 }
 

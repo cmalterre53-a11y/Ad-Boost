@@ -62,6 +62,7 @@ export default function ResultsDisplay({
   formData: FormData;
 }) {
   const [activeTab, setActiveTab] = useState<"textes" | "guide" | "calendrier">("textes");
+  const [showFullIcp, setShowFullIcp] = useState(false);
 
   const tabs = [
     { id: "textes" as const, label: "Textes de pub", icon: (
@@ -114,15 +115,41 @@ export default function ResultsDisplay({
                 {typeof results.icp === "string" ? (
                   <p className="text-slate-300 text-sm mt-1">{results.icp}</p>
                 ) : (
-                  <div className="mt-2 space-y-2 text-sm">
-                    {results.icp?.profil && <p className="text-slate-300"><span className="text-slate-400 font-medium">Profil :</span> {results.icp.profil}</p>}
-                    {results.icp?.probleme && <p className="text-slate-300"><span className="text-slate-400 font-medium">Problème :</span> {results.icp.probleme}</p>}
-                    {results.icp?.aspiration && <p className="text-slate-300"><span className="text-slate-400 font-medium">Aspiration :</span> {results.icp.aspiration}</p>}
-                    {Array.isArray(results.icp?.objections) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Objections :</span> {results.icp.objections.join(" · ")}</p>}
-                    {Array.isArray(results.icp?.mots) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Ses mots :</span> {results.icp.mots.map((m) => `"${m}"`).join(", ")}</p>}
-                    {results.icp?.declencheur && <p className="text-slate-300"><span className="text-slate-400 font-medium">Déclencheur :</span> {results.icp.declencheur}</p>}
-                    {results.icp?.presence && <p className="text-slate-300"><span className="text-slate-400 font-medium">Présence en ligne :</span> {results.icp.presence}</p>}
-                  </div>
+                  <>
+                    {/* Version courte */}
+                    <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+                      {results.icp?.icpResume
+                        ? results.icp.icpResume
+                        : `Ton client idéal : ${results.icp?.profil || ""}. Son problème principal : ${results.icp?.probleme || ""}. Ce qui le déclenche : ${results.icp?.declencheur || ""}. Où le toucher : ${results.icp?.presence || ""}.`
+                      }
+                    </p>
+
+                    {/* Toggle button */}
+                    <button
+                      type="button"
+                      onClick={() => setShowFullIcp(!showFullIcp)}
+                      className="mt-2 text-xs font-medium text-violet-400 hover:text-violet-300 transition-colors"
+                    >
+                      {showFullIcp ? "- Masquer le profil complet" : "+ Voir le profil complet"}
+                    </button>
+
+                    {/* Version complète */}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                        showFullIcp ? "max-h-[1000px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <div className="border-l-2 border-violet-500/30 pl-4 space-y-2 text-sm">
+                        {results.icp?.profil && <p className="text-slate-300"><span className="text-slate-400 font-medium">Profil :</span> {results.icp.profil}</p>}
+                        {results.icp?.probleme && <p className="text-slate-300"><span className="text-slate-400 font-medium">Problème :</span> {results.icp.probleme}</p>}
+                        {results.icp?.aspiration && <p className="text-slate-300"><span className="text-slate-400 font-medium">Aspiration :</span> {results.icp.aspiration}</p>}
+                        {Array.isArray(results.icp?.objections) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Objections :</span> {results.icp.objections.join(" · ")}</p>}
+                        {Array.isArray(results.icp?.mots) && <p className="text-slate-300"><span className="text-slate-400 font-medium">Ses mots :</span> {results.icp.mots.map((m) => `"${m}"`).join(", ")}</p>}
+                        {results.icp?.declencheur && <p className="text-slate-300"><span className="text-slate-400 font-medium">Déclencheur :</span> {results.icp.declencheur}</p>}
+                        {results.icp?.presence && <p className="text-slate-300"><span className="text-slate-400 font-medium">Présence en ligne :</span> {results.icp.presence}</p>}
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             </div>

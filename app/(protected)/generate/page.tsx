@@ -4,10 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 function repairJson(json: string): string {
+  // 0. Remove control characters (except \n \r \t which we handle below)
+  json = json.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
+
   // 1. Remove trailing commas before } or ]
   json = json.replace(/,\s*([\]}])/g, "$1");
 
-  // 2. Fix unescaped quotes, newlines, and control chars inside string values
+  // 2. Fix invalid escape sequences (e.g. \a, \x, etc.) — replace with the char itself
+  json = json.replace(/\\([^"\\\/bfnrtu])/g, "$1");
+
+  // 3. Fix unescaped quotes, newlines, and control chars inside string values
   let fixed = "";
   let inString = false;
   let escaped = false;
@@ -50,7 +56,15 @@ function repairJson(json: string): string {
     }
   }
 
-  // 3. Fix truncated JSON — close any open brackets
+  // 4. If we ended inside an unclosed string, close it
+  if (inString) {
+    fixed += '"';
+  }
+
+  // 5. Remove any trailing incomplete key-value pair (e.g. truncated mid-value)
+  fixed = fixed.replace(/,\s*"[^"]*"?\s*:?\s*$/, "");
+
+  // 6. Fix truncated JSON — close any open brackets
   let opens = 0;
   let closeBraces = 0;
   let openBrackets = 0;
@@ -190,8 +204,15 @@ export default function GeneratePage() {
     try {
       parsed = JSON.parse(jsonText);
     } catch {
-      const repaired = repairJson(jsonText);
-      parsed = JSON.parse(repaired);
+      try {
+        const repaired = repairJson(jsonText);
+        parsed = JSON.parse(repaired);
+      } catch (e2) {
+        console.error(`[Ad-Boost] JSON repair failed for step ${step}:`, e2, "\nRaw text:", jsonText.slice(0, 500));
+        throw new Error(
+          `La génération de l'étape "${step}" a produit un format invalide. Cela arrive parfois avec l'IA. Veuillez réessayer.`
+        );
+      }
     }
 
     const elapsed = Math.round(performance.now() - t0);

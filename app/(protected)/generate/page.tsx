@@ -7,10 +7,13 @@ function repairJson(json: string): string {
   // 0. Remove control characters (except \n \r \t which we handle below)
   json = json.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
 
-  // 1. Remove trailing commas before } or ]
+  // 1. Replace French quotes « » with regular quotes '
+  json = json.replace(/[«»]/g, "'");
+
+  // 2. Remove trailing commas before } or ]
   json = json.replace(/,\s*([\]}])/g, "$1");
 
-  // 2. Fix invalid escape sequences (e.g. \a, \x, etc.) — replace with the char itself
+  // 3. Fix invalid escape sequences (e.g. \a, \x, etc.) — replace with the char itself
   json = json.replace(/\\([^"\\\/bfnrtu])/g, "$1");
 
   // 3. Fix unescaped quotes, newlines, and control chars inside string values

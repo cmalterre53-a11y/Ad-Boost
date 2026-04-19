@@ -118,13 +118,13 @@ function buildPrompt(body: RequestBody): string {
 
   switch (body.step) {
     case "icp": {
-      const strategyHints: string[] = [];
-      if (body.servicePrincipal) strategyHints.push(`- Service principal : ${body.servicePrincipal}`);
-      if (body.douleurClient) strategyHints.push(`- Douleur client : ${body.douleurClient}`);
-      if (body.meilleureClient) strategyHints.push(`- Meilleur client : ${body.meilleureClient}`);
+      const hasHints = body.servicePrincipal || body.douleurClient || body.meilleureClient;
 
-      const strategyBlock = strategyHints.length > 0
-        ? `\nSi disponible, tiens compte de ces informations fournies par le client pour affiner l'ICP en priorité :\n${strategyHints.join("\n")}\nCes informations sont prioritaires sur ce que tu déduis toi-même.\n`
+      const strategyBlock = hasHints
+        ? `\nGénère un ICP complet et riche en combinant deux sources :
+1. Les informations fournies par le client (prioritaires et doivent apparaître dans l'ICP) :${body.servicePrincipal ? ` service principal = ${body.servicePrincipal},` : ""}${body.douleurClient ? ` douleur client = ${body.douleurClient},` : ""}${body.meilleureClient ? ` meilleur client = ${body.meilleureClient}.` : ""}
+2. Tes propres déductions intelligentes à partir du type d'activité et de la zone géographique — complète avec tous les éléments que le client n'a pas mentionnés : références aux enfants, valeur résiduelle du véhicule, bouche-à-oreille, événements déclencheurs supplémentaires, présence en ligne détaillée.
+L'ICP final doit être complet, précis et riche — il doit contenir TOUTES les informations pertinentes, celles du client ET celles que tu déduis. Ne sacrifie pas les déductions intelligentes au profit des infos client — combine les deux.\n`
         : "";
 
       return `${role}

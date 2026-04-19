@@ -137,6 +137,9 @@ export default function GeneratePage() {
     budget: "",
     objectif: objectifs[0].value,
     objectifLibre: "",
+    servicePrincipal: "",
+    douleurClient: "",
+    meilleureClient: "",
   });
 
   const handleChange = (
@@ -208,6 +211,9 @@ export default function GeneratePage() {
       budget: formData.budget,
       objectif: formData.objectif,
       objectifLibre: formData.objectifLibre,
+      servicePrincipal: formData.servicePrincipal,
+      douleurClient: formData.douleurClient,
+      meilleureClient: formData.meilleureClient,
     };
 
     try {
@@ -469,6 +475,60 @@ export default function GeneratePage() {
               />
             </div>
           )}
+        </div>
+
+        {/* Section optionnelle — Affine ta stratégie */}
+        <div className="border border-slate-700/50 rounded-xl p-5 space-y-4 bg-slate-900/30">
+          <div>
+            <h3 className="text-sm font-medium text-slate-200">
+              💡 Affine ta stratégie (optionnel)
+            </h3>
+            <p className="text-xs text-slate-500 mt-1">
+              Ces informations permettent à AdBoost de générer un contenu encore plus précis et personnalisé pour ton activité.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Ton service ou produit le plus vendu
+            </label>
+            <textarea
+              name="servicePrincipal"
+              placeholder="Ex: nettoyage intérieur complet, coupe femme, plomberie urgence..."
+              value={formData.servicePrincipal}
+              onChange={handleChange}
+              rows={1}
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Pourquoi tes clients t&apos;appellent — leur vraie douleur
+            </label>
+            <textarea
+              name="douleurClient"
+              placeholder="Ex: ils manquent de temps, leur ancien prestataire les a déçus, ils ne savent pas le faire eux-mêmes..."
+              value={formData.douleurClient}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-slate-300">
+              Décris ton meilleur client en quelques mots
+            </label>
+            <textarea
+              name="meilleureClient"
+              placeholder="Ex: plutôt des femmes 35-50 ans, propriétaires, pressées..."
+              value={formData.meilleureClient}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+            />
+          </div>
         </div>
 
         <button

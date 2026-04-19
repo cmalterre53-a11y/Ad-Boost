@@ -19,6 +19,9 @@ interface RequestBody {
   budget: string;
   objectif: string;
   objectifLibre?: string;
+  servicePrincipal?: string;
+  douleurClient?: string;
+  meilleureClient?: string;
   icp?: object;
 }
 
@@ -115,10 +118,19 @@ function buildPrompt(body: RequestBody): string {
 
   switch (body.step) {
     case "icp": {
+      const strategyHints: string[] = [];
+      if (body.servicePrincipal) strategyHints.push(`- Service principal : ${body.servicePrincipal}`);
+      if (body.douleurClient) strategyHints.push(`- Douleur client : ${body.douleurClient}`);
+      if (body.meilleureClient) strategyHints.push(`- Meilleur client : ${body.meilleureClient}`);
+
+      const strategyBlock = strategyHints.length > 0
+        ? `\nSi disponible, tiens compte de ces informations fournies par le client pour affiner l'ICP en priorité :\n${strategyHints.join("\n")}\nCes informations sont prioritaires sur ce que tu déduis toi-même.\n`
+        : "";
+
       return `${role}
 
 ${biz}
-
+${strategyBlock}
 À partir du type d'activité et de la zone géographique, génère un ICP (Client Cible Idéal) précis et structuré en 7 dimensions :
 1. Profil : qui est cette personne (âge, situation, profession, niveau de vie)
 2. Problème : sa douleur principale — ce qui l'énerve, lui prend du temps ou lui coûte de l'argent

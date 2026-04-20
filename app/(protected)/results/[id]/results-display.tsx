@@ -95,6 +95,7 @@ export default function ResultsDisplay({
   createdAt: string;
 }) {
   const [activeTab, setActiveTab] = useState<"textes" | "guide" | "calendrier">("textes");
+  const [textesSubTab, setTextesSubTab] = useState<"accroches" | "visuels" | "textes" | "legendes">("accroches");
   const [showFullIcp, setShowFullIcp] = useState(false);
 
   const tabs = [
@@ -219,110 +220,139 @@ export default function ResultsDisplay({
             </svg>
           }
           title="Textes de pub"
-          subtitle="Accroches, textes complets et légendes pour vos posts"
+          subtitle="Accroches, visuels, textes complets et légendes"
         />
 
+        {/* Sub-tabs */}
+        <div className="flex gap-1.5 mb-6 bg-slate-900/50 border border-slate-700/30 rounded-xl p-1.5">
+          {([
+            { id: "accroches" as const, emoji: "\u{1F4DD}", label: "Accroches" },
+            { id: "visuels" as const, emoji: "\u{1F5BC}\uFE0F", label: "Visuels" },
+            { id: "textes" as const, emoji: "\u{1F4E2}", label: "Textes de pub" },
+            { id: "legendes" as const, emoji: "\u{1F4AC}", label: "Légendes" },
+          ]).map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setTextesSubTab(tab.id)}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all ${
+                textesSubTab === tab.id
+                  ? "bg-violet-600 text-white shadow-md shadow-violet-500/25"
+                  : "text-slate-400 hover:text-white hover:bg-slate-700/50"
+              }`}
+            >
+              <span>{tab.emoji}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
         {/* Accroches courtes */}
-        <div className="mb-8">
-          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Accroches courtes (max 40 car.)
-          </h3>
-          <div className="space-y-2">
-            {(results.section1?.accroches ?? []).map((accroche, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
-              >
-                <span className="w-6 h-6 flex-shrink-0 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">
-                  {i + 1}
-                </span>
-                <p className="text-slate-100 flex-1">{accroche}</p>
-                <CopyButton text={accroche} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Visuels (prompts image) */}
-        {results.section1.visuels && results.section1.visuels.length > 0 && (
-        <div className="mb-8">
-          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Visuels — Prompts de génération d&apos;image
-          </h3>
-          <div className="space-y-4">
-            {results.section1.visuels.map((visuel, i) => (
-              <div key={i} className="space-y-2">
-                {/* Titre / texte du visuel */}
-                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
-                  <span className="w-6 h-6 flex-shrink-0 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">
-                    {i + 1}
-                  </span>
-                  <p className="text-white font-medium text-sm flex-1">{visuel.titre}</p>
-                  <CopyButton text={visuel.titre} />
-                </div>
-                {/* Prompt image */}
-                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
-                  <span className="text-xs font-semibold text-cyan-400/70 uppercase tracking-wider flex-shrink-0">Prompt</span>
-                  <p className="text-slate-400 text-xs flex-1">{visuel.promptImage}</p>
-                  <CopyButton text={visuel.promptImage} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        )}
-
-        {/* Textes de pub */}
-        <div className="mb-8">
-          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Textes de pub
-          </h3>
-          <div className="space-y-2">
-            {(results.section1?.textesPub ?? []).map((pub, i) => (
-              <div key={i} className="space-y-2">
-                {/* Accroche */}
-                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+        {textesSubTab === "accroches" && (
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              Accroches courtes (max 40 car.)
+            </h3>
+            <div className="space-y-2">
+              {(results.section1?.accroches ?? []).map((accroche, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
+                >
                   <span className="w-6 h-6 flex-shrink-0 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">
                     {i + 1}
                   </span>
-                  <p className="text-white font-medium flex-1">{pub.accroche}</p>
-                  <CopyButton text={pub.accroche} />
+                  <p className="text-slate-100 flex-1">{accroche}</p>
+                  <CopyButton text={accroche} />
                 </div>
-                {/* Description */}
-                <div className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
-                  <p className="text-slate-300 text-sm flex-1 whitespace-pre-line">{pub.description}</p>
-                  <CopyButton text={pub.description} />
-                </div>
-                {/* CTA */}
-                <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4 mb-4">
-                  <p className="text-violet-400 font-medium text-sm flex-1">{pub.cta}</p>
-                  <CopyButton text={pub.cta} />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Visuels (prompts image) */}
+        {textesSubTab === "visuels" && (
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              Visuels — Prompts de génération d&apos;image
+            </h3>
+            {results.section1.visuels && results.section1.visuels.length > 0 ? (
+              <div className="space-y-4">
+                {results.section1.visuels.map((visuel, i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+                      <span className="w-6 h-6 flex-shrink-0 rounded-full bg-cyan-500/20 text-cyan-400 text-xs flex items-center justify-center font-bold">
+                        {i + 1}
+                      </span>
+                      <p className="text-white font-medium text-sm flex-1">{visuel.titre}</p>
+                      <CopyButton text={visuel.titre} />
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
+                      <span className="text-xs font-semibold text-cyan-400/70 uppercase tracking-wider flex-shrink-0">Prompt</span>
+                      <p className="text-slate-400 text-xs flex-1">{visuel.promptImage}</p>
+                      <CopyButton text={visuel.promptImage} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-slate-500 text-sm">Aucun visuel généré pour cette stratégie.</p>
+            )}
+          </div>
+        )}
+
+        {/* Textes de pub */}
+        {textesSubTab === "textes" && (
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              Textes de pub complets
+            </h3>
+            <div className="space-y-2">
+              {(results.section1?.textesPub ?? []).map((pub, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3">
+                    <span className="w-6 h-6 flex-shrink-0 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">
+                      {i + 1}
+                    </span>
+                    <p className="text-white font-medium flex-1">{pub.accroche}</p>
+                    <CopyButton text={pub.accroche} />
+                  </div>
+                  <div className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4">
+                    <p className="text-slate-300 text-sm flex-1 whitespace-pre-line">{pub.description}</p>
+                    <CopyButton text={pub.description} />
+                  </div>
+                  <div className="flex items-center gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3 ml-4 mb-4">
+                    <p className="text-violet-400 font-medium text-sm flex-1">{pub.cta}</p>
+                    <CopyButton text={pub.cta} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Légendes */}
-        <div>
-          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Idées de légendes pour posts organiques
-          </h3>
-          <div className="space-y-2">
-            {(results.section1?.legendes ?? []).map((legende, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
-              >
-                <span className="w-6 h-6 flex-shrink-0 rounded-full bg-fuchsia-500/20 text-fuchsia-400 text-xs flex items-center justify-center font-bold mt-0.5">
-                  {i + 1}
-                </span>
-                <p className="text-slate-300 flex-1">{legende}</p>
-                <CopyButton text={legende} />
-              </div>
-            ))}
+        {textesSubTab === "legendes" && (
+          <div>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              Idées de légendes pour posts organiques
+            </h3>
+            <div className="space-y-2">
+              {(results.section1?.legendes ?? []).map((legende, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
+                >
+                  <span className="w-6 h-6 flex-shrink-0 rounded-full bg-fuchsia-500/20 text-fuchsia-400 text-xs flex items-center justify-center font-bold mt-0.5">
+                    {i + 1}
+                  </span>
+                  <p className="text-slate-300 flex-1">{legende}</p>
+                  <CopyButton text={legende} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </section>
       )}
 

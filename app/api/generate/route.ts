@@ -182,6 +182,12 @@ RÈGLES D'ÉCRITURE :
 - Utiliser les mots, les problèmes et les aspirations de l'ICP dans chaque accroche
 - Chaque texte doit faire ressentir au lecteur "c'est exactement moi ça"
 
+REGISTRE ET TON OBLIGATOIRES :
+- Registre professionnel mais accessible — chaleureux, direct, humain
+- INTERDIT d'utiliser des mots familiers, vulgaires ou péjoratifs : "dégueulasse", "flemme", "crado", "nul", "pourri", "galère", ou tout terme qui pourrait sembler irrespectueux envers le client ou son problème
+- À la place, utilise des formulations positives et engageantes : "un intérieur impeccable", "un résultat bluffant", "sans effort de votre part", "en toute tranquillité", etc.
+- Le ton doit donner envie, pas choquer
+
 VISUELS :
 - Les prompts image doivent montrer le bénéfice final, pas le service en train d'être réalisé
 - Exemple : un client souriant dans une voiture propre, pas quelqu'un en train de nettoyer

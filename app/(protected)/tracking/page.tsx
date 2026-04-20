@@ -106,7 +106,7 @@ export default function TrackingPage() {
         jours: form.jours ? parseInt(form.jours) : undefined,
       };
 
-      // 1. Appel IA pour l'analyse
+      // 1. Appel AdBoost pour l'analyse
       const res = await fetch("/api/tracking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -162,7 +162,7 @@ export default function TrackingPage() {
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto">
-          Entrez vos métriques Meta Ads et obtenez un diagnostic IA avec des
+          Entrez vos métriques Meta Ads et obtenez un diagnostic AdBoost avec des
           recommandations concrètes.
         </p>
       </div>

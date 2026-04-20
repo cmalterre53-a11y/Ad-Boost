@@ -143,7 +143,7 @@ Réponds UNIQUEMENT avec un JSON valide (pas de markdown, pas de texte autour) a
     const content = message.content[0];
     if (content.type !== "text") {
       return NextResponse.json(
-        { error: "Réponse inattendue de l'IA" },
+        { error: "Réponse inattendue du service" },
         { status: 500 }
       );
     }

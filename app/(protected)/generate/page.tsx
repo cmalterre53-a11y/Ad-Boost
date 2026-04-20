@@ -229,7 +229,7 @@ export default function GeneratePage() {
       } catch (e2) {
         console.error(`[Ad-Boost] JSON repair failed for step ${step}:`, e2, "\nRaw text:", jsonText.slice(0, 500));
         throw new Error(
-          `La génération de l'étape "${step}" a produit un format invalide. Cela arrive parfois avec l'IA. Veuillez réessayer.`
+          `La génération de l'étape "${step}" a produit un format invalide. Cela arrive parfois. Veuillez réessayer.`
         );
       }
     }
@@ -388,7 +388,7 @@ export default function GeneratePage() {
           Votre stratégie pub Meta Ads
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
-            générée par l&apos;IA
+            générée par AdBoost
           </span>
         </h2>
         <p className="text-lg text-slate-400 max-w-2xl mx-auto">

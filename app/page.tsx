@@ -82,7 +82,7 @@ const modules = [
 const steps = [
   { num: "1", title: "Décris ton activité", desc: "Tu remplis un formulaire simple en 2 minutes" },
   { num: "2", title: "Choisis tes modules", desc: "Tu sélectionnes ce dont tu as besoin" },
-  { num: "3", title: "Récupère ton pack", desc: "L'IA génère tout, tu copies-colles ou télécharges" },
+  { num: "3", title: "Récupère ton pack", desc: "AdBoost génère tout, tu copies-colles ou télécharges" },
 ];
 
 const plans = [
@@ -129,11 +129,8 @@ const plans = [
       "5 accroches + 3 textes de pub + 3 visuels + 5 légendes par génération",
       "Calendrier éditorial 30 jours complet",
       "5 scripts vidéo Reels",
-      "Tous les types d'emails (relance, promo, fidélité)",
-      "Textes Google Business Profile",
       "Historique des générations sauvegardé",
-      "Suivi des résultats Meta Ads avec diagnostic IA",
-      "Support par email",
+      "Suivi des résultats Meta Ads avec diagnostic AdBoost",
     ],
     cta: "Essayer 7 jours gratuits",
     popular: true,
@@ -158,9 +155,9 @@ const plans = [
 ];
 
 const faqs = [
-  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil IA qui génère automatiquement tout le contenu marketing dont un entrepreneur a besoin : textes de pub, posts réseaux sociaux, emails, scripts vidéo, et plus encore. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
-  { q: "Est-ce que je dois être expert en marketing ?", a: "Pas du tout ! AdBoost est conçu pour les entrepreneurs qui n'ont ni le temps ni les compétences en marketing. L'IA s'occupe de tout, tu n'as qu'à copier-coller." },
-  { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour que l'IA génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
+  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil qui génère automatiquement tout le contenu marketing dont un entrepreneur a besoin : textes de pub, posts réseaux sociaux, emails, scripts vidéo, et plus encore. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
+  { q: "Est-ce que je dois être expert en marketing ?", a: "Pas du tout ! AdBoost est conçu pour les entrepreneurs qui n'ont ni le temps ni les compétences en marketing. AdBoost s'occupe de tout, tu n'as qu'à copier-coller." },
+  { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour qu'AdBoost génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
   { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité et tes objectifs. Rien n'est générique." },
   { q: "Je peux annuler à tout moment ?", a: "Bien sûr. Aucun engagement, tu peux annuler ton abonnement en un clic depuis ton tableau de bord." },
   { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels et flyers par notre équipe, la publication de ton calendrier à ta place chaque mois, l'envoi de tes emails, et un accompagnement stratégique mensuel. Le tarif est sur devis selon tes besoins — contacte-nous depuis la section Tarifs." },
@@ -800,7 +797,7 @@ export default function LandingPage() {
               Ad<span className="text-violet-400">Boost</span>
             </span>
             <span className="text-slate-600 text-sm ml-2">
-              Le marketing IA pour les entrepreneurs
+              Le marketing simplifié pour les entrepreneurs
             </span>
           </div>
 

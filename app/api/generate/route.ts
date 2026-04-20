@@ -218,7 +218,7 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
     "visuels": [
       {
         "titre": "description courte du visuel",
-        "promptImage": "prompt détaillé pour générer l'image avec un outil IA (Midjourney, DALL-E, etc). Doit décrire précisément la scène, le style, les couleurs, l'ambiance."
+        "promptImage": "prompt détaillé pour générer l'image avec un outil de création visuelle (Midjourney, DALL-E, etc). Doit décrire précisément la scène, le style, les couleurs, l'ambiance."
       },
       {
         "titre": "description courte du visuel 2",
@@ -235,7 +235,7 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
 
 INSTRUCTIONS :
 - Les accroches courtes doivent faire max 40 caractères.
-- Les visuels doivent contenir 3 prompts de génération d'image détaillés et adaptés au secteur d'activité. Chaque prompt doit être suffisamment précis pour être copié-collé directement dans un outil de génération d'images IA.
+- Les visuels doivent contenir 3 prompts de génération d'image détaillés et adaptés au secteur d'activité. Chaque prompt doit être suffisamment précis pour être copié-collé directement dans un outil de génération d'images.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - IMPORTANT : dans toutes les valeurs texte du JSON, n'utilise JAMAIS de guillemets doubles ("). Utilise des apostrophes (') ou des guillemets français (« ») à la place.
 - Échappe toujours les caractères spéciaux dans les chaînes JSON (retours à la ligne avec \\n, tabulations avec \\t).

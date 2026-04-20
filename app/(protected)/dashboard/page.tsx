@@ -16,7 +16,7 @@ export default async function DashboardPage() {
         <div>
           <h2 className="text-3xl font-bold text-white">Mes stratégies</h2>
           <p className="text-slate-400 mt-1">
-            Retrouvez toutes vos stratégies publicitaires générées par l&apos;IA.
+            Retrouvez toutes vos stratégies publicitaires générées par AdBoost.
           </p>
         </div>
         <Link

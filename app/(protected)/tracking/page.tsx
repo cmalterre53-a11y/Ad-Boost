@@ -110,7 +110,10 @@ export default function TrackingPage() {
       const res = await fetch("/api/tracking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...payload,
+          typeActivite: selectedStrat?.type_activite,
+        }),
       });
 
       if (!res.ok) throw new Error("Erreur lors de l'analyse");

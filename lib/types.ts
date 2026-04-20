@@ -108,3 +108,28 @@ export interface Strategy {
   results: Results;
   created_at: string;
 }
+
+export interface TrackingAnalysis {
+  verdict: "excellent" | "correct" | "danger";
+  metriques: {
+    ctr: { valeur: number; label: string; status: "bon" | "moyen" | "mauvais" };
+    cpc: { valeur: number; label: string; status: "bon" | "moyen" | "mauvais" };
+    cpr: { valeur: number; label: string; status: "bon" | "moyen" | "mauvais" };
+  };
+  diagnostic: string;
+  action: string;
+  conseil: string;
+}
+
+export interface CampaignTracking {
+  id: string;
+  user_id: string;
+  strategy_id: string;
+  impressions: number;
+  clics: number;
+  resultats: number;
+  budget: number;
+  jours?: number;
+  analysis: TrackingAnalysis;
+  created_at: string;
+}

@@ -29,6 +29,12 @@ export default function HeaderNav({ email }: { email: string }) {
         </Link>
 
         <div className="flex items-center gap-4">
+          <Link
+            href="/tracking"
+            className="px-4 py-2 text-sm text-slate-400 hover:text-white border border-slate-600/50 hover:border-slate-500 rounded-lg transition"
+          >
+            Suivi
+          </Link>
           <span className="text-sm text-slate-400 hidden sm:block">{email}</span>
           <button
             onClick={handleLogout}

@@ -90,50 +90,70 @@ const plans = [
     name: "Starter",
     price: "Gratuit",
     period: "",
+    subtitle: "Pour découvrir AdBoost",
     features: [
       "1 génération par mois",
-      "Textes de pub Meta Ads (3 accroches + 3 textes)",
-      "Calendrier éditorial 10 jours",
+      "5 accroches + 3 textes de pub + 3 visuels + 5 légendes",
+      "Calendrier éditorial 7 jours",
       "1 script vidéo Reels",
-      "1 email de relance client",
-      "Brief visuel Canva",
+      "1 email de relance",
     ],
     cta: "Commencer gratuitement",
     popular: false,
+    contact: false,
+  },
+  {
+    name: "Essentiel",
+    price: "19€",
+    period: "/mois",
+    subtitle: "Pour les entrepreneurs qui démarrent leur présence en ligne",
+    features: [
+      "5 générations par mois",
+      "5 accroches + 3 textes de pub + 3 visuels + 5 légendes par génération",
+      "Calendrier éditorial 15 jours",
+      "3 scripts vidéo Reels",
+      "2 emails (relance + promo)",
+      "Profil business sauvegardé",
+    ],
+    cta: "Choisir Essentiel",
+    popular: false,
+    contact: false,
   },
   {
     name: "Pro",
     price: "29€",
     period: "/mois",
+    subtitle: "Pour ceux qui veulent une communication complète chaque mois",
     features: [
-      "Générations illimitées",
-      "Tous les modules disponibles",
-      "Calendrier éditorial 30 jours",
-      "Scripts vidéo illimités",
-      "Tous les types d'emails",
-      "Réponses aux avis Google",
-      "Offres promotionnelles",
+      "15 générations par mois",
+      "5 accroches + 3 textes de pub + 3 visuels + 5 légendes par génération",
+      "Calendrier éditorial 30 jours complet",
+      "5 scripts vidéo Reels",
+      "Tous les types d'emails (relance, promo, fidélité)",
       "Textes Google Business Profile",
       "Historique des générations sauvegardé",
-      "Profil business sauvegardé",
+      "Suivi des résultats Meta Ads avec diagnostic IA",
+      "Support par email",
     ],
     cta: "Essayer 7 jours gratuits",
     popular: true,
+    contact: false,
   },
   {
     name: "Premium",
     price: "Sur devis",
     period: "",
+    subtitle: "Tu veux qu'une vraie équipe s'occupe de tout ?",
     features: [
       "Tout le Pro inclus",
       "Visuels et flyers créés par notre équipe",
-      "Calendrier géré et publié pour vous",
-      "Emails rédigés et envoyés pour vous",
+      "Calendrier publié à ta place chaque mois",
+      "Emails rédigés et envoyés pour toi",
       "Accompagnement stratégique mensuel",
-      "Support prioritaire",
     ],
     cta: "Nous contacter",
     popular: false,
+    contact: true,
   },
 ];
 
@@ -143,7 +163,7 @@ const faqs = [
   { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour que l'IA génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
   { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité et tes objectifs. Rien n'est générique." },
   { q: "Je peux annuler à tout moment ?", a: "Bien sûr. Aucun engagement, tu peux annuler ton abonnement en un clic depuis ton tableau de bord." },
-  { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels et flyers par notre équipe, la gestion et publication de ton calendrier, l'envoi de tes emails, un accompagnement stratégique mensuel et un support prioritaire. Le tarif est sur devis selon tes besoins." },
+  { q: "C'est quoi le plan Premium ?", a: "Le plan Premium inclut tout le plan Pro, plus la création de visuels et flyers par notre équipe, la publication de ton calendrier à ta place chaque mois, l'envoi de tes emails, et un accompagnement stratégique mensuel. Le tarif est sur devis selon tes besoins — contacte-nous depuis la section Tarifs." },
 ];
 
 /* ─────────────────── COMPONENTS ─────────────────── */
@@ -181,6 +201,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function LandingPage() {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [contactSent, setContactSent] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
@@ -273,15 +295,14 @@ export default function LandingPage() {
               <motion.h1 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 Fini de chercher quoi dire.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                  AdBoost écrit pour toi.
+                  AdBoost génère tout ton contenu du mois — en 2 minutes.
                 </span>
               </motion.h1>
 
               {/* Subtitle */}
               <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
-                Tes clients jugent ton sérieux en ligne avant de venir.
-                AdBoost génère tout ton contenu — textes, pubs, emails,
-                scripts vidéo — pour que ton image soit toujours au niveau.
+                Accroches, textes de pub, emails, scripts vidéo, calendrier
+                éditorial… Tout est prêt. Tu n&apos;as plus qu&apos;à publier.
               </motion.p>
 
               {/* Buttons */}
@@ -444,6 +465,12 @@ export default function LandingPage() {
                 généré en une fois.
               </span>
             </motion.h2>
+            <motion.p variants={fadeUp} custom={1} className="text-slate-400 max-w-3xl mx-auto">
+              Tes clients jugent ton sérieux en ligne avant de venir. AdBoost
+              s&apos;occupe de toute ta communication digitale pour le mois :
+              publicités Meta, posts réseaux, emails clients, scripts Reels,
+              réponses Google — généré en une fois, personnalisé pour ton activité.
+            </motion.p>
           </motion.div>
 
           <motion.div
@@ -629,14 +656,14 @@ export default function LandingPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="grid sm:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {plans.map((plan, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className={`relative rounded-2xl p-6 ${
+                className={`relative rounded-2xl p-6 flex flex-col ${
                   plan.popular
                     ? "bg-gradient-to-b from-violet-500/10 to-indigo-500/10 border-2 border-violet-500/30"
                     : "bg-slate-900/50 border border-slate-800"
@@ -648,28 +675,38 @@ export default function LandingPage() {
                   </span>
                 )}
                 <h3 className="text-lg font-semibold text-white mb-1">{plan.name}</h3>
+                <p className="text-xs text-slate-500 mb-3">{plan.subtitle}</p>
                 <div className="mb-6">
                   <span className="text-3xl font-bold text-white">{plan.price}</span>
                   <span className="text-slate-500">{plan.period}</span>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-slate-300">
-                      <Check className="w-4 h-4 text-violet-400 flex-shrink-0" />
+                    <li key={j} className="flex items-start gap-2 text-sm text-slate-300">
+                      <Check className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/login"
-                  className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/25"
-                      : "border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white"
-                  }`}
-                >
-                  {plan.cta}
-                </Link>
+                {plan.contact ? (
+                  <button
+                    onClick={() => setContactOpen(true)}
+                    className="block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white"
+                  >
+                    {plan.cta}
+                  </button>
+                ) : (
+                  <Link
+                    href="/login"
+                    className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
+                      plan.popular
+                        ? "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/25"
+                        : "border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -778,6 +815,73 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
+
+      {/* ── CONTACT MODAL ── */}
+      <AnimatePresence>
+        {contactOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm"
+            onClick={() => { setContactOpen(false); setContactSent(false); }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md bg-slate-900 border border-slate-700/50 rounded-2xl p-6 sm:p-8"
+            >
+              {contactSent ? (
+                <div className="text-center py-6">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center mx-auto mb-4">
+                    <Check className="w-7 h-7 text-emerald-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">Message envoyé !</h3>
+                  <p className="text-slate-400 text-sm mb-6">Nous reviendrons vers vous rapidement.</p>
+                  <button onClick={() => { setContactOpen(false); setContactSent(false); }} className="px-6 py-2 text-sm font-medium border border-slate-700 hover:border-slate-600 rounded-lg text-slate-300 hover:text-white transition">
+                    Fermer
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-xl font-bold text-white">Contactez-nous</h3>
+                    <button onClick={() => setContactOpen(false)} className="p-1 text-slate-400 hover:text-white transition">
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); setContactSent(true); }}
+                    className="space-y-4"
+                  >
+                    <div>
+                      <label className="text-sm font-medium text-slate-300 block mb-1">Nom</label>
+                      <input type="text" required placeholder="Votre nom" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-300 block mb-1">Email</label>
+                      <input type="email" required placeholder="votre@email.com" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-300 block mb-1">Type d&apos;activité</label>
+                      <input type="text" required placeholder="Ex : institut de beauté" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-slate-300 block mb-1">Message</label>
+                      <textarea required rows={3} placeholder="Décrivez votre besoin..." className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm resize-none" />
+                    </div>
+                    <button type="submit" className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-violet-500/25 text-sm">
+                      Envoyer
+                    </button>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── GLOBAL STYLES ── */}
       <style jsx>{`

@@ -9,6 +9,8 @@ import {
   Calendar,
   Video,
   Target,
+  SlidersHorizontal,
+  TrendingUp,
   Clock,
   DollarSign,
   ChevronDown,
@@ -68,6 +70,8 @@ const modules = [
   { icon: PenTool, name: "Textes de pub Meta Ads", desc: "Accroches, descriptions et CTA optimisés pour Facebook et Instagram Ads" },
   { icon: Calendar, name: "Calendrier éditorial 30 jours", desc: "Planning de publication complet avec thèmes, horaires et conseils visuels" },
   { icon: Video, name: "Scripts vidéo Reels/Stories", desc: "Scripts prêts à tourner pour tes contenus vidéo courts" },
+  { icon: SlidersHorizontal, name: "Guide Meta Ads pas à pas", desc: "Configure ta campagne Facebook et Instagram en 7 étapes guidées — même si tu n'as jamais fait de pub." },
+  { icon: TrendingUp, name: "Suivi et optimisation de campagne", desc: "Entre tes chiffres après quelques jours et AdBoost t'explique quoi améliorer pour de meilleurs résultats." },
 ];
 
 const steps = [
@@ -466,14 +470,14 @@ export default function LandingPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="grid sm:grid-cols-3 gap-6"
+            className="flex flex-wrap justify-center gap-6"
           >
             {modules.map((m, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className="group bg-slate-900/50 border border-slate-800 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300"
+                className="group w-full sm:w-[calc(33.333%-1rem)] bg-slate-900/50 border border-slate-800 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-3 group-hover:bg-violet-500/20 transition">
                   <m.icon className="w-5 h-5 text-violet-400" />

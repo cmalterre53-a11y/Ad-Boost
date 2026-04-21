@@ -151,9 +151,20 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
     "mots": ["expression 1", "expression 2", "expression 3"],
     "declencheur": "l'événement ou situation qui déclenche l'achat",
     "presence": "où il passe son temps en ligne et comment il consomme le contenu",
-    "icpResume": "Résumé en 3-4 lignes de l'ICP. Format : Ton client idéal : [profil en une ligne]. Son problème principal : [problème en une ligne]. Ce qui le déclenche : [déclencheur en une ligne]. Où le toucher : [présence en ligne en une ligne]."
+    "icpResume": "Résumé en 3-4 lignes de l'ICP. Format : Ton client idéal : [profil en une ligne]. Son problème principal : [problème en une ligne]. Ce qui le déclenche : [déclencheur en une ligne]. Où le toucher : [présence en ligne en une ligne].",
+    "briefStrategique": "Brief stratégique du mois en 3-4 lignes (voir règles ci-dessous)"
   }
 }
+
+RÈGLES POUR LE BRIEF STRATÉGIQUE :
+Le champ briefStrategique doit contenir 3-4 lignes qui résument la stratégie du mois. Personnalise TOUJOURS avec le nom de l'activité (${body.nomActivite}) et la zone (${body.zone}).
+- Si objectif = 'Me faire connaître dans ma zone' : 'Ce mois-ci, l'objectif est de poser les bases de ta visibilité locale à [zone]. Les gens doivent apprendre qui tu es avant d'acheter. Le contenu généré présente ton activité, crée de la confiance et t'installe comme le référent local de ton secteur. Ne cherche pas à vendre tout de suite — construis d'abord la relation.'
+- Si objectif = 'Remplir mon agenda / avoir des appels' : 'Ce mois-ci, l'objectif est concret : décrocher des réservations et des appels cette semaine. Le contenu généré est conçu pour créer de l'urgence et pousser à l'action immédiate. Lance ta campagne Meta dès aujourd'hui et réponds aux messages dans les 2h pour maximiser tes chances de conversion.'
+- Si objectif = 'Vendre une offre ou un service' : 'Ce mois-ci, l'objectif est de mettre en avant ton offre et convaincre les indécis. Le contenu généré montre la valeur de ce que tu proposes, répond aux objections et pousse à l'achat. Utilise les textes de pub avec les visuels avant/après pour un impact maximum.'
+- Si objectif = 'Convaincre ceux qui hésitent' : 'Ce mois-ci, l'objectif est de transformer les curieux en clients. Les gens te connaissent mais n'ont pas encore sauté le pas. Le contenu généré mise sur les témoignages, les preuves concrètes et la réassurance. Collecte des avis clients cette semaine — c'est ton meilleur outil.'
+- Si objectif = 'Fidéliser mes clients existants' : 'Ce mois-ci, l'objectif est de garder le contact avec tes clients actuels et les faire revenir. Le contenu généré crée un sentiment d'appartenance et valorise leur fidélité. Pense à proposer une offre exclusive réservée à tes habitués — c'est ce qui fait la différence.'
+- Si objectif = 'Autre' : génère un brief adapté à l'objectif libre décrit par le client en 3-4 lignes avec le même format.
+Dans tous les cas, intègre le nom de l'activité et la zone géographique dans le brief.
 
 IMPORTANT : dans toutes les valeurs texte du JSON, n'utilise JAMAIS de guillemets doubles ("). Utilise des apostrophes (') ou des guillemets français (« ») à la place. Cela garantit un JSON valide.
 Échappe toujours les caractères spéciaux dans les chaînes JSON (retours à la ligne avec \\n, tabulations avec \\t).

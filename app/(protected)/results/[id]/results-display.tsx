@@ -118,6 +118,16 @@ export default function ResultsDisplay({
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-10 space-y-6">
+      {/* Brief stratégique */}
+      {typeof results.icp === "object" && results.icp?.briefStrategique && (
+        <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm border-l-4 border-l-violet-500">
+          <h2 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+            <span className="text-xl">{"\u{1F3AF}"}</span> Ta stratégie du mois
+          </h2>
+          <p className="text-slate-300 text-sm leading-relaxed">{results.icp.briefStrategique}</p>
+        </div>
+      )}
+
       {/* Recap */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm">
         <h2 className="text-lg font-semibold text-white mb-3">

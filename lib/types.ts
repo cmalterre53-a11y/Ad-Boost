@@ -54,6 +54,7 @@ export interface ICP {
   declencheur: string;
   presence: string;
   icpResume?: string;
+  briefStrategique?: string;
 }
 
 export interface Results {

@@ -281,10 +281,10 @@ export default function LandingPage() {
               variants={stagger}
             >
               {/* Title */}
-              <motion.h1 variants={fadeUp} custom={1} className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Fini de chercher quoi dire.{" "}
+              <motion.h1 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                Ton marketing du mois, généré en 2 minutes.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
-                  AdBoost génère tout ton contenu du mois — en 2 minutes.
+                  Tu n&apos;as plus qu&apos;à publier.
                 </span>
               </motion.h1>
 

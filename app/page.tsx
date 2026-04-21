@@ -10,6 +10,8 @@ import {
   Target,
   SlidersHorizontal,
   TrendingUp,
+  Crosshair,
+  CalendarRange,
   Clock,
   DollarSign,
   ChevronDown,
@@ -70,6 +72,8 @@ const modules = [
   { icon: Calendar, name: "Calendrier éditorial 30 jours", desc: "Planning de publication complet avec thèmes, horaires et conseils visuels" },
   { icon: SlidersHorizontal, name: "Guide Meta Ads pas à pas", desc: "Configure ta campagne Facebook et Instagram en 7 étapes guidées — même si tu n'as jamais fait de pub." },
   { icon: TrendingUp, name: "Suivi et optimisation de campagne", desc: "Entre tes chiffres après quelques jours et AdBoost t'explique quoi améliorer pour de meilleurs résultats." },
+  { icon: Crosshair, name: "Stratégie marketing personnalisée", desc: "AdBoost analyse ton activité et construit une stratégie adaptée à ton secteur, ta zone et tes objectifs — pas un template générique." },
+  { icon: CalendarRange, name: "Plan de communication mensuel", desc: "Chaque génération suit une logique : notoriété, preuve sociale, engagement, conversion. Ton contenu du mois est pensé pour convertir, pas juste pour exister." },
 ];
 
 const steps = [
@@ -463,7 +467,7 @@ export default function LandingPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {modules.map((m, i) => (
               <motion.div

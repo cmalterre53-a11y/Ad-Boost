@@ -7,7 +7,6 @@ import {
   Zap,
   PenTool,
   Calendar,
-  Video,
   Target,
   SlidersHorizontal,
   TrendingUp,
@@ -69,7 +68,6 @@ const problems = [
 const modules = [
   { icon: PenTool, name: "Textes de pub Meta Ads", desc: "Accroches, descriptions et CTA optimisés pour Facebook et Instagram Ads" },
   { icon: Calendar, name: "Calendrier éditorial 30 jours", desc: "Planning de publication complet avec thèmes, horaires et conseils visuels" },
-  { icon: Video, name: "Scripts vidéo Reels/Stories", desc: "Scripts prêts à tourner pour tes contenus vidéo courts" },
   { icon: SlidersHorizontal, name: "Guide Meta Ads pas à pas", desc: "Configure ta campagne Facebook et Instagram en 7 étapes guidées — même si tu n'as jamais fait de pub." },
   { icon: TrendingUp, name: "Suivi et optimisation de campagne", desc: "Entre tes chiffres après quelques jours et AdBoost t'explique quoi améliorer pour de meilleurs résultats." },
 ];
@@ -90,8 +88,6 @@ const plans = [
       "1 génération par mois",
       "5 accroches + 3 textes de pub + 3 visuels + 5 légendes",
       "Calendrier éditorial 7 jours",
-      "1 script vidéo Reels",
-      "1 email de relance",
     ],
     cta: "Commencer gratuitement",
     popular: false,
@@ -106,8 +102,6 @@ const plans = [
       "5 générations par mois",
       "5 accroches + 3 textes de pub + 3 visuels + 5 légendes par génération",
       "Calendrier éditorial 15 jours",
-      "3 scripts vidéo Reels",
-      "2 emails (relance + promo)",
       "Profil business sauvegardé",
     ],
     cta: "Choisir Essentiel",
@@ -123,7 +117,6 @@ const plans = [
       "15 générations par mois",
       "5 accroches + 3 textes de pub + 3 visuels + 5 légendes par génération",
       "Calendrier éditorial 30 jours complet",
-      "5 scripts vidéo Reels",
       "Historique des générations sauvegardé",
       "Suivi des résultats Meta Ads avec diagnostic AdBoost",
     ],
@@ -150,7 +143,7 @@ const plans = [
 ];
 
 const faqs = [
-  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil qui génère automatiquement tout le contenu marketing dont un entrepreneur a besoin : textes de pub, posts réseaux sociaux, emails, scripts vidéo, et plus encore. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
+  { q: "C'est quoi AdBoost exactement ?", a: "AdBoost est un outil qui génère automatiquement tout le contenu marketing dont un entrepreneur a besoin : textes de pub, calendrier éditorial, guide Meta Ads et suivi de campagne. Tu remplis un formulaire simple et tu reçois un pack complet en quelques minutes." },
   { q: "Est-ce que je dois être expert en marketing ?", a: "Pas du tout ! AdBoost est conçu pour les entrepreneurs qui n'ont ni le temps ni les compétences en marketing. AdBoost s'occupe de tout, tu n'as qu'à copier-coller." },
   { q: "Combien de temps ça prend ?", a: "2 minutes pour remplir le formulaire, et environ 30 secondes pour qu'AdBoost génère ton pack complet. En moins de 3 minutes, tu as tout ce qu'il te faut." },
   { q: "Les textes sont vraiment personnalisés à mon activité ?", a: "Oui, chaque texte est généré spécifiquement pour ton activité et tes objectifs. Rien n'est générique." },
@@ -293,8 +286,8 @@ export default function LandingPage() {
 
               {/* Subtitle */}
               <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
-                Accroches, textes de pub, emails, scripts vidéo, calendrier
-                éditorial… Tout est prêt. Tu n&apos;as plus qu&apos;à publier.
+                Accroches, textes de pub, calendrier éditorial, guide Meta Ads…
+                Tout est prêt. Tu n&apos;as plus qu&apos;à publier.
               </motion.p>
 
               {/* Buttons */}
@@ -460,8 +453,8 @@ export default function LandingPage() {
             <motion.p variants={fadeUp} custom={1} className="text-slate-400 max-w-3xl mx-auto">
               Tes clients jugent ton sérieux en ligne avant de venir. AdBoost
               s&apos;occupe de toute ta communication digitale pour le mois :
-              publicités Meta, posts réseaux, emails clients, scripts Reels,
-              réponses Google — généré en une fois, personnalisé pour ton activité.
+              publicités Meta, posts réseaux, guide Meta Ads, suivi de campagne
+              — généré en une fois, personnalisé pour ton activité.
             </motion.p>
           </motion.div>
 
@@ -470,14 +463,14 @@ export default function LandingPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="flex flex-wrap justify-center gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {modules.map((m, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className="group w-full sm:w-[calc(33.333%-1rem)] bg-slate-900/50 border border-slate-800 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300"
+                className="group bg-slate-900/50 border border-slate-800 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-3 group-hover:bg-violet-500/20 transition">
                   <m.icon className="w-5 h-5 text-violet-400" />

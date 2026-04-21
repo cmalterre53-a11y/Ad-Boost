@@ -197,7 +197,7 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
 
 {
   "section1": {
-    "accroches": ["accroche1 (max 40 car)", "accroche2", "accroche3"],
+    "accroches": ["accroche1 (max 40 car)", "accroche2", "accroche3", "accroche4", "accroche5"],
     "textesPub": [
       {
         "accroche": "titre accrocheur",
@@ -234,7 +234,7 @@ Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte aut
 }
 
 INSTRUCTIONS :
-- Les accroches courtes doivent faire max 40 caractères.
+- QUANTITÉS EXACTES OBLIGATOIRES : génère exactement 5 accroches courtes (max 40 caractères chacune), 3 textes de pub complets (accroche + description + CTA), 3 visuels (titre + promptImage), et 5 légendes pour posts organiques. Ni plus, ni moins.
 - Les visuels doivent contenir 3 prompts de génération d'image détaillés et adaptés au secteur d'activité. Chaque prompt doit être suffisamment précis pour être copié-collé directement dans un outil de génération d'images.
 - Les textes doivent être en français, concrets et adaptés au secteur.
 - IMPORTANT : dans toutes les valeurs texte du JSON, n'utilise JAMAIS de guillemets doubles ("). Utilise des apostrophes (') ou des guillemets français (« ») à la place.

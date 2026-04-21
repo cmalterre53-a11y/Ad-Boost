@@ -8,11 +8,7 @@ import {
   PenTool,
   Calendar,
   Video,
-  Mail,
-  Star,
   Target,
-  MapPin,
-  MessageSquare,
   Clock,
   DollarSign,
   ChevronDown,
@@ -72,11 +68,6 @@ const modules = [
   { icon: PenTool, name: "Textes de pub Meta Ads", desc: "Accroches, descriptions et CTA optimisés pour Facebook et Instagram Ads" },
   { icon: Calendar, name: "Calendrier éditorial 30 jours", desc: "Planning de publication complet avec thèmes, horaires et conseils visuels" },
   { icon: Video, name: "Scripts vidéo Reels/Stories", desc: "Scripts prêts à tourner pour tes contenus vidéo courts" },
-  { icon: Mail, name: "Emails marketing", desc: "Emails de relance, promo et fidélisation personnalisés à ton activité" },
-  { icon: Star, name: "Réponses aux avis Google", desc: "Templates de réponses professionnelles pour tes avis clients" },
-  { icon: Target, name: "Brief visuel pour Canva", desc: "Descriptions détaillées pour créer tes visuels facilement" },
-  { icon: MapPin, name: "Textes Google Business Profile", desc: "Descriptions et posts optimisés pour ton profil Google" },
-  { icon: MessageSquare, name: "Templates SMS clients", desc: "Messages courts et efficaces pour relancer et fidéliser tes clients" },
 ];
 
 const steps = [
@@ -475,7 +466,7 @@ export default function LandingPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={stagger}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid sm:grid-cols-3 gap-6"
           >
             {modules.map((m, i) => (
               <motion.div

@@ -140,9 +140,9 @@ export default function QuickGeneratePage() {
       {/* Title */}
       <div className="text-center">
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
-          {"\u26A1"} Générateur{" "}
+          {"\u26A1"} Post{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
-            rapide
+            Express
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto">

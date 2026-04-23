@@ -68,10 +68,10 @@ const problems = [
 ];
 
 const modules = [
-  { icon: PenTool, name: "Textes de pub Meta Ads", desc: "Accroches, descriptions et CTA optimisés pour Facebook et Instagram Ads" },
+  { icon: PenTool, name: "Textes publicitaires Meta Ads", desc: "Accroches pub, descriptions et CTA optimisés pour Facebook et Instagram Ads" },
   { icon: Calendar, name: "Calendrier éditorial 30 jours", desc: "Planning de publication complet avec thèmes, horaires et conseils visuels" },
-  { icon: SlidersHorizontal, name: "Guide Meta Ads pas à pas", desc: "Configure ta campagne Facebook et Instagram en 7 étapes guidées — même si tu n'as jamais fait de pub." },
-  { icon: TrendingUp, name: "Suivi et optimisation de campagne", desc: "Entre tes chiffres après quelques jours et AdBoost t'explique quoi améliorer pour de meilleurs résultats." },
+  { icon: SlidersHorizontal, name: "Pub Facebook & Instagram pas à pas", desc: "Configure ta campagne Facebook et Instagram en 7 étapes guidées — même si tu n'as jamais fait de pub." },
+  { icon: TrendingUp, name: "Suivi de ma pub et optimisation", desc: "Entre tes chiffres après quelques jours et AdBoost t'explique quoi améliorer pour de meilleurs résultats." },
   { icon: Crosshair, name: "Stratégie marketing personnalisée", desc: "AdBoost analyse ton activité et construit une stratégie adaptée à ton secteur, ta zone et tes objectifs — pas un template générique." },
   { icon: CalendarRange, name: "Plan de communication mensuel", desc: "Chaque génération suit une logique : notoriété, preuve sociale, engagement, conversion. Ton contenu du mois est pensé pour convertir, pas juste pour exister." },
 ];
@@ -290,7 +290,7 @@ export default function LandingPage() {
 
               {/* Subtitle */}
               <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
-                Accroches, textes de pub, calendrier éditorial, guide Meta Ads…
+                Accroches pub, textes publicitaires, planning du mois, pub Facebook & Instagram…
                 Tout est prêt. Tu n&apos;as plus qu&apos;à publier.
               </motion.p>
 

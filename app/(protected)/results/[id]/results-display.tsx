@@ -99,17 +99,17 @@ export default function ResultsDisplay({
   const [showFullIcp, setShowFullIcp] = useState(false);
 
   const tabs = [
-    { id: "textes" as const, label: "Textes de pub", icon: (
+    { id: "textes" as const, label: "Mes textes", icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
       </svg>
     )},
-    { id: "guide" as const, label: "Guide Meta Ads", icon: (
+    { id: "guide" as const, label: "Pub Facebook & Instagram", icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
       </svg>
     )},
-    { id: "calendrier" as const, label: "Calendrier", icon: (
+    { id: "calendrier" as const, label: "Mon planning du mois", icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
       </svg>
@@ -229,17 +229,17 @@ export default function ResultsDisplay({
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
             </svg>
           }
-          title="Textes de pub"
-          subtitle="Accroches, visuels, textes complets et légendes"
+          title="Mes textes"
+          subtitle="Accroches pub, photos & visuels, textes publicitaires et légendes réseaux sociaux"
         />
 
         {/* Sub-tabs */}
         <div className="flex gap-1.5 mb-6 bg-slate-900/50 border border-slate-700/30 rounded-xl p-1.5">
           {([
-            { id: "accroches" as const, emoji: "\u{1F4DD}", label: "Accroches" },
-            { id: "visuels" as const, emoji: "\u{1F5BC}\uFE0F", label: "Visuels" },
-            { id: "textes" as const, emoji: "\u{1F4E2}", label: "Textes de pub" },
-            { id: "legendes" as const, emoji: "\u{1F4AC}", label: "Légendes" },
+            { id: "accroches" as const, emoji: "\u{1F4DD}", label: "Accroches pub" },
+            { id: "visuels" as const, emoji: "\u{1F5BC}\uFE0F", label: "Photos & visuels" },
+            { id: "textes" as const, emoji: "\u{1F4E2}", label: "Textes publicitaires" },
+            { id: "legendes" as const, emoji: "\u{1F4AC}", label: "Légendes réseaux sociaux" },
           ]).map((tab) => (
             <button
               key={tab.id}

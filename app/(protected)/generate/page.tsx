@@ -95,9 +95,9 @@ type Progress = "idle" | Step | "saving" | "done";
 
 const STEPS: { key: Step; label: string }[] = [
   { key: "icp", label: "Analyse du client cible (ICP)" },
-  { key: "section1", label: "Génération des textes de pub" },
-  { key: "section2", label: "Guide de configuration Meta Ads" },
-  { key: "section3", label: "Calendrier de publication" },
+  { key: "section1", label: "Génération des textes publicitaires" },
+  { key: "section2", label: "Pub Facebook & Instagram" },
+  { key: "section3", label: "Mon planning du mois" },
 ];
 
 const objectifs = [

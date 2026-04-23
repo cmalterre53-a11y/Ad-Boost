@@ -54,7 +54,7 @@ export default function HeaderNav({ email }: { email: string }) {
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition shadow-md shadow-violet-500/20"
           >
             <span className="text-base leading-none">{"\u{1F4CA}"}</span>
-            Suivi
+            Suivi de ma pub
           </Link>
 
           {/* Icône profil */}

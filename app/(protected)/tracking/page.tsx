@@ -158,7 +158,7 @@ export default function TrackingPage() {
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
           Suivi de{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
-            campagne
+            ma pub
           </span>
         </h2>
         <p className="text-slate-400 max-w-xl mx-auto">

@@ -47,14 +47,23 @@ export default function HeaderNav({ email }: { email: string }) {
           </h1>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {/* Bouton Générateur rapide */}
+          <Link
+            href="/quick-generate"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-amber-600 hover:bg-amber-500 rounded-lg transition shadow-md shadow-amber-500/20"
+          >
+            <span className="text-base leading-none">{"\u26A1"}</span>
+            <span className="hidden sm:inline">Générateur rapide</span>
+          </Link>
+
           {/* Bouton Suivi */}
           <Link
             href="/tracking"
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500 rounded-lg transition shadow-md shadow-violet-500/20"
           >
             <span className="text-base leading-none">{"\u{1F4CA}"}</span>
-            Suivi de ma pub
+            <span className="hidden sm:inline">Suivi de ma pub</span>
           </Link>
 
           {/* Icône profil */}

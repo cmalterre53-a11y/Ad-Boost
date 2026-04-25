@@ -282,7 +282,7 @@ export default function LandingPage() {
             >
               {/* Title */}
               <motion.h1 variants={fadeUp} custom={1} className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-                Ton marketing du mois, généré en 2 minutes.{" "}
+                Toute ta présence sur les réseaux, gérée en 2 minutes.{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">
                   Tu n&apos;as plus qu&apos;à publier.
                 </span>
@@ -290,8 +290,8 @@ export default function LandingPage() {
 
               {/* Subtitle */}
               <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
-                Accroches pub, textes publicitaires, planning du mois, pub Facebook & Instagram…
-                Tout est prêt. Tu n&apos;as plus qu&apos;à publier.
+                Posts organiques, publicités Facebook & Instagram, planning du mois…
+                Tout ton Social Media en une seule génération.
               </motion.p>
 
               {/* Buttons */}
@@ -313,7 +313,7 @@ export default function LandingPage() {
 
               {/* Social proof */}
               <motion.p variants={fadeUp} custom={4} className="text-sm text-slate-500">
-                <span className="text-amber-400">&#9733;</span> Des centaines d&apos;entrepreneurs qui publient avec confiance
+                <span className="text-amber-400">&#9733;</span> Des centaines d&apos;entrepreneurs locaux qui gèrent leurs réseaux avec confiance
               </motion.p>
             </motion.div>
 

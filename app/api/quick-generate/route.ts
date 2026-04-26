@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { checkAndIncrementQuota } from "@/lib/subscription";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -82,6 +83,23 @@ export async function POST(req: NextRequest) {
 
   if (!user) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+  }
+
+  // Vérification quota (chaque appel = 1 génération)
+  const quota = await checkAndIncrementQuota(supabase, user.id);
+  if (!quota.allowed) {
+    return NextResponse.json(
+      {
+        error:
+          "Tu as utilisé toutes tes générations ce mois-ci. Passe au plan supérieur pour continuer.",
+        quota: {
+          plan: quota.subscription.plan,
+          generations_utilisees: quota.subscription.generations_utilisees,
+          generations_max: quota.subscription.generations_max,
+        },
+      },
+      { status: 403 }
+    );
   }
 
   const body: RequestBody = await req.json();

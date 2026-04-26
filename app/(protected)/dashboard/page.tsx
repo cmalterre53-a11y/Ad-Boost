@@ -1,9 +1,39 @@
 import { createClient } from "@/lib/supabase/server";
+import { getSubscription } from "@/lib/subscription";
 import Link from "next/link";
 import DeleteButton from "./delete-button";
 
+const planStyles: Record<string, string> = {
+  starter: "bg-slate-600 text-slate-200",
+  essentiel: "bg-blue-600 text-blue-100",
+  pro: "bg-violet-600 text-violet-100",
+  premium: "bg-amber-500 text-amber-950",
+};
+
+const planLabels: Record<string, string> = {
+  starter: "Starter",
+  essentiel: "Essentiel",
+  pro: "Pro",
+  premium: "Premium",
+};
+
 export default async function DashboardPage() {
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const subscription = user
+    ? await getSubscription(supabase, user.id)
+    : null;
+
+  const remaining = subscription
+    ? subscription.generations_max - subscription.generations_utilisees
+    : 0;
+  const showUpgrade = subscription
+    ? subscription.plan === "starter" || subscription.plan === "essentiel"
+    : false;
 
   const { data: strategies } = await supabase
     .from("strategies")
@@ -12,6 +42,43 @@ export default async function DashboardPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-10">
+      {/* Encart abonnement */}
+      {subscription && (
+        <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm mb-8">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-4">
+              <span
+                className={`px-3 py-1 rounded-full text-sm font-semibold ${planStyles[subscription.plan]}`}
+              >
+                {planLabels[subscription.plan]}
+              </span>
+              <p className="text-slate-300">
+                {subscription.plan === "premium" ? (
+                  <>
+                    <span className="text-white font-semibold">Illimitées</span>{" "}
+                    générations
+                  </>
+                ) : (
+                  <>
+                    <span className="text-white font-semibold">{remaining}</span>{" "}
+                    génération{remaining > 1 ? "s" : ""}{" "}
+                    restante{remaining > 1 ? "s" : ""} ce mois
+                  </>
+                )}
+              </p>
+            </div>
+            {showUpgrade && (
+              <Link
+                href="/#tarifs"
+                className="px-5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-semibold rounded-xl transition shadow-lg shadow-violet-500/25"
+              >
+                Passer au Pro
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-8">
         <div>
           <h2 className="text-3xl font-bold text-white">Mes stratégies</h2>

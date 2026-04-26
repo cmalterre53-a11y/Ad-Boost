@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+interface SubscriptionInfo {
+  plan: string;
+  generations_utilisees: number;
+  generations_max: number;
+  remaining: number;
+}
 
 function repairJson(json: string): string {
   // 0. Remove control characters (except \n \r \t which we handle below)
@@ -147,6 +155,9 @@ export default function GeneratePage() {
   const [progress, setProgress] = useState<Progress>("idle");
   const [completedSteps, setCompletedSteps] = useState<Set<Step>>(new Set());
   const [error, setError] = useState<string | null>(null);
+  const [checkingQuota, setCheckingQuota] = useState(true);
+  const [quotaExceeded, setQuotaExceeded] = useState(false);
+  const [subscription, setSubscription] = useState<SubscriptionInfo | null>(null);
   const [formData, setFormData] = useState({
     nomActivite: "",
     typeActivite: "",
@@ -165,6 +176,27 @@ export default function GeneratePage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Vérification du quota au chargement
+  useEffect(() => {
+    async function checkSubscription() {
+      try {
+        const res = await fetch("/api/subscription");
+        if (res.ok) {
+          const data: SubscriptionInfo = await res.json();
+          setSubscription(data);
+          if (data.plan !== "premium" && data.remaining <= 0) {
+            setQuotaExceeded(true);
+          }
+        }
+      } catch {
+        // Silently fail — the API route will catch quota issues
+      } finally {
+        setCheckingQuota(false);
+      }
+    }
+    checkSubscription();
+  }, []);
+
   async function callStep(step: Step, payload: Record<string, unknown>): Promise<Record<string, unknown>> {
     const t0 = performance.now();
     const res = await fetch("/api/generate", {
@@ -175,6 +207,9 @@ export default function GeneratePage() {
 
     if (!res.ok || !res.body) {
       const err = await res.json().catch(() => null);
+      if (res.status === 403) {
+        setQuotaExceeded(true);
+      }
       throw new Error(err?.error || `Erreur serveur (step=${step})`);
     }
 
@@ -316,6 +351,61 @@ export default function GeneratePage() {
   };
 
   const isGenerating = progress !== "idle" && progress !== "done";
+
+  // Chargement de la vérification quota
+  if (checkingQuota) {
+    return (
+      <main className="max-w-2xl mx-auto px-6 py-24 flex items-center justify-center">
+        <div className="flex items-center gap-3 text-slate-400">
+          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          </svg>
+          Chargement...
+        </div>
+      </main>
+    );
+  }
+
+  // Quota atteint → message de blocage pleine page
+  if (quotaExceeded) {
+    return (
+      <main className="max-w-md mx-auto px-6 py-24 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h2 className="text-2xl font-bold text-white mb-3">Limite atteinte</h2>
+        <p className="text-slate-400 mb-8">
+          Tu as utilisé toutes tes générations ce mois-ci.
+          <br />
+          Passe au plan supérieur pour continuer à générer des stratégies publicitaires.
+        </p>
+        {subscription && (
+          <p className="text-sm text-slate-500 mb-6">
+            Plan actuel :{" "}
+            <span className="text-slate-300 font-medium capitalize">{subscription.plan}</span>
+            {" "}&mdash; {subscription.generations_utilisees}/{subscription.generations_max} générations utilisées
+          </p>
+        )}
+        <div className="flex flex-col gap-3">
+          <Link
+            href="/#tarifs"
+            className="w-full py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-semibold rounded-xl transition shadow-lg shadow-violet-500/25 text-center"
+          >
+            Voir les plans
+          </Link>
+          <Link
+            href="/dashboard"
+            className="w-full py-3 border border-slate-600/50 hover:border-slate-500 text-slate-400 hover:text-white font-medium rounded-xl transition text-center"
+          >
+            Retour au dashboard
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   if (isGenerating || progress === "done") {
     return (

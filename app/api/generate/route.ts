@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { checkAndIncrementQuota } from "@/lib/subscription";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -493,6 +494,25 @@ export async function POST(req: NextRequest) {
 
   if (!step || !["icp", "section1", "section2", "section3"].includes(step)) {
     return NextResponse.json({ error: "Paramètre 'step' invalide" }, { status: 400 });
+  }
+
+  // Vérification quota (seulement sur step "icp" = début d'une nouvelle génération)
+  if (step === "icp") {
+    const quota = await checkAndIncrementQuota(supabase, user.id);
+    if (!quota.allowed) {
+      return NextResponse.json(
+        {
+          error:
+            "Tu as utilisé toutes tes générations ce mois-ci. Passe au plan supérieur pour continuer.",
+          quota: {
+            plan: quota.subscription.plan,
+            generations_utilisees: quota.subscription.generations_utilisees,
+            generations_max: quota.subscription.generations_max,
+          },
+        },
+        { status: 403 }
+      );
+    }
   }
 
   console.log(`[Ad-Boost] Step: ${step} | ${body.nomActivite} (${body.typeActivite})`);

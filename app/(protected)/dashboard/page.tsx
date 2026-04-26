@@ -2,6 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { getSubscription } from "@/lib/subscription";
 import Link from "next/link";
 import DeleteButton from "./delete-button";
+import ResetQuotaButton from "./reset-quota-button";
+
+const ADMIN_EMAIL = "tests7.0@outlook.fr";
 
 const planStyles: Record<string, string> = {
   starter: "bg-slate-600 text-slate-200",
@@ -158,6 +161,13 @@ export default async function DashboardPage() {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+
+      {/* Dev tools — visible uniquement pour l'admin */}
+      {user?.email === ADMIN_EMAIL && (
+        <div className="mt-12 pt-6 border-t border-slate-800/50 flex justify-end">
+          <ResetQuotaButton />
         </div>
       )}
     </main>

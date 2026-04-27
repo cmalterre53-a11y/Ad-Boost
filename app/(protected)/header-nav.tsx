@@ -33,7 +33,7 @@ export default function HeaderNav({ email }: { email: string }) {
   }, [menuOpen]);
 
   return (
-    <header className="border-b border-slate-700/50 px-6 py-4 bg-slate-900/50 backdrop-blur-sm">
+    <header className="border-b border-slate-700/50 px-6 py-4 bg-slate-900/50 backdrop-blur-sm relative z-50">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 cursor-pointer">

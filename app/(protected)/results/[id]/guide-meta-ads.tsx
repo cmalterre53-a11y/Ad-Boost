@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { Results } from "@/lib/types";
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -44,7 +43,7 @@ const BLOCS = [
 export default function GuideMetaAds({
   section2,
 }: {
-  section2: Results["section2"];
+  section2: Record<string, unknown>;
 }) {
   return (
     <section className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
@@ -68,7 +67,8 @@ export default function GuideMetaAds({
       {/* 6 blocs */}
       <div className="space-y-3 mb-8">
         {BLOCS.map(({ key, emoji, label }) => {
-          const value = section2?.[key] ?? "";
+          const raw = section2?.[key];
+          const value = typeof raw === "string" ? raw : "";
           return (
             <div
               key={key}
@@ -80,7 +80,7 @@ export default function GuideMetaAds({
                   {label}
                 </span>
                 <p className="text-slate-100 text-sm mt-1 leading-relaxed whitespace-pre-line">
-                  {value}
+                  {value || "—"}
                 </p>
               </div>
               {value && <CopyButton text={value} />}

@@ -22,29 +22,6 @@ export interface Semaine {
   posts: Post[];
 }
 
-export interface SousEtape {
-  id: string;
-  titre: string;
-  contenu: string;
-}
-
-export interface Etape {
-  numero: number;
-  titre: string;
-  contenu: string;
-  sousEtapes?: SousEtape[];
-  // backward compat
-  description?: string;
-  ou?: string;
-  action?: string;
-  valeur?: string;
-}
-
-export interface ConseilSuivi {
-  titre: string;
-  description: string;
-}
-
 export interface ICP {
   profil: string;
   probleme: string;
@@ -66,23 +43,12 @@ export interface Results {
     legendes: string[];
   };
   section2: {
-    etapes: Etape[];
-    noteInterface?: string;
-    ciblage: {
-      age: string;
-      zone: string;
-      interets: string[];
-      exclusions: string;
-    };
-    budget: {
-      total: string;
-      repartition: string;
-      budgetJournalier: string;
-      dureeTest: string;
-    };
-    format: string;
-    conseilsSuivi: ConseilSuivi[];
-    conseilsSecteur: string[];
+    zone: string;
+    audience: string;
+    budget: string;
+    objectif: string;
+    placements: string;
+    contenu: string;
   };
   section3: {
     semaines: Semaine[];

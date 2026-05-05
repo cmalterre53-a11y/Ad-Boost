@@ -263,102 +263,24 @@ ${biz}
 
 ${icpRecap}
 
-Génère un guide complet de configuration Meta Ads personnalisé pour cette activité.
-
-La section2.etapes doit contenir EXACTEMENT 7 étapes (numérotées de 0 à 6) qui reflètent le vrai parcours de création Meta Ads 2025/2026 :
-  0. Accéder au Gestionnaire de publicités : avec 3 sous-étapes (0a pas de compte : créer Page Facebook + compte Meta Business Suite, 0b déjà un compte : aller sur business.facebook.com ou adsmanager.facebook.com, 0c lancer la création : cliquer + Créer).
-  1. Créer la campagne (Page 1) : type d'achat → Enchère, objectif → Prospects. Cliquer Suivant.
-  2. Budget et stratégie d'enchère (Page 2) : nom de campagne, Advantage+ budget (activé ou non), budget quotidien calculé depuis le budget mensuel, stratégie d'enchère Volume le plus élevé, catégories spéciales si applicable. Cliquer Suivant.
-  3. Conversion et objectif de performance (Page 3 - haut) : lieu de conversion (Formulaires instantanés recommandé, ou Appels, Messenger, WhatsApp selon le secteur), objectif de performance (Maximiser prospects).
-  4. Audience et placements (Page 3 - milieu) : budget/calendrier si pas au niveau campagne, audience Advantage+ avec contrôles (lieux = zone de l'utilisateur, rayon adapté), informations annonceur UE obligatoires, placements Advantage+ recommandé.
-  5. Créer la publicité (Page 3 - bas) : identité (Page Facebook + Instagram), format (Image/Vidéo unique ou Carrousel), contenu publicitaire (texte + titre + description + CTA), destination (formulaire instantané avec champs adaptés au secteur).
-  6. Vérifier, publier et suivre : aperçu, suivi/tracking, publier, délai examen 24h, phase d'apprentissage 7 jours, KPIs à J+3.
-
-Le champ "contenu" de chaque étape doit être concis : des instructions directes, une action par ligne. Indique les noms exacts des boutons et options tels qu'ils apparaissent dans Meta Ads. Personnalise TOUS les exemples pour l'activité de l'utilisateur.
+Génère les 6 réglages essentiels que l'utilisateur doit rentrer dans Meta Ads Manager pour lancer sa campagne Facebook & Instagram. Personnalise chaque champ selon le secteur d'activité, la zone géographique, le budget et l'objectif du client.
 
 Génère UNIQUEMENT du JSON valide avec cette structure exacte (pas de texte autour) :
 
 {
   "section2": {
-    "etapes": [
-      {
-        "numero": 0,
-        "titre": "Accéder au Gestionnaire de publicités",
-        "contenu": "Comment accéder à Meta Ads pour créer sa première pub.",
-        "sousEtapes": [
-          { "id": "0a", "titre": "Si vous n'avez pas encore de compte", "contenu": "..." },
-          { "id": "0b", "titre": "Si vous avez déjà un compte", "contenu": "..." },
-          { "id": "0c", "titre": "Lancer la création", "contenu": "..." }
-        ]
-      },
-      { "numero": 1, "titre": "Créer la campagne (Page 1)", "contenu": "..." },
-      {
-        "numero": 2,
-        "titre": "Budget et stratégie d'enchère (Page 2)",
-        "contenu": "...",
-        "sousEtapes": [
-          { "id": "2a", "titre": "Mode budget", "contenu": "..." },
-          { "id": "2b", "titre": "Montant et stratégie", "contenu": "..." },
-          { "id": "2c", "titre": "Catégories spéciales", "contenu": "..." }
-        ]
-      },
-      {
-        "numero": 3,
-        "titre": "Conversion et objectif de performance (Page 3 - haut)",
-        "contenu": "...",
-        "sousEtapes": [
-          { "id": "3a", "titre": "Lieu de conversion", "contenu": "..." },
-          { "id": "3b", "titre": "Objectif de performance", "contenu": "..." },
-          { "id": "3c", "titre": "Contenu publicitaire dynamique", "contenu": "..." }
-        ]
-      },
-      {
-        "numero": 4,
-        "titre": "Audience et placements (Page 3 - milieu)",
-        "contenu": "...",
-        "sousEtapes": [
-          { "id": "4a", "titre": "Budget et calendrier", "contenu": "..." },
-          { "id": "4b", "titre": "Audience", "contenu": "..." },
-          { "id": "4c", "titre": "Informations annonceur UE", "contenu": "..." },
-          { "id": "4d", "titre": "Placements", "contenu": "..." }
-        ]
-      },
-      {
-        "numero": 5,
-        "titre": "Créer la publicité (Page 3 - bas)",
-        "contenu": "...",
-        "sousEtapes": [
-          { "id": "5a", "titre": "Identité", "contenu": "..." },
-          { "id": "5b", "titre": "Format", "contenu": "..." },
-          { "id": "5c", "titre": "Contenu publicitaire", "contenu": "..." },
-          { "id": "5d", "titre": "Destination", "contenu": "..." }
-        ]
-      },
-      { "numero": 6, "titre": "Vérifier, publier et suivre", "contenu": "..." }
-    ],
-    "noteInterface": "L'interface Meta Ads suit un parcours en 3 pages...",
-    "ciblage": {
-      "age": "tranche d'âge recommandée",
-      "zone": "zone géographique et rayon exact à configurer",
-      "interets": ["intérêt1", "intérêt2", "intérêt3", "intérêt4", "intérêt5"],
-      "exclusions": "ce qu'il faut exclure du ciblage et pourquoi"
-    },
-    "budget": {
-      "total": "budget total recommandé",
-      "repartition": "comment répartir le budget entre les campagnes",
-      "budgetJournalier": "budget quotidien recommandé",
-      "dureeTest": "durée recommandée pour tester avant d'optimiser"
-    },
-    "format": "format de pub recommandé avec explication détaillée",
-    "conseilsSuivi": [
-      { "titre": "Titre du conseil", "description": "Description détaillée du conseil" }
-    ],
-    "conseilsSecteur": ["conseil1", "conseil2", "conseil3", "conseil4", "conseil5"]
+    "zone": "ville + rayon adapté à l'activité (ex: Paris — rayon 15 km). Adapte le rayon : petit pour commerce de proximité, large pour service à domicile",
+    "audience": "tranche d'âge et profil recommandé selon l'ICP (ex: 25-45 ans, propriétaires de véhicules). Sois précis sur le profil.",
+    "budget": "budget quotidien recommandé calculé depuis le budget mensuel de ${body.budget} (ex: 5 €/jour pendant 30 jours). Donne le calcul.",
+    "objectif": "objectif Meta Ads recommandé selon l'objectif choisi '${body.objectif === "Autre" ? body.objectifLibre : body.objectif}' (ex: Prospects — Formulaires instantanés). Explique pourquoi cet objectif.",
+    "placements": "Advantage+ (recommandé) — Meta diffuse automatiquement sur Facebook, Instagram, Messenger et Audience Network pour maximiser les résultats au meilleur coût.",
+    "contenu": "rappel de copier-coller les accroches, textes de pub et visuels depuis l'onglet Mes textes de Ad-Boost. Précise quels éléments copier (accroche en titre, texte de pub en description, visuel en image)."
   }
 }
 
 INSTRUCTIONS :
-- La section2.conseilsSuivi doit contenir 3-4 conseils détaillés pour suivre et optimiser la campagne APRÈS la publication.
+- Chaque champ doit être une réponse concrète et personnalisée que l'utilisateur peut copier-coller directement dans Meta Ads.
+- Sois précis et actionnable : donne des valeurs exactes, pas des fourchettes vagues.
 - IMPORTANT : dans toutes les valeurs texte du JSON, n'utilise JAMAIS de guillemets doubles ("). Utilise des apostrophes (') ou des guillemets français (« ») à la place.
 - Échappe toujours les caractères spéciaux dans les chaînes JSON (retours à la ligne avec \\n, tabulations avec \\t).
 - Réponds UNIQUEMENT avec le JSON, sans markdown ni explication.`;
@@ -526,7 +448,7 @@ export async function POST(req: NextRequest) {
         controller.enqueue(encoder.encode("{"));
         const anthropicStream = anthropic.messages.stream({
           model: "claude-haiku-4-5-20251001",
-          max_tokens: step === "section2" ? 8192 : 4096,
+          max_tokens: 4096,
           messages: [
             { role: "user", content: prompt },
             { role: "assistant", content: "{" },

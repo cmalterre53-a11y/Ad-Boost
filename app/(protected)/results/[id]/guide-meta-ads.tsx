@@ -15,7 +15,7 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="flex-shrink-0 p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600/50 border border-slate-600/30 transition-all group"
+      className="flex-shrink-0 p-2 rounded-lg bg-[#FAFAFA] hover:bg-gray-100 border border-gray-200 transition-all group"
       title="Copier"
     >
       {copied ? (
@@ -23,7 +23,7 @@ function CopyButton({ text }: { text: string }) {
           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
         </svg>
       ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-slate-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-gray-400 group-hover:text-[#111111]" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
         </svg>
       )}
@@ -46,7 +46,7 @@ export default function GuideMetaAds({
   section2: Record<string, unknown>;
 }) {
   return (
-    <section className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+    <section className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
       {/* Header */}
       <div className="flex items-start gap-4 mb-6">
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-violet-500/20">
@@ -55,10 +55,10 @@ export default function GuideMetaAds({
           </svg>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-white">
+          <h2 className="text-2xl font-bold text-[#111111]">
             Ce que tu dois rentrer dans Ads Manager
           </h2>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-gray-500 text-sm mt-1">
             Copie-colle ces infos directement dans ta campagne Facebook &amp; Instagram
           </p>
         </div>
@@ -72,14 +72,14 @@ export default function GuideMetaAds({
           return (
             <div
               key={key}
-              className="flex items-start gap-3 bg-slate-900/50 border border-slate-700/30 rounded-xl px-4 py-3"
+              className="flex items-start gap-3 bg-[#FAFAFA] border border-gray-200 rounded-xl px-4 py-3"
             >
               <span className="text-xl flex-shrink-0 mt-0.5">{emoji}</span>
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                   {label}
                 </span>
-                <p className="text-slate-100 text-sm mt-1 leading-relaxed whitespace-pre-line">
+                <p className="text-[#111111] text-sm mt-1 leading-relaxed whitespace-pre-line">
                   {value || "—"}
                 </p>
               </div>
@@ -94,10 +94,10 @@ export default function GuideMetaAds({
         <div className="flex items-start gap-3">
           <span className="text-2xl flex-shrink-0">{"\u{1F4CA}"}</span>
           <div className="flex-1">
-            <h3 className="text-white font-semibold text-lg mb-1">
+            <h3 className="text-[#111111] font-semibold text-lg mb-1">
               Suivre et am&eacute;liorer ta pub
             </h3>
-            <p className="text-slate-300 text-sm leading-relaxed mb-4">
+            <p className="text-gray-500 text-sm leading-relaxed mb-4">
               Une fois ta campagne lanc&eacute;e, reviens ici dans 3 jours pour
               analyser tes r&eacute;sultats. On te dira si ta pub marche bien et
               quoi am&eacute;liorer.

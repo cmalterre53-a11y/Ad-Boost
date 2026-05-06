@@ -27,7 +27,7 @@ export default function ResetQuotaButton() {
       type="button"
       onClick={handleReset}
       disabled={loading}
-      className="text-xs text-slate-600 hover:text-slate-400 border border-slate-700/50 hover:border-slate-600 px-3 py-1.5 rounded-lg transition disabled:opacity-50"
+      className="text-xs text-gray-400 hover:text-gray-600 border border-gray-200 hover:border-gray-300 px-3 py-1.5 rounded-lg transition disabled:opacity-50"
     >
       {done
         ? "Quota réinitialisé"

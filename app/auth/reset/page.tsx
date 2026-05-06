@@ -41,7 +41,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a]">
+    <div className="min-h-screen bg-white">
       <main className="flex items-center justify-center px-6 pt-24 pb-12">
         <div className="w-full max-w-md">
           {/* Logo */}
@@ -51,26 +51,26 @@ export default function ResetPasswordPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold text-white">
+            <h1 className="text-3xl font-bold text-[#111111]">
               Ad<span className="text-violet-400">Boost</span>
             </h1>
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-white mb-3">
+            <h2 className="text-2xl font-bold text-[#111111] mb-3">
               Définir votre mot de passe
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-gray-500 text-sm">
               Choisissez un mot de passe pour votre compte.
             </p>
           </div>
 
           <form
             onSubmit={handleSubmit}
-            className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 space-y-5 backdrop-blur-sm"
+            className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-sm"
           >
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-300">
+              <label className="text-sm font-medium text-gray-500">
                 Nouveau mot de passe
               </label>
               <input
@@ -79,12 +79,12 @@ export default function ResetPasswordPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-300">
+              <label className="text-sm font-medium text-gray-500">
                 Confirmer le mot de passe
               </label>
               <input
@@ -93,7 +93,7 @@ export default function ResetPasswordPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
               />
             </div>
 

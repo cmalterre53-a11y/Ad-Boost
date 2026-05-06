@@ -144,8 +144,8 @@ function StepIndicator({ status }: { status: "done" | "active" | "pending" }) {
     );
   }
   return (
-    <div className="w-8 h-8 rounded-full bg-slate-700/50 border-2 border-slate-600 flex items-center justify-center flex-shrink-0">
-      <div className="w-2 h-2 rounded-full bg-slate-500" />
+    <div className="w-8 h-8 rounded-full bg-gray-100 border-2 border-gray-300 flex items-center justify-center flex-shrink-0">
+      <div className="w-2 h-2 rounded-full bg-gray-400" />
     </div>
   );
 }
@@ -356,7 +356,7 @@ export default function GeneratePage() {
   if (checkingQuota) {
     return (
       <main className="max-w-2xl mx-auto px-6 py-24 flex items-center justify-center">
-        <div className="flex items-center gap-3 text-slate-400">
+        <div className="flex items-center gap-3 text-gray-500">
           <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -376,16 +376,16 @@ export default function GeneratePage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-white mb-3">Limite atteinte</h2>
-        <p className="text-slate-400 mb-8">
+        <h2 className="text-2xl font-bold text-[#111111] mb-3">Limite atteinte</h2>
+        <p className="text-gray-500 mb-8">
           Tu as utilisé toutes tes générations ce mois-ci.
           <br />
           Passe au plan supérieur pour continuer à générer des stratégies publicitaires.
         </p>
         {subscription && (
-          <p className="text-sm text-slate-500 mb-6">
+          <p className="text-sm text-gray-400 mb-6">
             Plan actuel :{" "}
-            <span className="text-slate-300 font-medium capitalize">{subscription.plan}</span>
+            <span className="text-[#111111] font-medium capitalize">{subscription.plan}</span>
             {" "}&mdash; {subscription.generations_utilisees}/{subscription.generations_max} générations utilisées
           </p>
         )}
@@ -398,7 +398,7 @@ export default function GeneratePage() {
           </Link>
           <Link
             href="/dashboard"
-            className="w-full py-3 border border-slate-600/50 hover:border-slate-500 text-slate-400 hover:text-white font-medium rounded-xl transition text-center"
+            className="w-full py-3 border border-gray-200 hover:border-gray-300 text-gray-500 hover:text-[#111111] font-medium rounded-xl transition text-center"
           >
             Retour au dashboard
           </Link>
@@ -411,10 +411,10 @@ export default function GeneratePage() {
     return (
       <main className="max-w-2xl mx-auto px-6 py-12">
         <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#111111] mb-3">
             {progress === "saving" ? "Sauvegarde en cours..." : progress === "done" ? "Redirection..." : "Génération de votre stratégie"}
           </h2>
-          <p className="text-slate-400">
+          <p className="text-gray-500">
             {progress === "saving"
               ? "Enregistrement de vos résultats..."
               : progress === "done"
@@ -423,7 +423,7 @@ export default function GeneratePage() {
           </p>
         </div>
 
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
           <div className="space-y-4">
             {STEPS.map((s) => {
               const status = stepStatus(s.key, progress, completedSteps);
@@ -434,8 +434,8 @@ export default function GeneratePage() {
                     status === "done"
                       ? "text-emerald-400"
                       : status === "active"
-                      ? "text-white"
-                      : "text-slate-500"
+                      ? "text-[#111111]"
+                      : "text-gray-400"
                   }`}>
                     {s.label}
                     {status === "active" && "..."}
@@ -446,7 +446,7 @@ export default function GeneratePage() {
           </div>
 
           {progress === "saving" && (
-            <div className="mt-6 flex items-center gap-3 text-sm text-slate-400">
+            <div className="mt-6 flex items-center gap-3 text-sm text-gray-500">
               <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -457,11 +457,11 @@ export default function GeneratePage() {
         </div>
 
         {error && (
-          <div className="mt-6 bg-red-500/10 border border-red-500/25 rounded-xl p-4 text-red-300 text-sm">
+          <div className="mt-6 bg-red-500/10 border border-red-500/25 rounded-xl p-4 text-red-500 text-sm">
             {error}
             <button
               onClick={() => { setError(null); setProgress("idle"); setCompletedSteps(new Set()); }}
-              className="ml-3 underline hover:text-red-200"
+              className="ml-3 underline hover:text-red-400"
             >
               Réessayer
             </button>
@@ -474,14 +474,14 @@ export default function GeneratePage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-12">
       <div className="text-center mb-12">
-        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 text-balance">
+        <h2 className="text-4xl sm:text-5xl font-bold text-[#111111] mb-4 text-balance">
           Votre stratégie pub Meta Ads
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
             générée par AdBoost
           </span>
         </h2>
-        <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-500 max-w-2xl mx-auto">
           Remplissez le formulaire ci-dessous et recevez en quelques secondes
           vos textes de pub, un guide Meta Ads personnalisé et votre
           calendrier de publication.
@@ -489,7 +489,7 @@ export default function GeneratePage() {
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-500/10 border border-red-500/25 rounded-xl p-4 text-red-300 text-sm">
+        <div className="mb-6 bg-red-500/10 border border-red-500/25 rounded-xl p-4 text-red-500 text-sm">
           {error}
         </div>
       )}
@@ -497,12 +497,12 @@ export default function GeneratePage() {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-sm"
+        className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm"
       >
         <div className="grid sm:grid-cols-2 gap-6">
           {/* Nom activité */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Nom de l&apos;activité
             </label>
             <input
@@ -512,13 +512,13 @@ export default function GeneratePage() {
               value={formData.nomActivite}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
             />
           </div>
 
           {/* Type activité */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Type d&apos;activité
             </label>
             <input
@@ -528,13 +528,13 @@ export default function GeneratePage() {
               value={formData.typeActivite}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
             />
           </div>
 
           {/* Zone */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Zone géographique
             </label>
             <input
@@ -544,13 +544,13 @@ export default function GeneratePage() {
               value={formData.zone}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
             />
           </div>
 
           {/* Budget */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Budget pub mensuel
             </label>
             <input
@@ -560,13 +560,13 @@ export default function GeneratePage() {
               value={formData.budget}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition"
             />
           </div>
 
           {/* Objectif */}
           <div className="space-y-3 sm:col-span-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Objectif principal
             </label>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -578,11 +578,11 @@ export default function GeneratePage() {
                   className={`text-left px-4 py-3 rounded-xl border transition ${
                     formData.objectif === obj.value
                       ? "border-violet-500 bg-violet-500/10 ring-2 ring-violet-500/50"
-                      : "border-slate-600/50 bg-slate-900/50 hover:border-slate-500/50"
+                      : "border-gray-200 bg-white hover:border-gray-300"
                   }`}
                 >
-                  <span className="block text-sm font-medium text-white">{obj.label}</span>
-                  <span className="block text-xs text-slate-400 mt-1">{obj.description}</span>
+                  <span className="block text-sm font-medium text-[#111111]">{obj.label}</span>
+                  <span className="block text-xs text-gray-500 mt-1">{obj.description}</span>
                 </button>
               ))}
             </div>
@@ -591,7 +591,7 @@ export default function GeneratePage() {
           {/* Objectif libre */}
           {formData.objectif === "Autre" && (
             <div className="space-y-2 sm:col-span-2">
-              <label className="text-sm font-medium text-slate-300">
+              <label className="text-sm font-medium text-gray-500">
                 Décris ton objectif
               </label>
               <textarea
@@ -601,25 +601,25 @@ export default function GeneratePage() {
                 onChange={handleChange}
                 required
                 rows={3}
-                className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
               />
             </div>
           )}
         </div>
 
         {/* Section optionnelle — Affine ta stratégie */}
-        <div className="border border-slate-700/50 rounded-xl p-5 space-y-4 bg-slate-900/30">
+        <div className="border border-gray-200 rounded-xl p-5 space-y-4 bg-[#FAFAFA]">
           <div>
-            <h3 className="text-sm font-medium text-slate-200">
+            <h3 className="text-sm font-medium text-[#111111]">
               💡 Affine ta stratégie (optionnel)
             </h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Ces informations permettent à AdBoost de générer un contenu encore plus précis et personnalisé pour ton activité.
             </p>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Ton service ou produit le plus vendu
             </label>
             <textarea
@@ -628,12 +628,12 @@ export default function GeneratePage() {
               value={formData.servicePrincipal}
               onChange={handleChange}
               rows={1}
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Pourquoi tes clients t&apos;appellent — leur vraie douleur
             </label>
             <textarea
@@ -642,12 +642,12 @@ export default function GeneratePage() {
               value={formData.douleurClient}
               onChange={handleChange}
               rows={2}
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-gray-500">
               Décris ton meilleur client en quelques mots
             </label>
             <textarea
@@ -656,7 +656,7 @@ export default function GeneratePage() {
               value={formData.meilleureClient}
               onChange={handleChange}
               rows={2}
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-600/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition resize-none"
             />
           </div>
         </div>

@@ -35,7 +35,7 @@ export default function DeleteButton({ id }: { id: string }) {
           e.stopPropagation();
           setShowModal(true);
         }}
-        className="flex-shrink-0 p-2 rounded-lg border bg-slate-700/50 border-slate-600/30 text-slate-500 hover:text-red-400 hover:border-red-500/30 transition-all"
+        className="flex-shrink-0 p-2 rounded-lg border bg-white border-gray-200 text-gray-400 hover:text-red-400 hover:border-red-500/30 transition-all"
         title="Supprimer"
       >
         <svg
@@ -57,11 +57,11 @@ export default function DeleteButton({ id }: { id: string }) {
       {showModal &&
         createPortal(
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
             onClick={() => setShowModal(false)}
           >
             <div
-              className="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+              className="bg-white border border-gray-200 rounded-2xl p-6 max-w-sm w-full shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
@@ -80,10 +80,10 @@ export default function DeleteButton({ id }: { id: string }) {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-[#111111] mb-2">
                 Supprimer cette stratégie ?
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
+              <p className="text-sm text-gray-500 mb-6">
                 Cette action est irréversible. La stratégie sera définitivement
                 supprimée et tu ne récupéreras pas ta génération.
               </p>
@@ -91,7 +91,7 @@ export default function DeleteButton({ id }: { id: string }) {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 text-sm font-medium text-slate-300 border border-slate-600 rounded-xl hover:bg-slate-700/50 transition"
+                  className="px-4 py-2 text-sm font-medium text-gray-500 border border-gray-200 rounded-xl hover:bg-gray-50 transition"
                 >
                   Annuler
                 </button>

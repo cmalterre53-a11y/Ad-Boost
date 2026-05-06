@@ -164,14 +164,14 @@ const faqs = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-slate-800 rounded-xl overflow-hidden">
+    <div className="border border-gray-200 rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-slate-800/50 transition"
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition"
       >
-        <span className="font-medium text-white">{q}</span>
+        <span className="font-medium text-[#111111]">{q}</span>
         <ChevronDown
-          className={`w-5 h-5 text-slate-400 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`w-5 h-5 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
       <AnimatePresence>
@@ -182,7 +182,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <p className="px-6 pb-4 text-slate-400 text-sm leading-relaxed">{a}</p>
+            <p className="px-6 pb-4 text-gray-500 text-sm leading-relaxed">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -198,9 +198,9 @@ export default function LandingPage() {
   const [contactSent, setContactSent] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#111111] overflow-x-hidden">
       {/* ── NAVBAR ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-slate-800/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center">
@@ -213,24 +213,24 @@ export default function LandingPage() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#fonctionnalites" className="text-sm text-slate-400 hover:text-white transition">
+            <a href="#fonctionnalites" className="text-sm text-gray-500 hover:text-[#111111] transition">
               Fonctionnalités
             </a>
-            <a href="#tarifs" className="text-sm text-slate-400 hover:text-white transition">
+            <a href="#tarifs" className="text-sm text-gray-500 hover:text-[#111111] transition">
               Tarifs
             </a>
-            <a href="#exemple" className="text-sm text-slate-400 hover:text-white transition">
+            <a href="#exemple" className="text-sm text-gray-500 hover:text-[#111111] transition">
               Exemples
             </a>
             <Link
               href="/login"
-              className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-lg transition-all shadow-lg shadow-violet-500/20"
+              className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-lg transition-all shadow-lg shadow-violet-500/20 text-white"
             >
               Essayer gratuitement
             </Link>
             <Link
               href="/login"
-              className="p-2 text-slate-400 hover:text-white transition"
+              className="p-2 text-gray-400 hover:text-[#111111] transition"
               title="Se connecter"
             >
               <UserCircle className="w-6 h-6" />
@@ -240,7 +240,7 @@ export default function LandingPage() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenu(!mobileMenu)}
-            className="md:hidden p-2 text-slate-400"
+            className="md:hidden p-2 text-gray-400"
           >
             {mobileMenu ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -253,16 +253,16 @@ export default function LandingPage() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-slate-800/50 bg-[#0a0a0a]/95 backdrop-blur-lg"
+              className="md:hidden border-t border-gray-200 bg-white/95 backdrop-blur-lg"
             >
               <div className="px-6 py-4 space-y-3">
-                <a href="#fonctionnalites" onClick={() => setMobileMenu(false)} className="block text-sm text-slate-400 hover:text-white">Fonctionnalités</a>
-                <a href="#tarifs" onClick={() => setMobileMenu(false)} className="block text-sm text-slate-400 hover:text-white">Tarifs</a>
-                <a href="#exemple" onClick={() => setMobileMenu(false)} className="block text-sm text-slate-400 hover:text-white">Exemples</a>
-                <Link href="/login" className="block w-full text-center px-4 py-2 text-sm font-medium bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg">
+                <a href="#fonctionnalites" onClick={() => setMobileMenu(false)} className="block text-sm text-gray-500 hover:text-[#111111]">Fonctionnalités</a>
+                <a href="#tarifs" onClick={() => setMobileMenu(false)} className="block text-sm text-gray-500 hover:text-[#111111]">Tarifs</a>
+                <a href="#exemple" onClick={() => setMobileMenu(false)} className="block text-sm text-gray-500 hover:text-[#111111]">Exemples</a>
+                <Link href="/login" className="block w-full text-center px-4 py-2 text-sm font-medium bg-gradient-to-r from-violet-600 to-indigo-600 rounded-lg text-white">
                   Essayer gratuitement
                 </Link>
-                <Link href="/login" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 text-sm text-slate-400 hover:text-white">
+                <Link href="/login" onClick={() => setMobileMenu(false)} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#111111]">
                   <UserCircle className="w-5 h-5" />
                   Se connecter
                 </Link>
@@ -293,7 +293,7 @@ export default function LandingPage() {
               </motion.h1>
 
               {/* Subtitle */}
-              <motion.p variants={fadeUp} custom={2} className="text-lg text-slate-400 mb-8 max-w-xl">
+              <motion.p variants={fadeUp} custom={2} className="text-lg text-gray-500 mb-8 max-w-xl">
                 Posts organiques, publicités Facebook & Instagram, planning du mois…
                 Tout ton Social Media en une seule génération.
               </motion.p>
@@ -302,21 +302,21 @@ export default function LandingPage() {
               <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4 mb-6">
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25 text-white"
                 >
                   Générer mon contenu gratuitement
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a
                   href="#exemple"
-                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold border border-slate-700 hover:border-slate-600 rounded-xl transition-all text-slate-300 hover:text-white"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-semibold border border-gray-200 hover:border-gray-300 rounded-xl transition-all text-gray-500 hover:text-[#111111]"
                 >
                   Voir un exemple
                 </a>
               </motion.div>
 
               {/* Social proof */}
-              <motion.p variants={fadeUp} custom={4} className="text-sm text-slate-500">
+              <motion.p variants={fadeUp} custom={4} className="text-sm text-gray-400">
                 <span className="text-amber-400">&#9733;</span> Des centaines d&apos;entrepreneurs locaux qui gèrent leurs réseaux avec confiance
               </motion.p>
             </motion.div>
@@ -330,43 +330,43 @@ export default function LandingPage() {
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-indigo-500/20 rounded-2xl blur-xl" />
-                <div className="relative bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm space-y-4">
+                <div className="relative bg-white border border-gray-200 rounded-2xl p-6 shadow-lg space-y-4">
                   {/* Fake generated cards */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
                       <Zap className="w-4 h-4 text-violet-400" />
                     </div>
-                    <span className="text-sm font-medium text-slate-300">Stratégie générée pour <span className="text-violet-400">Institut Lumière</span></span>
+                    <span className="text-sm font-medium text-gray-500">Stratégie générée pour <span className="text-violet-400">Institut Lumière</span></span>
                   </div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
+                    className="bg-[#FAFAFA] border border-gray-200 rounded-xl p-4"
                   >
-                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Accroche pub</p>
-                    <p className="text-sm text-white font-medium">Offrez-vous une pause beauté bien méritée ✨</p>
+                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Accroche pub</p>
+                    <p className="text-sm text-[#111111] font-medium">Offrez-vous une pause beauté bien méritée ✨</p>
                   </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.1 }}
-                    className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
+                    className="bg-[#FAFAFA] border border-gray-200 rounded-xl p-4"
                   >
-                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Texte de pub</p>
-                    <p className="text-sm text-slate-300">Chez Institut Lumière à Toulouse, on prend soin de vous de la tête aux pieds. Soin du visage, épilation, manucure...</p>
+                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Texte de pub</p>
+                    <p className="text-sm text-gray-500">Chez Institut Lumière à Toulouse, on prend soin de vous de la tête aux pieds. Soin du visage, épilation, manucure...</p>
                   </motion.div>
 
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.4 }}
-                    className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4"
+                    className="bg-[#FAFAFA] border border-gray-200 rounded-xl p-4"
                   >
-                    <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Prompt visuel</p>
-                    <p className="text-sm text-slate-300">Soft-lit photo of a woman relaxing during a facial treatment in a cozy beauty salon...</p>
+                    <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">Prompt visuel</p>
+                    <p className="text-sm text-gray-500">Soft-lit photo of a woman relaxing during a facial treatment in a cozy beauty salon...</p>
                   </motion.div>
 
                   <motion.div
@@ -375,9 +375,9 @@ export default function LandingPage() {
                     transition={{ delay: 1.7 }}
                     className="flex gap-2"
                   >
-                    <span className="px-3 py-1 text-xs bg-violet-500/15 text-violet-300 border border-violet-500/25 rounded-full">Meta Ads</span>
-                    <span className="px-3 py-1 text-xs bg-indigo-500/15 text-indigo-300 border border-indigo-500/25 rounded-full">Calendrier 30j</span>
-                    <span className="px-3 py-1 text-xs bg-cyan-500/15 text-cyan-300 border border-cyan-500/25 rounded-full">Guide complet</span>
+                    <span className="px-3 py-1 text-xs bg-[#F3F0FF] text-violet-600 border border-violet-200 rounded-full">Meta Ads</span>
+                    <span className="px-3 py-1 text-xs bg-indigo-500/15 text-indigo-500 border border-indigo-500/25 rounded-full">Calendrier 30j</span>
+                    <span className="px-3 py-1 text-xs bg-cyan-500/15 text-cyan-500 border border-cyan-500/25 rounded-full">Guide complet</span>
                   </motion.div>
                 </div>
               </div>
@@ -387,13 +387,13 @@ export default function LandingPage() {
       </section>
 
       {/* ── LOGOS / SOCIAL PROOF ── */}
-      <section className="py-12 border-y border-slate-800/50 overflow-hidden">
+      <section className="py-12 border-y border-gray-200 overflow-hidden">
         <div className="relative">
           <div className="flex animate-scroll whitespace-nowrap">
             {[...sectors, ...sectors].map((sector, i) => (
               <span
                 key={i}
-                className="mx-8 text-sm text-slate-500 font-medium flex-shrink-0"
+                className="mx-8 text-sm text-gray-400 font-medium flex-shrink-0"
               >
                 {sector}
               </span>
@@ -414,7 +414,7 @@ export default function LandingPage() {
           >
             <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold mb-4">
               Tu passes des heures sur ta comm...{" "}
-              <span className="text-slate-500">ou tu ne la fais pas.</span>
+              <span className="text-gray-400">ou tu ne la fais pas.</span>
             </motion.h2>
           </motion.div>
 
@@ -430,12 +430,12 @@ export default function LandingPage() {
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 text-center"
+                className="bg-white border border-gray-200 rounded-2xl p-6 text-center shadow-sm"
               >
                 <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-4">
                   <p.icon className="w-6 h-6 text-red-400" />
                 </div>
-                <p className="text-slate-300">{p.text}</p>
+                <p className="text-gray-500">{p.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -458,7 +458,7 @@ export default function LandingPage() {
                 généré en une fois.
               </span>
             </motion.h2>
-            <motion.p variants={fadeUp} custom={1} className="text-slate-400 max-w-3xl mx-auto">
+            <motion.p variants={fadeUp} custom={1} className="text-gray-500 max-w-3xl mx-auto">
               Tes clients jugent ton sérieux en ligne avant de venir. AdBoost
               s&apos;occupe de toute ta communication digitale pour le mois :
               publicités Meta, posts réseaux, guide Meta Ads, suivi de campagne
@@ -478,13 +478,13 @@ export default function LandingPage() {
                 key={i}
                 variants={fadeUp}
                 custom={i}
-                className="group bg-slate-900/50 border border-slate-800 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300"
+                className="group bg-white border border-gray-200 rounded-2xl p-5 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300 shadow-sm"
               >
                 <div className="w-10 h-10 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-3 group-hover:bg-violet-500/20 transition">
                   <m.icon className="w-5 h-5 text-violet-400" />
                 </div>
-                <h3 className="font-semibold text-white text-sm mb-1">{m.name}</h3>
-                <p className="text-xs text-slate-500 leading-relaxed">{m.desc}</p>
+                <h3 className="font-semibold text-[#111111] text-sm mb-1">{m.name}</h3>
+                <p className="text-xs text-gray-400 leading-relaxed">{m.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -515,11 +515,11 @@ export default function LandingPage() {
           >
             {steps.map((s, i) => (
               <motion.div key={i} variants={fadeUp} custom={i} className="text-center">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg shadow-violet-500/20">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg shadow-violet-500/20 text-white">
                   {s.num}
                 </div>
-                <h3 className="font-semibold text-white mb-2">{s.title}</h3>
-                <p className="text-sm text-slate-400">{s.desc}</p>
+                <h3 className="font-semibold text-[#111111] mb-2">{s.title}</h3>
+                <p className="text-sm text-gray-500">{s.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -550,14 +550,14 @@ export default function LandingPage() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <div className="bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-lg">
               <div className="grid sm:grid-cols-2 gap-6">
                 {/* Ad text example */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Texte de pub Facebook / Instagram</h3>
-                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-xl p-4">
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Texte de pub Facebook / Instagram</h3>
+                  <div className="bg-[#FAFAFA] border border-gray-200 rounded-xl p-4">
                     <p className="text-violet-400 font-semibold text-sm mb-2">Offrez-vous une pause beauté bien méritée ✨</p>
-                    <p className="text-slate-300 text-sm mb-3">
+                    <p className="text-gray-500 text-sm mb-3">
                       Chez Institut Lumière à Toulouse, on prend soin de vous
                       de la tête aux pieds. Soin du visage, épilation, manucure...
                       Réservez votre séance dès aujourd&apos;hui et repartez transformée.
@@ -568,42 +568,42 @@ export default function LandingPage() {
 
                 {/* Posts ideas */}
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Idées de posts</h3>
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Idées de posts</h3>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
+                    <div className="flex items-center gap-3 bg-[#FAFAFA] border border-gray-200 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">1</span>
-                      <p className="text-slate-300 text-sm">Avant/après soin du visage — montrez la différence en photo</p>
+                      <p className="text-gray-500 text-sm">Avant/après soin du visage — montrez la différence en photo</p>
                     </div>
-                    <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
+                    <div className="flex items-center gap-3 bg-[#FAFAFA] border border-gray-200 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">2</span>
-                      <p className="text-slate-300 text-sm">Offre du mois : -20% sur la manucure complète jusqu&apos;au 30 avril</p>
+                      <p className="text-gray-500 text-sm">Offre du mois : -20% sur la manucure complète jusqu&apos;au 30 avril</p>
                     </div>
-                    <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/30 rounded-xl px-4 py-3">
+                    <div className="flex items-center gap-3 bg-[#FAFAFA] border border-gray-200 rounded-xl px-4 py-3">
                       <span className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs flex items-center justify-center font-bold">3</span>
-                      <p className="text-slate-300 text-sm">Coulisses de l&apos;institut — une journée avec notre équipe</p>
+                      <p className="text-gray-500 text-sm">Coulisses de l&apos;institut — une journée avec notre équipe</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Mini calendar */}
-              <div className="mt-6 pt-6 border-t border-slate-700/30">
-                <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Calendrier semaine 1</h3>
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Calendrier semaine 1</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Lundi</p>
+                  <div className="bg-[#FAFAFA] border border-gray-200 rounded-lg p-3">
+                    <p className="text-xs text-[#111111] font-medium">Lundi</p>
                     <p className="text-xs text-violet-400">Post témoignage client</p>
                   </div>
-                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Mercredi</p>
+                  <div className="bg-[#FAFAFA] border border-gray-200 rounded-lg p-3">
+                    <p className="text-xs text-[#111111] font-medium">Mercredi</p>
                     <p className="text-xs text-violet-400">Promo soin du visage</p>
                   </div>
-                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Vendredi</p>
+                  <div className="bg-[#FAFAFA] border border-gray-200 rounded-lg p-3">
+                    <p className="text-xs text-[#111111] font-medium">Vendredi</p>
                     <p className="text-xs text-violet-400">Reel coulisses de l&apos;institut</p>
                   </div>
-                  <div className="bg-slate-800/60 border border-slate-700/30 rounded-lg p-3">
-                    <p className="text-xs text-white font-medium">Dimanche</p>
+                  <div className="bg-[#FAFAFA] border border-gray-200 rounded-lg p-3">
+                    <p className="text-xs text-[#111111] font-medium">Dimanche</p>
                     <p className="text-xs text-violet-400">Rappel prise de rendez-vous</p>
                   </div>
                 </div>
@@ -620,7 +620,7 @@ export default function LandingPage() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 px-6 py-3 font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25"
+              className="inline-flex items-center gap-2 px-6 py-3 font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25 text-white"
             >
               Générer le mien
               <ArrowRight className="w-4 h-4" />
@@ -659,23 +659,23 @@ export default function LandingPage() {
                 className={`relative rounded-2xl p-6 flex flex-col ${
                   plan.popular
                     ? "bg-gradient-to-b from-violet-500/10 to-indigo-500/10 border-2 border-violet-500/30"
-                    : "bg-slate-900/50 border border-slate-800"
+                    : "bg-white border border-gray-200 shadow-sm"
                 }`}
               >
                 {plan.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full text-white">
                     Populaire
                   </span>
                 )}
-                <h3 className="text-lg font-semibold text-white mb-1">{plan.name}</h3>
-                <p className="text-xs text-slate-500 mb-3">{plan.subtitle}</p>
+                <h3 className="text-lg font-semibold text-[#111111] mb-1">{plan.name}</h3>
+                <p className="text-xs text-gray-400 mb-3">{plan.subtitle}</p>
                 <div className="mb-6">
-                  <span className="text-3xl font-bold text-white">{plan.price}</span>
-                  <span className="text-slate-500">{plan.period}</span>
+                  <span className="text-3xl font-bold text-[#111111]">{plan.price}</span>
+                  <span className="text-gray-400">{plan.period}</span>
                 </div>
                 <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-slate-300">
+                    <li key={j} className="flex items-start gap-2 text-sm text-gray-500">
                       <Check className="w-4 h-4 text-violet-400 flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
@@ -684,7 +684,7 @@ export default function LandingPage() {
                 {plan.contact ? (
                   <button
                     onClick={() => setContactOpen(true)}
-                    className="block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white"
+                    className="block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all border border-gray-200 hover:border-gray-300 text-gray-500 hover:text-[#111111]"
                   >
                     {plan.cta}
                   </button>
@@ -694,7 +694,7 @@ export default function LandingPage() {
                     className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
                       plan.popular
                         ? "bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white shadow-lg shadow-violet-500/25"
-                        : "border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white"
+                        : "border border-gray-200 hover:border-gray-300 text-gray-500 hover:text-[#111111]"
                     }`}
                   >
                     {plan.cta}
@@ -758,7 +758,7 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 custom={1}
-                className="text-lg text-slate-400 mb-8"
+                className="text-lg text-gray-500 mb-8"
               >
                 Génère ton premier pack gratuitement, sans carte bancaire.
               </motion.p>
@@ -771,7 +771,7 @@ export default function LandingPage() {
               >
                 <Link
                   href="/login"
-                  className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25"
+                  className="inline-flex items-center gap-2 px-8 py-4 text-lg font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all shadow-lg shadow-violet-500/25 text-white"
                 >
                   Démarrer maintenant
                   <ArrowRight className="w-5 h-5" />
@@ -783,7 +783,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-slate-800/50 py-12 px-6">
+      <footer className="border-t border-gray-200 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center">
@@ -792,18 +792,18 @@ export default function LandingPage() {
             <span className="font-bold">
               Ad<span className="text-violet-400">Boost</span>
             </span>
-            <span className="text-slate-600 text-sm ml-2">
+            <span className="text-gray-400 text-sm ml-2">
               Le marketing simplifié pour les entrepreneurs
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-sm text-slate-500">
-            <a href="#" className="hover:text-white transition">CGU</a>
-            <a href="#" className="hover:text-white transition">Confidentialité</a>
-            <a href="#" className="hover:text-white transition">Contact</a>
+          <div className="flex items-center gap-6 text-sm text-gray-400">
+            <a href="#" className="hover:text-[#111111] transition">CGU</a>
+            <a href="#" className="hover:text-[#111111] transition">Confidentialité</a>
+            <a href="#" className="hover:text-[#111111] transition">Contact</a>
           </div>
 
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-gray-400">
             Fait avec &hearts; pour les entrepreneurs
           </p>
         </div>
@@ -816,7 +816,7 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/40"
             onClick={() => { setContactOpen(false); setContactSent(false); }}
           >
             <motion.div
@@ -824,24 +824,24 @@ export default function LandingPage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md bg-slate-900 border border-slate-700/50 rounded-2xl p-6 sm:p-8"
+              className="w-full max-w-md bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-2xl"
             >
               {contactSent ? (
                 <div className="text-center py-6">
                   <div className="w-14 h-14 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center mx-auto mb-4">
                     <Check className="w-7 h-7 text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">Message envoyé !</h3>
-                  <p className="text-slate-400 text-sm mb-6">Nous reviendrons vers vous rapidement.</p>
-                  <button onClick={() => { setContactOpen(false); setContactSent(false); }} className="px-6 py-2 text-sm font-medium border border-slate-700 hover:border-slate-600 rounded-lg text-slate-300 hover:text-white transition">
+                  <h3 className="text-xl font-bold text-[#111111] mb-2">Message envoyé !</h3>
+                  <p className="text-gray-500 text-sm mb-6">Nous reviendrons vers vous rapidement.</p>
+                  <button onClick={() => { setContactOpen(false); setContactSent(false); }} className="px-6 py-2 text-sm font-medium border border-gray-200 hover:border-gray-300 rounded-lg text-gray-500 hover:text-[#111111] transition">
                     Fermer
                   </button>
                 </div>
               ) : (
                 <>
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold text-white">Contactez-nous</h3>
-                    <button onClick={() => setContactOpen(false)} className="p-1 text-slate-400 hover:text-white transition">
+                    <h3 className="text-xl font-bold text-[#111111]">Contactez-nous</h3>
+                    <button onClick={() => setContactOpen(false)} className="p-1 text-gray-400 hover:text-[#111111] transition">
                       <X className="w-5 h-5" />
                     </button>
                   </div>
@@ -850,20 +850,20 @@ export default function LandingPage() {
                     className="space-y-4"
                   >
                     <div>
-                      <label className="text-sm font-medium text-slate-300 block mb-1">Nom</label>
-                      <input type="text" required placeholder="Votre nom" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                      <label className="text-sm font-medium text-gray-500 block mb-1">Nom</label>
+                      <input type="text" required placeholder="Votre nom" className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-slate-300 block mb-1">Email</label>
-                      <input type="email" required placeholder="votre@email.com" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                      <label className="text-sm font-medium text-gray-500 block mb-1">Email</label>
+                      <input type="email" required placeholder="votre@email.com" className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-slate-300 block mb-1">Type d&apos;activité</label>
-                      <input type="text" required placeholder="Ex : institut de beauté" className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
+                      <label className="text-sm font-medium text-gray-500 block mb-1">Type d&apos;activité</label>
+                      <input type="text" required placeholder="Ex : institut de beauté" className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-slate-300 block mb-1">Message</label>
-                      <textarea required rows={3} placeholder="Décrivez votre besoin..." className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm resize-none" />
+                      <label className="text-sm font-medium text-gray-500 block mb-1">Message</label>
+                      <textarea required rows={3} placeholder="Décrivez votre besoin..." className="w-full px-4 py-3 bg-white border border-gray-300 rounded-xl text-[#111111] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 transition text-sm resize-none" />
                     </div>
                     <button type="submit" className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-violet-500/25 text-sm">
                       Envoyer

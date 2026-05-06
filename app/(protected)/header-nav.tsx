@@ -33,7 +33,7 @@ export default function HeaderNav({ email }: { email: string }) {
   }, [menuOpen]);
 
   return (
-    <header className="border-b border-slate-700/50 px-6 py-4 bg-slate-900/50 backdrop-blur-sm relative z-50">
+    <header className="border-b border-gray-200 px-6 py-4 bg-white relative z-50">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 cursor-pointer">
@@ -42,7 +42,7 @@ export default function HeaderNav({ email }: { email: string }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-[#111111]">
             Ad<span className="text-violet-400">Boost</span>
           </h1>
         </Link>
@@ -77,13 +77,13 @@ export default function HeaderNav({ email }: { email: string }) {
 
             {/* Menu déroulant */}
             {menuOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-slate-800 border border-slate-700/50 rounded-xl shadow-xl shadow-black/30 py-2 z-50">
-                <div className="px-4 py-2 border-b border-slate-700/50">
-                  <p className="text-xs text-slate-400 truncate">{email}</p>
+              <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-50">
+                <div className="px-4 py-2 border-b border-gray-200">
+                  <p className="text-xs text-gray-500 truncate">{email}</p>
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-slate-700/50 transition flex items-center gap-2"
+                  className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-gray-50 transition flex items-center gap-2"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
